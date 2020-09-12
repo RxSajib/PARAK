@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:padding="@dimen/_5sdp"
+                android:id="@+id/backbutton"
+                android:background="@drawable/back_button_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/back_icon"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+
+
+            </RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Job Application"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textSize="@dimen/_15sdp"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_above="@+id/SubmitButtonID"
+            android:id="@+id/ScrallviewID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:padding="@dimen/_7sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
+                        android:text="Application Name"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/_7sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <EditText
+                            android:id="@+id/FirstName"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:singleLine="true"
+                            android:layout_marginRight="@dimen/_5sdp"
+                            android:hint="@string/firstname"
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:inputType="text"
+                            android:maxLength="15"
+                            android:layout_height="wrap_content">
+
+                        </EditText>
+
+                        <EditText
+                            android:id="@+id/LastName"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:singleLine="true"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:hint="@string/lastname"
+                            android:inputType="text"
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:maxLength="15"
+                            android:layout_height="wrap_content">
+
+                        </EditText>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
+                        android:text="Application Email address"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <EditText
+                        android:id="@+id/Email"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:hint="Example123@gmail.com"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:inputType="textEmailAddress"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
+                        android:text="@string/whatsapp_status"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <EditText
+                        android:id="@+id/WhatsAppNumber"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:hint="@string/cod"
+                        android:textSize="@dimen/_13sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:inputType="number"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
+                        android:text="@string/employstatus"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <RadioGroup
+                        android:id="@+id/RadioGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="@string/employed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </RadioButton>
+
+                        <RadioButton
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="@string/unemployed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </RadioButton>
+                        <RadioButton
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="@string/self_employed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </RadioButton>
+                        <RadioButton
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="@string/studen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </RadioButton>
+
+                    </RadioGroup>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
+                        android:text="@string/resume"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:cornerRadius="@dimen/_15sdp"
+                        android:id="@+id/PdfButton"
+                        android:textSize="@dimen/_13sdp"
+                        android:text="Insert your pdf"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textAllCaps="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.button.MaterialButton>
+
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
+                        android:text="Informaction"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:hint="@string/achivement"
+                        android:textSize="@dimen/_13sdp"
+                        android:maxLength="200"
+                        android:id="@+id/Achivement"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:inputType="textEmailAddress"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/Goals"
+                        android:layout_width="match_parent"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:hint="@string/des"
+                        android:textSize="@dimen/_13sdp"
+                        android:maxLength="300"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:inputType="textEmailAddress"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                </LinearLayout>
+
+
+
+
+            </RelativeLayout>
+
+
+        </ScrollView>
+        <RelativeLayout
+            android:id="@+id/SubmitButtonID"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:background="@color/carbon_teal_700"
+            android:layout_height="@dimen/_38sdp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="@dimen/_13sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@android:color/white"
+                android:text="@string/submit_your_application"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

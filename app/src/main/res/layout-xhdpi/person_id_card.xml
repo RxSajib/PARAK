@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:elevation="10dp"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+
+            <RelativeLayout
+                android:id="@+id/ProfileImageContinerID"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="110dp"
+                android:background="@drawable/personstoke_oval"
+                android:elevation="0.001dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ProfileImage"
+                    android:src="@drawable/user_background">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+
+            </RelativeLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/CardUserNameID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ProfileImageContinerID"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:visibility="gone"
+                android:fontFamily="sans-serif"
+                android:text="MR Sajib Toy"
+                android:textColor="@android:color/black"
+                android:textSize="22sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/CardEmailAddress"
+                android:visibility="gone"
+                android:layout_below="@+id/CardUserNameID"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="Sajibroy206@gmail.com"
+                android:textSize="13sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <RelativeLayout
+                android:background="#ECFDEE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+
+                <LinearLayout
+                    android:id="@+id/TopBorderID"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:weightSum="4">
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+
+                <RelativeLayout
+                    android:id="@+id/MidLayouID"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:layout_below="@+id/TopBorderID"
+                    android:background="#5A9F46">
+
+                    <ImageView
+                        android:src="@drawable/applogo"
+                        android:scaleType="fitXY"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </ImageView>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="30dp"
+                        android:elevation="0.01dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/CompanyNameText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="@string/company_name"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/CompanyNameText"
+                            android:layout_centerHorizontal="true"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="@string/company_short_descptrion"
+                            android:textColor="@android:color/white"
+                            android:textSize="13sp">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/card_oval">
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/BordrID"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_below="@+id/MidLayouID"
+                    android:weightSum="4">
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/MiddleLayutID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/BordrID">
+
+
+                    <RelativeLayout
+                        android:id="@+id/InfoBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:layout_marginTop="@dimen/_60sdp">
+
+                        <RelativeLayout
+                            android:id="@+id/LeftSide"
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/app_color">
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/RightSide"
+                            android:layout_toRightOf="@+id/LeftSide">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:weightSum="5">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/IDNO"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="10dp"
+                                        android:fontFamily="sans-serif-medium"
+                                        android:text="ID NO:"
+                                        android:textSize="15sp">
+
+                                    </com.google.android.material.textview.MaterialTextView>
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="5dp"
+                                        android:id="@+id/CardIDNO"
+                                        android:fontFamily="@font/ubuntureguiar"
+                                        android:layout_toRightOf="@+id/IDNO"
+                                        android:textSize="15sp">
+
+                                    </com.google.android.material.textview.MaterialTextView>
+
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+
+
+                                    <RelativeLayout
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+
+
+
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/FullNameID"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:text="Full Name:"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/CardFullname"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_toRightOf="@+id/FullNameID"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+
+
+                                    <RelativeLayout
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+
+
+
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/JobsTextID"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:text="Job:"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="5dp"
+                                            android:id="@+id/JobsTexts"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:layout_toRightOf="@+id/JobsTextID"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp"
+                                    android:layout_weight="1">
+
+                                    <RelativeLayout
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+
+
+
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/PhoneNumber"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:text="Number:"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_toRightOf="@+id/PhoneNumber"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:id="@+id/CardPhoeNumber"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+
+                                <RelativeLayout
+                                    android:layout_weight="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="0dp">
+
+                                    <RelativeLayout
+                                        android:layout_centerVertical="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+
+
+
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:id="@+id/Position"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="10dp"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:text="@string/location"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerVertical="true"
+                                            android:layout_marginLeft="5dp"
+                                            android:fontFamily="@font/ubuntureguiar"
+
+                                            android:id="@+id/StatusTexts"
+                                            android:layout_toRightOf="@+id/Position"
+                                            android:textColor="@android:color/holo_orange_dark"
+                                            android:textSize="15sp">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                    </RelativeLayout>
+
+                                </RelativeLayout>
+
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/RightSide"
+                            android:layout_width="20dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:background="@color/app_color">
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_below="@+id/InfoBox"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <RelativeLayout
+                                android:layout_toLeftOf="@+id/QrCodeImage"
+                                android:layout_width="match_parent"
+                                android:visibility="visible"
+                                android:layout_marginRight="@dimen/_5sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:orientation="vertical"
+                                    android:layout_width="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_height="wrap_content">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:textSize="@dimen/_15sdp"
+                                        android:text="E-Sign Here"
+                                        android:id="@+id/ESigID"
+                                        android:rotationX="-90"
+                                        android:fontFamily="@font/sincures"
+                                        android:layout_gravity="center_horizontal"
+
+                                        android:textColor="@color/carbon_black_87"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+                                    </com.google.android.material.textview.MaterialTextView>
+
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:textSize="@dimen/_10sdp"
+                                        android:text="@string/signature"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:layout_gravity="center_horizontal"
+                                        android:layout_centerHorizontal="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content">
+
+                                    </com.google.android.material.textview.MaterialTextView>
+
+
+
+
+                                </LinearLayout>
+
+                            </RelativeLayout>
+
+                            <ImageView
+                                android:layout_centerHorizontal="true"
+                                android:id="@+id/QrCodeImage"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp">
+
+                            </ImageView>
+                            <ImageView
+                                android:src="@drawable/qrcode"
+                                android:layout_centerHorizontal="true"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp">
+
+                            </ImageView>
+
+                            <RelativeLayout
+                                android:layout_toRightOf="@+id/QrCodeImage"
+                                android:layout_width="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_height="wrap_content">
+
+                                    <LinearLayout
+                                        android:orientation="vertical"
+                                        android:layout_width="match_parent"
+                                        android:gravity="center_vertical|center_horizontal"
+                                        android:layout_height="wrap_content">
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:layout_width="match_parent"
+                                            android:gravity="center_vertical|center_horizontal"
+                                            android:layout_height="wrap_content">
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:textSize="@dimen/_13sdp"
+                                                android:textColor="@color/carbon_black"
+                                                android:text="@string/iss_date"
+                                                android:fontFamily="@font/ubuntureguiar"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content">
+
+                                            </com.google.android.material.textview.MaterialTextView>
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:textSize="@dimen/_10sdp"
+                                                android:text="Card is not active"
+                                                android:id="@+id/Issue_date"
+                                                android:layout_marginTop="@dimen/_5sdp"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content">
+
+                                            </com.google.android.material.textview.MaterialTextView>
+
+                                        </LinearLayout>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:textSize="@dimen/_13sdp"
+                                            android:textColor="@color/carbon_black"
+                                            android:text="@string/exp_date"
+                                            android:layout_marginTop="@dimen/_10sdp"
+                                            android:fontFamily="@font/ubuntureguiar"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                        <com.google.android.material.textview.MaterialTextView
+                                            android:textSize="@dimen/_10sdp"
+                                            android:text="Card is not active"
+                                            android:id="@+id/Expdate_id"
+                                            android:layout_marginTop="@dimen/_5sdp"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content">
+
+                                        </com.google.android.material.textview.MaterialTextView>
+
+                                    </LinearLayout>
+
+                                </RelativeLayout>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_below="@+id/MiddleLayutID"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_height="20dp"
+                    android:weightSum="4">
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/app_color">
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+</RelativeLayout>

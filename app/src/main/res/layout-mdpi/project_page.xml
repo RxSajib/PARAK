@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/BackButton"
+                android:background="@drawable/back_button_ripple"
+                android:layout_width="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/back_icon"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+
+
+            </RelativeLayout>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/carbon_white"
+                android:textSize="@dimen/_15sdp"
+                android:text="Project"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <RelativeLayout
+        android:padding="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/CharityButtonID"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp">
+
+                <RelativeLayout
+                    android:background="@drawable/charity_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/QuramID"
+                            android:src="@drawable/charity"
+                            android:layout_width="@dimen/_55sdp"
+                            android:layout_height="@dimen/_55sdp">
+                        </ImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_toRightOf="@id/QuramID"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_15sdp"
+                            android:textColor="@color/carbon_black_87"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="Charity"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:id="@+id/JobsButtonIDs"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="@dimen/_90sdp">
+
+                <RelativeLayout
+                    android:background="@drawable/jobs_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/QuramID"
+                            android:src="@drawable/work_icons"
+                            android:layout_width="@dimen/_55sdp"
+                            android:layout_height="@dimen/_55sdp">
+                        </ImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_toRightOf="@id/QuramID"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_15sdp"
+                            android:textColor="@color/carbon_black_87"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="Jobs providing"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:id="@+id/QuranButtoID"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="invisible"
+                android:layout_height="@dimen/_100sdp">
+
+                <RelativeLayout
+                    android:background="@drawable/quran_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_15sdp"
+                        android:layout_marginRight="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/QuramID"
+                            android:src="@drawable/quran"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_60sdp">
+                        </ImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_toRightOf="@id/QuramID"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_15sdp"
+                            android:textColor="@color/carbon_black_87"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="Quran Teaching for Kids"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

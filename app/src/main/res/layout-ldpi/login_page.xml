@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/app_color_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_above="@+id/Edittextayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/login_icons"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp">
+
+            </ImageView>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/Edittextayout"
+            android:layout_above="@+id/LoginButtoID"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:background="@drawable/login_edittext_design"
+                android:drawableLeft="@drawable/email_icon_icon"
+                android:drawablePadding="@dimen/_3sdp"
+                android:id="@+id/LoginEmailID"
+                android:padding="10dp"
+                android:hint="Enter Email"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textSize="13sp"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#CCCCCC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </EditText>
+
+            <EditText
+                android:id="@+id/LoginPasswordID"
+                android:layout_marginTop="10dp"
+
+                android:background="@drawable/login_edittext_design"
+
+                android:drawableLeft="@drawable/lock_icon_icon"
+                android:drawablePadding="@dimen/_3sdp"                  android:padding="10dp"
+                android:hint="Enter Password"
+                android:textSize="13sp"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@android:color/white"
+                android:singleLine="true"
+                android:inputType="textPassword"
+                android:textColorHint="#CCCCCC"
+                android:layout_below="@+id/LoginEmailID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </EditText>
+
+        </RelativeLayout>
+
+
+
+
+        <RelativeLayout
+            android:layout_above="@+id/MidleTextID"
+            android:id="@+id/LoginButtoID"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/phone_login_button_design"
+            android:layout_height="40dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="13sp"
+                android:textColor="@android:color/black"
+                android:text="Sign In"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/MidleTextID"
+            android:layout_above="@+id/PhoneLoginButtonID"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/donthaveaccounttext"
+                    android:text="Don't have an Account ?"
+                    android:layout_width="wrap_content"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_toRightOf="@+id/donthaveaccounttext"
+                    android:text="SIGN UP"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/SignUpButtonID"
+                    android:layout_marginLeft="7dp"
+                    android:textColor="@android:color/white"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/PhoneLoginButtonID"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/phone_login_button_design"
+            android:layout_height="35dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="12sp"
+                android:textColor="@android:color/black"
+                android:text="Phone Login"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

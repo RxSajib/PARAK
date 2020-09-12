@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/carbon_colorPrimaryDark_dark"
+    tools:context=".ImageFullScreen.ImageFullScreen">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:elevation="0.5dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_14sdp"
+                    android:text="SenderName"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:textColor="@color/carbon_white_70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                   <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:text="5 aug 2020"
+                       android:id="@+id/ImageTimeDetails"
+                       android:fontFamily="@font/ubuntureguiar"
+                       android:layout_marginTop="@dimen/_2sdp"
+                    android:textColor="@color/carbon_white_70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/PhotoViewID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.github.chrisbanes.photoview.PhotoView>
+
+</RelativeLayout>

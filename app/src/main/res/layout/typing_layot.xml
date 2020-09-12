@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/TypeLayout"
+        android:orientation="horizontal"
+        android:padding="@dimen/_3sdp"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/TypeUserNameID"
+            android:text="Sajib Roy"
+            android:textColor="@color/carbon_white_70"
+            android:textSize="@dimen/_9sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+          <com.google.android.material.textview.MaterialTextView
+            android:text="Typing ..."
+              android:id="@+id/UsernameTypeText"
+            android:textSize="@dimen/_9sdp"
+              android:textColor="@color/carbon_white_70"
+            android:layout_width="wrap_content"
+              android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </LinearLayout>
+
+</RelativeLayout>

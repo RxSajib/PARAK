@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_7sdp"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background = "@drawable/job_ripple"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_margin="@dimen/_5sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/CurrentDate"
+                    android:layout_alignParentRight="true"
+                    android:text="Current Date"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:background="@drawable/job_oval"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:textColor="@android:color/white"
+                            android:text="JOB"
+                            android:layout_centerHorizontal="true"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_10sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:text="Applicant name"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_14sdp"
+                            android:id="@+id/ApplicantFullname"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:text="Sajib Roy"
+                            android:textColor="@android:color/black"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_10sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="Applicant info"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_12sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:id="@+id/ApplicantGoel"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:text="Bangladesh officially the People's Republic of Bangladesh, is a country in South Asia. It is the eighth-most populous country in the world, with a population "
+                            android:textColor="@color/carbon_black_87"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ProfileID"
+        android:title="@string/profile"
+        android:icon="@drawable/profile_icon_update"
+        ></item>
+
+    <item
+        android:id="@+id/IDCARD"
+        android:title="@string/id_card"
+        android:icon="@drawable/naction_id"
+        ></item>
+
+    <item
+        android:id="@+id/ParakJobID"
+        android:title="Job Seekers"
+        android:icon="@drawable/iconjobs"
+        ></item>
+
+    <item
+        android:id="@+id/MissionVission"
+        android:title="Mission &amp; Vission"
+        android:icon="@drawable/mission_update">
+        </item>
+    <item
+        android:id="@+id/ProjectID"
+        android:icon="@drawable/project_icon_update"
+        android:title="@string/project">
+
+        </item>
+
+    <item
+        android:id="@+id/OurTeamID"
+        android:icon="@drawable/team_icon_update"
+        android:title="@string/our_team">
+        <!--android:icon="@drawable/team"-->
+    </item>
+
+
+     <item
+        android:id="@+id/ShareID"
+        android:icon="@drawable/share_icon"
+        android:title="@string/share">
+        <!--android:icon="@drawable/team"-->
+    </item>
+
+
+
+
+    <item
+        android:id="@+id/LogoutID"
+        android:icon="@drawable/logout_icon"
+        android:title="@string/logout">
+      <!--  android:icon="@drawable/logout"-->
+        </item>
+
+</menu>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:padding="@dimen/_5sdp"
+                android:id="@+id/backbutton"
+                android:background="@drawable/back_button_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/back_icon"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+
+
+            </RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Job Application"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textSize="@dimen/_15sdp"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp">
+
+            <ImageView
+                android:src="@drawable/job_banner_image"
+                android:layout_width="match_parent"
+                android:scaleType="centerCrop"
+                android:layout_height="@dimen/_130sdp">
+
+            </ImageView>
+
+            <View
+                android:background="@drawable/charity_bler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </View>
+
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:padding="@dimen/_10sdp"
+            android:layout_above="@+id/CheckBox"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Applicant Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_14sdp"
+                    android:id="@+id/ApplicantName"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Applicant Name Empty"
+                    android:textColor="@color/carbon_black_87"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Applicant Email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:id="@+id/ApplicantEmail"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Applicant email empty"
+                    android:textColor="@color/carbon_black_87"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Applicant Number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:id="@+id/ApplicantNumber"
+                    android:text="Applicant number empty"
+                    android:textColor="@color/carbon_black_87"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Employ Status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Applicant Status empty"
+                    android:textColor="@color/carbon_black_87"
+                    android:id="@+id/ApplicantStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Acivement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Applicant Acivement empty"
+                    android:id="@+id/Acivement"
+                    android:textColor="@color/carbon_black_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="About my goals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:id="@+id/Goals"
+                    android:text="Applicant goals empty"
+                    android:textColor="@color/carbon_black_54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+
+        <CheckBox
+            android:id="@+id/CheckBox"
+            android:layout_above="@+id/DownloadPDFButtonID"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/carbon_pink_500"
+            android:visibility="gone"
+            android:text="I Agree to download job application"
+            android:layout_height="wrap_content">
+
+        </CheckBox>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/DownloadPDFButtonID"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:fontFamily="@font/ubuntureguiar"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:backgroundTint="@color/pdf_button_inactive"
+            android:text="@string/applicant_cv"
+            android:enabled="false"
+            app:cornerRadius="@dimen/_15sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.button.MaterialButton>
+
+    </RelativeLayout>
+</LinearLayout>

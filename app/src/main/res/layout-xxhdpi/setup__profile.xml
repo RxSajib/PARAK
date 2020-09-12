@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:background="@color/colorPrimary"
+            android:id="@+id/ProfileFirstToolbarID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:text="Setup Your Profile"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+            </RelativeLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/ProfileFirstToolbarID"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:weightSum="4"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:textColor="#8D8D8D"
+                        android:layout_marginRight="25dp"
+                        android:gravity="center"
+                        android:layout_marginLeft="25dp"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:text="@string/profiletext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/ImageContinerID"
+                        android:layout_width="120dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_height="120dp">
+
+                        <ImageButton
+                            android:background="@null"
+                            android:elevation="0.2dp"
+                            android:src="@drawable/camera_icn_black"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp">
+
+                        </ImageButton>
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/ProfileImageID"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/profile_image_back"
+                            android:layout_height="match_parent">
+
+                        </de.hdodenhof.circleimageview.CircleImageView>
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_below="@+id/ImageContinerID"
+                        android:layout_marginTop="25dp"
+                        android:layout_height="match_parent">
+
+                        <EditText
+                            android:id="@+id/FillNameID"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:textSize="17sp"
+                            android:hint="Enter fullname"
+                            android:padding="12dp"
+                            android:textColorHint="#8C8C8C"
+                            android:textColor="#8C8C8C"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:background="@drawable/edittext_design"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </EditText>
+
+                        <EditText
+                            android:id="@+id/PhoneNumberID"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/FillNameID"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:textSize="17sp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:hint="Enter PhoneNumber"
+                            android:textColorHint="#8C8C8C"
+                            android:textColor="#8C8C8C"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:padding="12dp"
+                            android:background="@drawable/edittext_design"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </EditText>
+
+
+                        <EditText
+                            android:id="@+id/JobsInputID"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/PhoneNumberID"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:textSize="17sp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:hint="Enter work"
+                            android:textColorHint="#8C8C8C"
+                            android:textColor="#8C8C8C"
+                            android:maxLength="20"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:padding="12dp"
+                            android:background="@drawable/edittext_design"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </EditText>
+
+                        <EditText
+                            android:id="@+id/LocationID"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@+id/JobsInputID"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:textSize="17sp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:hint="Enter location"
+                            android:textColorHint="#8C8C8C"
+                            android:textColor="#8C8C8C"
+                            android:maxLength="20"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:padding="12dp"
+                            android:background="@drawable/edittext_design"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        </EditText>
+
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:layout_below="@+id/PhoneNumberID"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginTop="15dp"
+                            android:id="@+id/ProfessionButtonID"
+                            android:layout_width="match_parent"
+                            android:background="@drawable/edittext_design"
+                            android:layout_height="48dp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:textColor="#8C8C8C"
+                                android:id="@+id/ProfessionMid"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                android:text="Profession"
+                                android:textSize="17sp"
+                                android:fontFamily="sans-serif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </com.google.android.material.textview.MaterialTextView>
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:textColor="#8C8C8C"
+                                android:id="@+id/ProfessonFirst"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="Profession:"
+                                android:textSize="17sp"
+                                android:fontFamily="sans-serif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </com.google.android.material.textview.MaterialTextView>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:textColor="#8C8C8C"
+                                android:id="@+id/ProfessonLast"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:text="Profession:"
+                                android:textSize="17sp"
+                                android:layout_alignParentRight="true"
+                                android:fontFamily="sans-serif"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </com.google.android.material.textview.MaterialTextView>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/ContinueButtonID"
+                            android:background="@drawable/profile_buttn_design"
+                            android:layout_marginRight="25dp"
+                            android:layout_marginLeft="25dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:textSize="15sp"
+                                android:text="Continue"
+                                android:layout_centerVertical="true"
+                                android:textColor="@android:color/white"
+                                android:fontFamily="@font/ubuntureguiar"
+                                android:layout_centerHorizontal="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </com.google.android.material.textview.MaterialTextView>
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

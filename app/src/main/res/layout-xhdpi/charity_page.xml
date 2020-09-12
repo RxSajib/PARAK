@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/background"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/backButton"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/back_button_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/back_icon"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+
+
+            </RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textColor="@color/carbon_white"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/_15sdp"
+                android:text="Charity"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/charitybox"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp">
+
+
+
+            <ImageView
+                android:src="@drawable/chritypic"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp">
+
+            </ImageView>
+
+            <View
+                android:background="@drawable/charity_bler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </View>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/charitybox"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="@dimen/_13sdp"
+                android:id="@+id/titles"
+                android:textColor="@color/carbon_red_500"
+                android:layout_centerHorizontal="true"
+                android:text="@string/charity_title"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_below="@+id/titles"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_13sdp"
+                android:fontFamily="@font/ubuntureguiar"
+                android:text="@string/charity_det"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

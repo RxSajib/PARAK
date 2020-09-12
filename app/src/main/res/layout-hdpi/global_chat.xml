@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/GlobalToolbarID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/GlobalBackButtonID"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/back_button_ripple"
+
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/back_icon"></ImageView>
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Community"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/_13sdp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:orientation="horizontal">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/CouuentUserTypingID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ChatListID"
+        android:layout_below="@+id/GlobalToolbarID"
+        android:layout_above="@+id/ChatBox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/ChatBox"
+        android:layout_width="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+
+        <com.devlomi.record_view.RecordView
+            android:id="@+id/GlobalRecordViewID"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="55dp"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            app:slide_to_cancel_arrow_color="@color/colorPrimary"
+            app:slide_to_cancel_text="Slide To Cancel"
+            app:counter_time_color="#ff0000"
+            app:slide_to_cancel_bounds="10dp"
+            app:slide_to_cancel_margin_right="10dp"
+            app:slide_to_cancel_arrow="@drawable/slide_cancel_arraw"
+            android:layout_height="wrap_content">
+        </com.devlomi.record_view.RecordView>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="45dp"
+            android:layout_height="wrap_content">
+
+
+
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_marginRight="10dp"
+                android:id="@+id/MessageCard"
+                android:layout_centerVertical="true"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/_20sdp"
+                android:layout_height="45dp">
+
+                <RelativeLayout
+                    android:layout_centerVertical="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <EditText
+                        android:id="@+id/GlobalMessageInput"
+                        android:layout_centerVertical="true"
+                        android:layout_width="match_parent"
+                        android:hint="Enter message"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:padding="7dp"
+                        android:layout_toLeftOf="@+id/GlobalAttachBox"
+                        android:textSize="@dimen/_13sdp"
+                        android:background="@null"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/GlobalAttachBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/_5sdp">
+
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:id="@+id/GlobalCamera"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_3sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:src="@drawable/camera_icon">
+
+                            </ImageView>
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/GlobalAttach"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_3sdp">
+
+                            <ImageView
+                                android:layout_width="@dimen/_16sdp"
+                                android:layout_height="@dimen/_16sdp"
+                                android:src="@drawable/attach_icon_update"></ImageView>
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+
+
+
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/_38sdp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/GlobalMessageSendButton"
+            android:layout_centerVertical="true"
+            android:backgroundTint="@color/colorPrimary"
+            android:visibility="gone"
+            app:cardCornerRadius="@dimen/_25sdp"
+            android:layout_height="@dimen/_38sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/send_icon_black"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp">
+
+                </ImageView>
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <com.devlomi.record_view.RecordButton
+            android:background="@drawable/recod_button_back"
+            android:layout_width="@dimen/_38sdp"
+            android:id="@+id/GlobalRecordButtonID"
+            android:visibility="visible"
+            android:scaleType="centerCrop"
+            app:mic_icon="@drawable/mic_icon"
+            android:layout_centerVertical="true"
+            android:padding="7dp"
+            android:layout_alignParentRight="true"
+            android:layout_height="@dimen/_38sdp">
+
+        </com.devlomi.record_view.RecordButton>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

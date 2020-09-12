@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="50dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginBottom="15dp">
+
+
+    <RelativeLayout
+        android:id="@+id/ImageContinerIDS"
+        android:layout_width="80dp"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:src="@drawable/camera_icn_black"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:elevation="0.01dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp">
+
+        </ImageView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:background="@drawable/profile_image_back"
+            android:layout_height="match_parent">
+
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/UserNamID"
+        android:layout_below="@+id/ImageContinerIDS"
+        android:layout_width="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:text="@string/loadingdot"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-condensed"
+        android:layout_height="wrap_content">
+    </com.google.android.material.textview.MaterialTextView>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/UserEmailID"
+        android:layout_below="@+id/UserNamID"
+        android:layout_width="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="@string/loading"
+        android:layout_marginTop="7dp"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.textview.MaterialTextView>
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".BottomnavPage.JobPage">
+
+
+    <RelativeLayout
+        android:id="@+id/Jobhave"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/job_icon"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="@dimen/_70sdp">
+            </ImageView>
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/tranprent"
+                android:text="No Jobs Found"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/JobsListViewID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_alignParentBottom="true"
+        android:id="@+id/AddJobsID"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_17sdp"
+        android:backgroundTint="@color/carbon_teal_800"
+        android:src="@drawable/add_jobs_icon"
+        android:layout_marginBottom="@dimen/_17sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+</RelativeLayout>

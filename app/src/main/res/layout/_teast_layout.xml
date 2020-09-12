@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TeastLayout.TeastLayout">
+
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="@dimen/_200sdp"
+        android:src="@drawable/flowericon"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="30dip"
+        android:layout_height="150dp">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+
+
+</RelativeLayout>

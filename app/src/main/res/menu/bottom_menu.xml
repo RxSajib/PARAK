@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<!--
+
+    <item
+        android:id="@+id/UserCardID"
+        android:title="ID CARD"
+        android:icon="@drawable/person_card"
+        ></item>
+-->
+
+
+    <item
+        android:id="@+id/ChatID"
+        android:title="Chat"
+        android:icon="@drawable/chat_icon"
+        ></item>
+
+    <item
+        android:id="@+id/NewsID"
+        android:title="News"
+        android:icon="@drawable/newsicon"
+        ></item>
+
+    <item
+        android:id="@+id/JobsID"
+        android:title="Jobs"
+        android:icon="@drawable/jobsicon"
+        ></item>
+
+
+
+
+
+</menu>

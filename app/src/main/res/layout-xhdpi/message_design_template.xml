@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:id="@+id/SenderMessageLayout"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/sender_message_design"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SenderMessageTimeID"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="7dp"
+            android:textSize="13sp"
+            android:text="2:00 AM"
+            android:textColor="#E8E8E8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/SenderMessageTimeID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:id="@+id/SendMessageID"
+                android:paddingBottom="7dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
+                android:paddingTop="3dp"
+                android:layout_marginRight="@dimen/_3sdp"
+                android:text="hello developer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="@dimen/_10sdp"
+                android:id="@+id/SenderShoetMessageTime"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:text="2:00 AM"
+                android:layout_toRightOf="@+id/SendMessageID"
+                android:textColor="#E8E8E8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ReciverMessageLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="100dp"
+        android:visibility="gone"
+        android:layout_marginBottom="7dp"
+        android:background="@drawable/reciver_message_design"
+        android:layout_height="wrap_content">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ReciverMessageTime"
+            android:textSize="13sp"
+            android:text="01:00 PM"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/ReciverMessageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:layout_marginRight="@dimen/_3sdp"
+                android:id="@+id/ReciverMessage"
+                android:paddingBottom="7dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="7dp"
+                android:paddingTop="3dp"
+                android:text="hello developer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </com.google.android.material.textview.MaterialTextView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="@dimen/_10sdp"
+                android:id="@+id/ReciverShoetMessageTime"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ReciverMessage"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:text="2:00 AM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/ImageLayoutID"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp">
+
+
+        /// sender image
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/SenderImageID"
+            android:layout_width="@dimen/_210sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:visibility="gone"
+            app:riv_border_width="2dip"
+            app:riv_border_color="#40B100"
+            android:background="@drawable/image_placeholder"
+            android:scaleType="centerCrop"
+            android:layout_alignParentRight="true"
+            app:riv_corner_radius="@dimen/_10sdp"
+            android:layout_height="@dimen/_150sdp">
+
+        </com.makeramen.roundedimageview.RoundedImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:id="@+id/SenderImageTime"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="gone"
+            android:text = "current time"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_toLeftOf="@+id/SenderImageID"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+        /// sender image
+
+        /// reciver image
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/ImageReciver"
+            android:layout_width="@dimen/_210sdp"
+            android:background="@drawable/image_placeholder"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            app:riv_border_width="2dip"
+            app:riv_border_color="#FFF"
+            android:layout_alignParentLeft="true"
+            app:riv_corner_radius="@dimen/_10sdp"
+            android:layout_height="@dimen/_150sdp">
+        </com.makeramen.roundedimageview.RoundedImageView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:id="@+id/ReciverTime"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="gone"
+            android:text = "current time"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_toRightOf="@+id/ImageReciver"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        /// reciver image
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:visibility="invisible"
+        android:id="@+id/SenderPdfBox"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@drawable/sender_message_design"
+        android:layout_width="@dimen/_175sdp"
+        android:layout_height="@dimen/_40sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@color/carbon_black_38"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_10sdp"
+            android:text="10:00 AM"
+            android:id="@+id/SenderPdfTime"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <ImageView
+            android:id="@+id/AttachIcon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/attach_icon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp">
+        </ImageView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/AttachIcon"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/carbon_white"
+            android:text="Download"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="invisible"
+        android:id="@+id/ReciverPdfBox"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@drawable/reciver_message_design"
+        android:layout_width="@dimen/_175sdp"
+        android:layout_height="@dimen/_40sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@color/carbon_black_38"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_10sdp"
+            android:text="10:00 AM"
+            android:id="@+id/ReciverPdfTime"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <ImageView
+            android:id="@+id/AAttachIcon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/attach_icon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp">
+        </ImageView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/AAttachIcon"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/carbon_white"
+            android:text="Download"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </RelativeLayout>
+
+
+
+
+
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/SendAudio"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@drawable/sender_message_design"
+        android:layout_width="@dimen/_175sdp"
+        android:layout_height="@dimen/_40sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@color/carbon_black_38"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_10sdp"
+            android:text="10:00 AM"
+            android:id="@+id/SenderAudioTime"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <ImageView
+            android:id="@+id/AudioTime"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/mic_icon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp">
+        </ImageView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/AudioTime"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/carbon_white"
+            android:text="Play Record"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/ReciverAudio"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@drawable/reciver_message_design"
+        android:layout_width="@dimen/_175sdp"
+        android:layout_height="@dimen/_40sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@color/carbon_black_38"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_10sdp"
+            android:text="10:00 AM"
+            android:id="@+id/ReciverAudioTime"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <ImageView
+            android:id="@+id/MicICon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/mic_black_icon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp">
+        </ImageView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/MicICon"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:textSize="@dimen/_13sdp"
+            android:textColor="@color/carbon_black"
+            android:text="Play Record"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

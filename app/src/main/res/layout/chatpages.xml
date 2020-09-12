@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".BottomnavPage.Chatpages">
+
+
+    <RelativeLayout
+        android:id="@+id/haveUser"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/whatsappchat"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="@dimen/_70sdp">
+
+            </ImageView>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_14sdp"
+                android:text="No User Found"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@color/tranprent"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ChatRecylrarViewID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:id="@+id/SearchButtonID"
+            android:backgroundTint="@color/carbon_teal_600"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/group_of_people"
+            android:tint="@color/carbon_white"
+            android:layout_marginRight="@dimen/_17sdp"
+            android:layout_marginBottom="@dimen/_17sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,112 @@
+<resources>
+    <string name="app_name">Pak_Parak</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profiletext">Kindly Compelete Your MUSTAQEEM WELFARE GROUP Profile With Your Correct Information</string>
+
+    <string name="company_name">MUSTAQEEM</string>
+    <string name="company_short_descptrion">lets Help the Needy</string>
+
+
+    <string name="mission_and_vision">
+•Provide a mechanism that could possibly work where the individual has failed to deal with. \n• Various projects can be executed without having to use the government resources.\nThis is because there are many private donors who support the community.\n• Have the capability of communic-ating at all levels.\nThis means that we can easily interact with pakistanis and cascade their messages to top levels of the government. \n• Capable of recruiting highly motivated staff and experts in different fields of interest \n• Able to penetrate all corners of the community to find out what kind of problems people face and what they can do to make things better. \n• Help our people to improve the standards of life and teach people how to lead a better life.
+        \n• Have the capability of communic-ating at all levels. \nThis means that we can easily interact with pakistanis and cascade
+        their messages to top levels of the government. \n• Capable of recruiting highly motivated staff and
+        experts in different fields of interest \n• Able to penetrate all corners of the community to find out
+        what kind of problems people face and what they can do to make things better. \n• Help our people to
+        improve the standards of life and teach people how to lead a better life \n• Provide counseling
+        services dealing with social, moral, psychological, financial, educational and health issues,
+        free of cost. • Organize social events, exhibitions, seminars, conferences and public lectures
+        for the betterment of Pakistani community.
+    </string>
+
+
+    <string name="onbording_title">Al-Baqarah - The Cow - 2:261\n(Sura: 2, Verse: 261)</string>
+
+    <string name="onboarding_desone">مَثَلُ الَّذِينَ يُنْفِقُونَ أَمْوَالَهُمْ فِي سَبِيلِ اللَّهِ كَمَثَلِ حَبَّةٍ أَنْبَتَتْ سَبْعَ سَنَابِلَ فِي كُلِّ سُنْبُلَةٍ مِائَةُ حَبَّةٍ ۗ وَاللَّهُ يُضَاعِفُ لِمَنْ يَشَاءُ ۗ وَاللَّهُ وَاسِعٌ عَلِيمٌ</string>
+    <string name="onboarding_des_two">The example of those who spend their wealth in the way of Allah is like a seed [of grain] which grows seven spikes; in each spike is a hundred grains. And Allah multiplies [His reward] for whom He wills. And Allah is all-Encompassing and Knowing.</string>
+    <string name="onboarding_des_three">جو لوگ اﷲ کی راہ میں اپنے مال خرچ کرتے ہیں ان کی مثال (اس) دانے کی سی ہے جس سے سات بالیاں اگیں (اور پھر) ہر بالی میں سو دانے ہوں (یعنی سات سو گنا اجر پاتے ہیں)، اور اﷲ جس کے لئے چاہتا ہے (اس سے بھی) اضافہ فرما دیتا ہے، اور اﷲ بڑی وسعت والا خوب جاننے والا ہے،</string>
+
+    <string name="charity_title">MUSTAQEEM WELFARE GROUP</string>
+
+
+    <string name="charity_det">Has been involved in a number of
+        charitable activities since 2 Years such as:-\n\n-financial assistance to
+        deserving families in hour of need -\n\n-Provided legal assistance to resolve minor and major
+        cases faced by the labors, women, professionals and families.
+        \n\n-Support More than 1100 Pakistani stuck Due to The pandemic covid-19 Helping them to arrange
+        Air tickets -providing them foods All other needs inthe mean time\n\n-We ensure the provision of social, moral,
+        financial and legal support to the members. </string>
+
+
+    <string name="employstatus">What is your current employment status?</string>
+    <string name="whatsapp_status">Application Whatsapp number</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="employed">Employed</string>
+    <string name="unemployed">Unemployed</string>
+    <string name="self_employed">Self-Employed</string>
+    <string name="studen">Student</string>
+    <string name="resume">How do you prefer to submit your resume</string>
+    <string name="achivement">Please share your achievement?</string>
+    <string name="des">What you want to do?\nshare your aim and goals\nshare your talent what you got?</string>
+
+    <string name="vision">
+        Provide a mechanism that could possibly work where the individual has failed to deal with--
+    </string>
+
+    <string name="Our_values">
+        Various projects can be executed without having to use the government resources.This is because there are many private donors who support the community
+    </string>
+
+    <string name="Our_goals">
+        Able to penetrate all corners of the community to find out what kind of problems people face and what they can do to make things better.
+Help our people to improve the standards of life and teach people how to lead a better life.
+    </string>
+
+    <string name="Our_objective">
+        Provide counseling services dealing with social, moral, psychological, financial, educational and health issues, free of cost.
+Organize social events, exhibitions, seminars, conferences and public lectures for the betterment of Pakistani community.
+    </string>
+    <string name="visiontext">Vision</string>
+    <string name="our_values">Our Values</string>
+    <string name="our_goals">Our Goals</string>
+    <string name="obj">Our Objective</string>
+    <string name="profile">Profile</string>
+    <string name="id_card">ID Card</string>
+    <string name="project">Project</string>
+    <string name="our_team">Our Team</string>
+    <string name="logout">LogOut</string>
+    <string name="cod">00971-</string>
+    <string name="loadingdot">Loading ...</string>
+    <string name="loading">loading</string>
+    <string name="applicant_cv">Applicant CV</string>
+    <string name="submit_your_application">Submit your Application</string>
+    <string name="share">Share to your friends</string>
+    <string name="exp_date">Exp. date</string>
+    <string name="iss_date">Iss- date</string>
+    <string name="work">Work:</string>
+    <string name="full_name">Full Name:</string>
+    <string name="id_no">ID NO:</string>
+    <string name="number">Number:</string>
+    <string name="location">Location:</string>
+    <string name="signature">(signature)</string>
+    <string name="card_is_not_active">Card is not active</string>
+    <string name="no_news_available">No News Available</string>
+
+    <string name="share_message_one">
+        Welcome Brother/sister!
+        We\'re so happy you\'re here. We founded MUSTAQEEM WELFARE GROUP (Pakistani Community)
+        because we wanted to create a trustworthy and inspiring place for you to find
+        everything you need to help and support as well Click
+        the Link Below to Connect with thousands of Pakistani nationals in UAE
+        By MUSTAQEEM WELFARE GROUP
+    </string>
+
+    <string name="share_message_two">
+        خوش آمدید بھائی / بہن!
+ہم یہاں بہت خوش ہیں۔ ہم نے مستقیم ویلفر گروپ (پاکستانی کمیونٹی) کی بنیاد رکھی کیونکہ ہم آپ کے لئے ایک قابل اعتماد اور متاثر کن جگہ بنانا چاہتے تھے جس کی مدد اور مدد کے لئے آپ کی ضرورت ہے اور ساتھ ہی متحدہ عرب امارات کے ہزاروں پاکستانی شہریوں سے رابطہ قائم کرنے کے لئے نیچے لنک پر کلک کریں
+بذریعہ   مستقیم ویلفر گروپ
+    </string>
+
+</resources>

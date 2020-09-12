@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/JobsID"
+        android:icon="@drawable/jobslist"
+        android:title="Jobs"></item>
+    <item
+        android:id="@+id/HairesID"
+        android:icon="@drawable/haires"
+        android:title="Haires"></item>
+
+</menu>

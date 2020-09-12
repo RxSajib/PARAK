@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_marginBottom="@dimen/_30sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/OnboardingImage"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp">
+
+            </ImageView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:id="@+id/OnbaordingTitle"
+                android:fontFamily="@font/ubuntureguiar"
+                android:gravity="center"
+                android:textColor="@color/carbon_black_87"
+                android:textSize="@dimen/_13sdp"
+                android:text="Sample Title"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:id="@+id/OnboardingDescptrion"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@color/carbon_black_87"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center"
+                android:text="Sample descptrion"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

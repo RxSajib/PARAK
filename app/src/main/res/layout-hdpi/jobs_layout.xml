@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_5sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/JobTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntureguiar"
+                android:text="Junior Accountant"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/carbon_black"
+                android:textSize="@dimen/_13sdp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/NewAnimaction"
+                android:layout_gravity="center_vertical"
+                android:layout_width="@dimen/_20sdp"
+                app:lottie_autoPlay="true"
+                android:visibility="invisible"
+                app:lottie_fileName="new.json"
+                app:lottie_loop="true"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_height="@dimen/_20sdp">
+
+            </com.airbnb.lottie.LottieAnimationView>
+
+        </LinearLayout>
+
+
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:id="@+id/PostTime"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/ubuntureguiar"
+            android:text="5 hours ago"
+            android:textColor="@color/carbon_black_38"
+            android:textSize="@dimen/_10sdp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/ubuntureguiar"
+                android:text="Job > "
+                android:textColor="@color/carbon_black_38"
+                android:textSize="@dimen/_10sdp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/Jobname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/ubuntureguiar"
+                android:text="71W Software company"
+                android:textColor="@color/carbon_lightBlue_800"
+                android:textSize="@dimen/_10sdp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/carbon_black_6"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Employment Type"
+                    android:textColor="@color/carbon_black_54"
+                    android:textSize="@dimen/_13sdp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/EmploymenttypeID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Full Time"
+                    android:textColor="@color/carbon_black"
+                    android:textSize="@dimen/_13sdp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/carbon_black_6"></View>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/carbon_black_6"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Monthly Salary"
+                    android:textColor="@color/carbon_black_54"
+                    android:textSize="@dimen/_13sdp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/JobSalaryID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="2000 - 3999"
+                    android:textColor="@color/carbon_black"
+                    android:textSize="@dimen/_13sdp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/carbon_black_6"></View>
+
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            android:fontFamily="@font/ubuntureguiar"
+            android:text="Show more details"
+            android:textColor="@color/carbon_cyan_800"
+            android:textSize="@dimen/_13sdp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/ubuntureguiar"
+            android:text="Description"
+            android:textColor="@color/carbon_grey_800"
+            android:textSize="@dimen/_12sdp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/JobDetailsID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/ubuntureguiar"
+            android:text="If you need a better way to control your job descriptions, a new market is emerging for job description management software.
+We expect Gartner Group, Forrester, IDC  and other top tech research houses to soon categorize this market.
+Here are the 8 main job description "
+            android:textColor="@color/carbon_grey_800"
+            android:textSize="@dimen/_12sdp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <RelativeLayout
+            android:id="@+id/JobApplyButtonID"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@color/carbon_teal_700">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/ubuntureguiar"
+                android:text="Apply Now"
+                android:textColor="@color/carbon_white"
+                android:textSize="@dimen/_13sdp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/Newslayout"
+        android:layout_margin="@dimen/_7sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/TopLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/AdminIconID"
+                    android:layout_width="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_height="30dp"
+                    android:src="@drawable/admin_icon">
+
+                </de.hdodenhof.circleimageview.CircleImageView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@id/AdminIconID">
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/AdminTop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Admin Post"
+                        android:textColor="@android:color/black"
+                        android:textSize="15dp">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/NewLottiFile"
+                        android:layout_width="25dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/AdminTop"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_fileName="new.json"
+                        android:layout_marginLeft="5dp"
+                        android:layout_height="25dp">
+
+                    </com.airbnb.lottie.LottieAnimationView>
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/AdminTop"
+                        android:layout_marginTop="3dp"
+                        android:id="@+id/NewsTimeAndDate"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="time and date"
+                        android:textSize="10dp">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/MessageLayout"
+            android:layout_below="@id/TopLayout"
+            android:layout_marginTop="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:textSize="13sp"
+                android:id="@+id/NewsMessage"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Bangladesh, to the east of India on the Bay of Bengal, is a South Asian country marked by lush greenery and many waterways. Its Padma (Ganges), Meghna and Jamuna rivers create fertile plains, and travel by boat is common"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_below="@+id/MessageLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/NewsImage"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </ImageView>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

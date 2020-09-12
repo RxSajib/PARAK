@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+
+
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <com.airbnb.lottie.LottieAnimationView
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="noconnection.json"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.airbnb.lottie.LottieAnimationView>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:text="  Retry  "
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:textAllCaps="false"
+                        android:backgroundTint="@color/carbon_purple_800"
+                        android:layout_width="wrap_content"
+                        app:cornerRadius="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.button.MaterialButton>
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:text="  Cancel  "
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:textAllCaps="false"
+                        android:backgroundTint="@color/carbon_red_600"
+                        android:layout_width="wrap_content"
+                        app:cornerRadius="@dimen/_15sdp"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.button.MaterialButton>
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

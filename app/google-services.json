@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "124954229364",
+    "firebase_url": "https://parak-63f2b.firebaseio.com",
+    "project_id": "parak-63f2b",
+    "storage_bucket": "parak-63f2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124954229364:android:aa2adb5a798ca736f92f21",
+        "android_client_info": {
+          "package_name": "com.rakpak.pak_parak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124954229364-er647usa8lgm01lsbdfi6tehip43r60o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rakpak.pak_parak",
+            "certificate_hash": "afd7a56cfcf94a51f3a745af9f2f8b6088deac21"
+          }
+        },
+        {
+          "client_id": "124954229364-jboqe3h1sl6k8tdcdulce1ac1h2mva2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJlU3dyBBm-qYwqvJlDKr5wgvPIRdcnBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124954229364-jboqe3h1sl6k8tdcdulce1ac1h2mva2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

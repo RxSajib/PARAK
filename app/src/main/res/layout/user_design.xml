@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/iteams_click_ripple"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/LayoutID"
+        android:layout_margin="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/UserProfileImageID"
+            android:layout_width="60dp"
+            android:background="@drawable/profile_image_back"
+            android:layout_height="60dp">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+
+        <RelativeLayout
+            android:layout_toRightOf="@id/UserProfileImageID"
+            android:layout_marginLeft="7dp"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/UserNameTextID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="UserName"
+                android:textColor="@android:color/black"
+                android:textSize="17sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/UserTypingStatus"
+                android:layout_marginTop="3dp"
+                android:layout_width="wrap_content"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:text="sajibroy206@gmail.com"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+            <RelativeLayout
+                android:layout_below="@+id/UserNameTextID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:id="@+id/OnlineDot"
+                        android:background="@drawable/inactive_dot"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="@dimen/_8sdp">
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:id="@+id/OnlineTime"
+                        android:text="Last online: 10:00 AM"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
