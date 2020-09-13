@@ -45,7 +45,7 @@ public class Landing_Screen extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.landing__screen, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+     //   getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Mauth = FirebaseAuth.getInstance();
         nextbutton = view.findViewById(R.id.NextButtonID);
@@ -177,7 +177,7 @@ public class Landing_Screen extends Fragment {
     private void goto_homepage(Fragment fragment){
         if(fragment != null){
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
+            fragmentTransaction.setCustomAnimations(R.anim.home_sloder_from_right    , R.anim.home_slider_from_left);
             fragmentTransaction.replace(R.id.MainID, fragment);
             fragmentTransaction.commit();
         }

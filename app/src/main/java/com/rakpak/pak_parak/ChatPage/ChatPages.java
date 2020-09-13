@@ -1,12 +1,16 @@
 package com.rakpak.pak_parak.ChatPage;
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -131,6 +135,7 @@ public class ChatPages extends Fragment {
     private RelativeLayout backbutton;
 
     private RelativeLayout activedot;
+    private DatabaseReference ONlineData;
 
 
     /// todo update function
@@ -157,7 +162,7 @@ public class ChatPages extends Fragment {
     /// todo update function
 
 
-
+    private DatabaseReference MtypeData;
 
 
     public ChatPages() {
@@ -171,6 +176,55 @@ public class ChatPages extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.chat_pages, container, false);
+
+
+        MtypeData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserTypeRoot);
+
+        ONlineData  = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
+        ONlineData.keepSynced(true);
+
+
+
+        /// todo internet connection dioloag
+        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
+
+        boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
+        if(isconnected){
+
+            ///open anythings
+        }
+        else {
+            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+            dialog.setContentView(R.layout.no_connection_dioloag);
+            dialog.show();
+
+
+            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(true);
+                    dialog.dismiss();
+                }
+            });
+
+            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
+
+            cancelbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+
+        }
+
+
+        /// todo internet connection dialoag
+
 
 
 
@@ -369,6 +423,9 @@ public class ChatPages extends Fragment {
 
                     attachbox.setVisibility(View.VISIBLE);
 
+
+
+
                     Calendar calendar_time = Calendar.getInstance();
                     SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
                     Current_time = simpleDateFormat_time.format(calendar_time.getTime());
@@ -382,21 +439,21 @@ public class ChatPages extends Fragment {
                     type_map.put("time", Current_time);
                     type_map.put("date", Current_date);
 
-                    Muser_database.child(SenderID)
+                    MtypeData.child(SenderID)
                             .child("type_status").child("type").setValue("notype");
-                    Muser_database.child(SenderID)
+                    MtypeData.child(SenderID)
                             .child("type_status").child("time").setValue(Current_time);
-                    Muser_database.child(SenderID)
+                    MtypeData.child(SenderID)
                             .child("type_status").child("date").setValue(Current_date);
 
                     /// todo sender and reciver type
-                    Muser_database.child(ReciverUID).child(SenderID)
+                    MtypeData.child(ReciverUID).child(SenderID)
                             .child("type").setValue("notype");
 
-                     Muser_database.child(ReciverUID).child(SenderID)
+                    MtypeData.child(ReciverUID).child(SenderID)
                             .child("time").setValue(Current_time);
 
-                      Muser_database.child(ReciverUID).child(SenderID)
+                    MtypeData.child(ReciverUID).child(SenderID)
                             .child("date").setValue(Current_date);
 
 
@@ -418,21 +475,21 @@ public class ChatPages extends Fragment {
                     type_map.put("time", Current_time);
                     type_map.put("date", Current_date);
 
-                    Muser_database.child(SenderID)
+                    MtypeData.child(SenderID)
                             .child("type_status").child("type").setValue("typing ...");
-                    Muser_database.child(SenderID)
+                    MtypeData.child(SenderID)
                             .child("type_status").child("time").setValue(Current_time);
-                    Muser_database.child(SenderID)
+                    MtypeData.child(SenderID)
                             .child("type_status").child("date").setValue(Current_date);
 
                     /// todo sender and reciver type status
-                    Muser_database.child(ReciverUID).child(SenderID)
+                    MtypeData.child(ReciverUID).child(SenderID)
                             .child("type").setValue("typing ...");
 
-                    Muser_database.child(ReciverUID).child(SenderID)
+                    MtypeData.child(ReciverUID).child(SenderID)
                             .child("time").setValue(Current_time);
 
-                    Muser_database.child(ReciverUID).child(SenderID)
+                    MtypeData.child(ReciverUID).child(SenderID)
                             .child("date").setValue(Current_date);
                 }
             }
@@ -483,7 +540,7 @@ public class ChatPages extends Fragment {
                 });
 
 
-        Muser_database.child(ReciverUID).child("type_status")
+        MtypeData.child(ReciverUID).child("type_status")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -641,8 +698,6 @@ public class ChatPages extends Fragment {
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
 
-                            Muser_database.child(ReciverUID).child(ReciverUID).child("last_message_reciver").setValue(Message);
-                          //  Muser_database.child(SenderID).child("last_message_sender").setValue(Message);
                             find_userand_sendnotifaction();
 
                         } else {
@@ -694,6 +749,16 @@ public class ChatPages extends Fragment {
                 });
     }
 
+
+    @Override
+    public void onStart() {
+
+
+
+
+
+        super.onStart();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
@@ -1058,7 +1123,7 @@ public class ChatPages extends Fragment {
         onlinemap.put(DataManager.UserActiveTime, CurrentTime);
         onlinemap.put(DataManager.UserActiveDate, CurrentDate);
 
-        Muser_database.child(SenderID).child(DataManager.UserOnlineRoot).updateChildren(onlinemap)
+        ONlineData.child(SenderID).child(DataManager.UserOnlineRoot).updateChildren(onlinemap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -1087,7 +1152,7 @@ public class ChatPages extends Fragment {
     }
 
     private void getuser_friend_online(){
-        Muser_database.child(ReciverUID)
+        ONlineData.child(ReciverUID)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {

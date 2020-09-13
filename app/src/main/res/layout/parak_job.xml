@@ -41,7 +41,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:textSize="@dimen/_15sdp"
                 android:textColor="@android:color/white"
-                android:text="Parak Jobs"
+                android:text="Jobs"
                 android:fontFamily="@font/ubuntureguiar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

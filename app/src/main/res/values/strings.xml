@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pak_Parak</string>
+    <string name="app_name">MUSTAQEEN</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profiletext">Kindly Compelete Your MUSTAQEEM WELFARE GROUP Profile With Your Correct Information</string>
@@ -108,5 +108,7 @@ Organize social events, exhibitions, seminars, conferences and public lectures f
 ہم یہاں بہت خوش ہیں۔ ہم نے مستقیم ویلفر گروپ (پاکستانی کمیونٹی) کی بنیاد رکھی کیونکہ ہم آپ کے لئے ایک قابل اعتماد اور متاثر کن جگہ بنانا چاہتے تھے جس کی مدد اور مدد کے لئے آپ کی ضرورت ہے اور ساتھ ہی متحدہ عرب امارات کے ہزاروں پاکستانی شہریوں سے رابطہ قائم کرنے کے لئے نیچے لنک پر کلک کریں
 بذریعہ   مستقیم ویلفر گروپ
     </string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
 
 </resources>

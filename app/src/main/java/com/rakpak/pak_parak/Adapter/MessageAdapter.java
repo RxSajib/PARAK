@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,8 +34,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.rakpak.pak_parak.BottomSheed.AuidoButtomSheed;
+import com.rakpak.pak_parak.BottomSheed.ForwardBottomSheed;
 import com.rakpak.pak_parak.BottomSheed.FullSceenImageBottomSheed;
 import com.rakpak.pak_parak.DataManager;
+import com.rakpak.pak_parak.Forword.MessageForward;
 import com.rakpak.pak_parak.ImageFullScreen.ImageFullScreen;
 import com.rakpak.pak_parak.Model.UserMessageListModal;
 import com.rakpak.pak_parak.R;
@@ -118,6 +122,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
+                holder.sendermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+
+
+                });
+
+
+
                 String sendermessage = MessageModalList.getMessage();
                 if(sendermessage.length() >= 15){
                     holder.sendmessage_time.setVisibility(View.VISIBLE);
@@ -134,6 +155,26 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
             } else {
                 holder.recivermessagelayout.setVisibility(View.VISIBLE);
+
+
+
+                holder.recivermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+
+
+                });
+
+
+
 
                 String sendermessage = MessageModalList.getMessage();
                 if(sendermessage.length() >= 15){
@@ -158,6 +199,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.sendderimage.setVisibility(View.VISIBLE);
                 holder.senderimagetime.setVisibility(View.VISIBLE);
                 holder.senderimagetime.setText(MessageModalList.getTime());
+
+
+
+                holder.sendderimage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+
+
+                });
+
+
 
                 Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(holder.sendderimage,
                         new Callback() {
@@ -217,17 +277,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
                     }
 
-                    private void goto_fullscreen(Fragment fragment) {
-                        if(fragment != null){
 
-                            Bundle bundle = new Bundle();
-                            bundle.putString("URI", MessageModalList.getMessage());
-                            bundle.putString("TIME", MessageModalList.getTime());
-                            fragment.setArguments(bundle);
-
-
-                        }
-                    }
 
                 });
 
@@ -236,6 +286,24 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.reciverimage.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setVisibility(View.VISIBLE);
                 holder.recivemessage_time.setText(MessageModalList.getTime());
+
+
+                holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+
+
+                });
+
+
 
                 Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.reciverimage, new Callback() {
@@ -251,7 +319,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         });
 
 
-                holder.sendderimage.setOnClickListener(new View.OnClickListener() {
+                holder.reciverimage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -272,6 +340,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         alertDialog.show();*/
 
                       //  goto_fullscreen(new ImageFullScreen());
+
 
 
                         final Dialog dialog = new Dialog(holder.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
@@ -308,6 +377,20 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.sender_pdf_box.setVisibility(View.VISIBLE);
                 holder.sender_pdf_time.setText(MessageModalList.getTime());
 
+
+                holder.sender_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
+
+
                 holder.sender_pdf_box.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -323,6 +406,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciver_pdf_box.setVisibility(View.VISIBLE);
                 holder.reciver_pdf_time.setText(MessageModalList.getTime());
+
+
+                holder.reciver_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
 
                 holder.reciver_pdf_box.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -340,6 +436,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.senderaudiobox.setVisibility(View.VISIBLE);
                 holder.senderaudiotime.setText(MessageModalList.getTime());
 
+
+                holder.senderaudiobox.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
+
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -352,6 +461,404 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciveraudiobox.setVisibility(View.VISIBLE);
                 holder.reciveraudiotime.setText(MessageModalList.getTime());
+
+
+
+                holder.reciveraudiobox.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AuidoButtomSheed buttomSheed = new AuidoButtomSheed(MessageModalList.getMessage());
+                        buttomSheed.show(((AppCompatActivity)holder.context).getSupportFragmentManager(), "show");
+                    }
+                });
+            }
+        }
+
+
+
+
+
+        if(type.equals(DataManager.ForwardImageType)){
+            holder.imagebox.setVisibility(View.VISIBLE);
+            if (from.equals(SenderUID)) {
+
+
+
+
+
+                holder.sendderimage.setVisibility(View.VISIBLE);
+                holder.senderimagetime.setVisibility(View.VISIBLE);
+                holder.senderimagetime.setText(MessageModalList.getTime());
+
+
+
+
+
+                holder.sendderimage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+
+
+                        return true;
+                    }
+                });
+
+                holder.sendderimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final Dialog dialog = new Dialog(holder.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+                        dialog.setContentView(R.layout.full_screenimage_bottomsheeed);
+
+                        PhotoView photoView = dialog.findViewById(R.id.PhotoView);
+                        Picasso.with(holder.context).load(MessageModalList.getMessage()).into(photoView);
+                        dialog.show();
+                    }
+                });
+
+                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(holder.sendderimage,
+                        new Callback() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+                                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().into(holder.sendderimage);
+                            }
+                        });
+
+
+
+
+                holder.sendderimage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        return true;
+                    }
+
+
+                });
+
+
+
+            }
+
+            else {
+
+
+                holder.reciverimage.setVisibility(View.VISIBLE);
+                holder.reciverimagetime.setVisibility(View.VISIBLE);
+                holder.recivemessage_time.setText(MessageModalList.getTime());
+
+
+                holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+
+
+                        return true;
+                    }
+                });
+
+
+                holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+
+
+                });
+
+
+
+                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE)
+                        .into(holder.reciverimage, new Callback() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+                                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().into(holder.reciverimage);
+                            }
+                        });
+
+
+                holder.reciverimage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                      /*  MaterialAlertDialogBuilder Mbuilder  = new MaterialAlertDialogBuilder(holder.context);
+                        View Mview = LayoutInflater.from(holder.context).inflate(R.layout.full_scren_dioloag, null, false);
+
+                        MaterialToolbar toolbar = Mview.findViewById(R.id.DioloagToolbarID);
+                        MaterialTextView time = Mview.findViewById(R.id.ImageTimeDetails);
+                        PhotoView photoView = Mview.findViewById(R.id.PhotoViewID);
+
+                        Picasso.with(holder.context).load(MessageModalList.getMessage()).into(photoView);
+                        time.setText(MessageModalList.getTime());
+
+
+
+                        Mbuilder.setView(Mview);
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();*/
+
+                        //  goto_fullscreen(new ImageFullScreen());
+
+
+
+                        final Dialog dialog = new Dialog(holder.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+                        dialog.setContentView(R.layout.full_screenimage_bottomsheeed);
+
+                        PhotoView photoView = dialog.findViewById(R.id.PhotoView);
+                        Picasso.with(holder.context).load(MessageModalList.getMessage()).into(photoView);
+                        dialog.show();
+                    }
+
+                    private void goto_fullscreen(Fragment fragment) {
+                        if(fragment != null){
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("URI", MessageModalList.getMessage());
+                            bundle.putString("TIME", MessageModalList.getTime());
+                            fragment.setArguments(bundle);
+
+                            FragmentTransaction transaction = ((AppCompatActivity) holder.context).getSupportFragmentManager().beginTransaction();
+                            transaction.replace(R.id.MainID, fragment).addToBackStack(null);
+                            transaction.commit();
+                        }
+                    }
+
+                });
+
+
+
+
+            }
+        }
+
+        if(type.equals(DataManager.ForwardTexType)){
+
+
+            if (from.equals(SenderUID)) {
+                holder.sendermessagelayout.setVisibility(View.VISIBLE);
+
+
+            holder.sendermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                    return true;
+                }
+            });
+
+
+
+                String sendermessage = MessageModalList.getMessage();
+                if(sendermessage.length() >= 15){
+                    holder.sendmessage_time.setVisibility(View.VISIBLE);
+                    holder.sendmessage_time.setText(MessageModalList.getTime());
+                    holder.sendmessage.setText(MessageModalList.getMessage());
+                    holder.sendershort_message.setText(MessageModalList.getTime());
+                }
+                else {
+                    holder.sendershort_message.setVisibility(View.VISIBLE);
+                    holder.sendershort_message.setText(MessageModalList.getTime());
+                    holder.sendmessage_time.setText(MessageModalList.getTime());
+                    holder.sendmessage.setText(MessageModalList.getMessage());
+                }
+
+            }
+
+            else {
+
+                holder.recivermessagelayout.setVisibility(View.VISIBLE);
+
+
+
+                holder.recivermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+
+
+                });
+
+
+
+
+                String sendermessage = MessageModalList.getMessage();
+                if(sendermessage.length() >= 15){
+                    holder.recivemessage_time.setVisibility(View.VISIBLE);
+                    holder.recivemessage_time.setText(MessageModalList.getTime());
+                    holder.recivemessage.setText(MessageModalList.getMessage());
+                    holder.recivershort_message.setText(MessageModalList.getTime());
+                }
+                else {
+                    holder.recivershort_message.setVisibility(View.VISIBLE);
+                    holder.recivershort_message.setText(MessageModalList.getTime());
+                    holder.recivemessage_time.setText(MessageModalList.getTime());
+                    holder.recivemessage.setText(MessageModalList.getMessage());
+                }
+
+
+            }
+
+        }
+
+
+        if(type.equals(DataManager.ForwardPdfType)){
+
+            if(from.equals(SenderUID)){
+                holder.sender_pdf_box.setVisibility(View.VISIBLE);
+                holder.sender_pdf_time.setText(MessageModalList.getTime());
+
+
+
+                holder.sender_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
+
+                holder.sender_pdf_box.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(MessageModalList.getMessage()));
+                        holder.context.startActivity(myIntent);
+
+
+                    }
+                });
+
+
+            }
+
+            else {
+                holder.reciver_pdf_box.setVisibility(View.VISIBLE);
+                holder.reciver_pdf_time.setText(MessageModalList.getTime());
+
+
+                holder.reciver_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
+
+                holder.reciver_pdf_box.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(MessageModalList.getMessage()));
+                        holder.context.startActivity(myIntent);
+                    }
+                });
+            }
+
+        }
+
+
+        if(type.equals(DataManager.ForwardAudioType)){
+            if(from.equals(SenderUID)){
+                holder.senderaudiobox.setVisibility(View.VISIBLE);
+                holder.senderaudiotime.setText(MessageModalList.getTime());
+
+
+                holder.senderaudiobox.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
+
+                holder.senderaudiobox.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AuidoButtomSheed buttomSheed = new AuidoButtomSheed(MessageModalList.getMessage());
+                        buttomSheed.show(((AppCompatActivity)holder.context).getSupportFragmentManager(), "show");
+                    }
+                });
+
+            }
+
+            else {
+                holder.reciveraudiobox.setVisibility(View.VISIBLE);
+                holder.reciveraudiotime.setText(MessageModalList.getTime());
+
+
+
+                holder.reciveraudiobox.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+
+                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        return true;
+                    }
+                });
+
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override

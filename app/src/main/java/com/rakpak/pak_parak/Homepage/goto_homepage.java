@@ -1,7 +1,11 @@
 package com.rakpak.pak_parak.Homepage;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +21,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,6 +32,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -87,6 +94,9 @@ public class goto_homepage extends Fragment {
     private RelativeLayout menu_button;
     private String CurrentTime, CurrentDate;
 
+
+    private DatabaseReference OnlineData;
+
     public goto_homepage() {
         // Required empty public constructor
     }
@@ -100,9 +110,58 @@ public class goto_homepage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.goto_homepage, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+    //    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.OnlineUseRoot);
 
         menu_button = view.findViewById(R.id.MyMenuButtonID);
+
+
+
+
+
+        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
+
+        boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
+        if(isconnected){
+
+            ///open anythings
+        }
+        else {
+            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.send_message);
+
+
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setContentView(R.layout.no_connection_dioloag);
+            dialog.show();
+
+
+            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(true);
+                    dialog.dismiss();
+                }
+            });
+
+            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
+
+            cancelbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+
+        }
+
+
+
 
 
 
@@ -366,6 +425,7 @@ public class goto_homepage extends Fragment {
 
         if(fragment != null) {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
             transaction.replace(R.id.MainFream, fragment);
             transaction.commit();
         }
@@ -376,6 +436,7 @@ public class goto_homepage extends Fragment {
 
         if(fragment != null) {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
             transaction.replace(R.id.MainFream, fragment);
             transaction.commit();
         }
@@ -385,6 +446,7 @@ public class goto_homepage extends Fragment {
 
         if(fragment != null) {
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
             transaction.replace(R.id.MainFream, fragment);
             transaction.commit();
         }
@@ -510,12 +572,12 @@ public class goto_homepage extends Fragment {
     private void onlinecheack(String online){
 
         Calendar calendar_time = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
         CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
 
         Calendar calendar_date = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
         CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
 
@@ -524,7 +586,7 @@ public class goto_homepage extends Fragment {
         onlinemap.put(DataManager.UserActiveTime, CurrentTime);
         onlinemap.put(DataManager.UserActiveDate, CurrentDate);
 
-        Muserdata.child(Currentuserid).child(DataManager.UserOnlineRoot).updateChildren(onlinemap)
+        OnlineData.child(Currentuserid).child(DataManager.UserOnlineRoot).updateChildren(onlinemap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

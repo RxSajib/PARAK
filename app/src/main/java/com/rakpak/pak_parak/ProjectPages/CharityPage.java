@@ -1,5 +1,9 @@
 package com.rakpak.pak_parak.ProjectPages;
 
+import android.app.Dialog;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +36,7 @@ public class CharityPage extends Fragment {
     private DatabaseReference Muserdatabase;
     private String CurrentUserID;
     private FirebaseAuth Mauth;
+    private DatabaseReference OnlineData;
 
     public CharityPage() {
     }
@@ -42,6 +47,52 @@ public class CharityPage extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.charity_page, container, false);
+
+        OnlineData =  FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
+        OnlineData.keepSynced(true);
+
+
+        /// todo internet connection dioloag
+        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
+
+        boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
+        if(isconnected){
+
+            ///open anythings
+        }
+        else {
+            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+            dialog.setContentView(R.layout.no_connection_dioloag);
+            dialog.show();
+
+
+            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(true);
+                    dialog.dismiss();
+                }
+            });
+
+            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
+
+            cancelbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+
+        }
+
+
+        /// todo internet connection dialoag
+
+
 
 
         Muserdatabase = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
@@ -78,7 +129,7 @@ public class CharityPage extends Fragment {
         onlinemap.put(DataManager.UserActiveTime, CurrentTime);
         onlinemap.put(DataManager.UserActiveDate, CurrentDate);
 
-        Muserdatabase.child(CurrentUserID).child(DataManager.UserOnlineRoot).updateChildren(onlinemap)
+        OnlineData.child(CurrentUserID).child(DataManager.UserOnlineRoot).updateChildren(onlinemap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

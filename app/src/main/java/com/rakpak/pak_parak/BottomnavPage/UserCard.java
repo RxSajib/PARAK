@@ -83,7 +83,7 @@ public class UserCard extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.user_card, container, false);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+ //       getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         // todo issue date and exp date
         issue_date = view.findViewById(R.id.Issue_date);
@@ -266,13 +266,13 @@ public class UserCard extends Fragment {
 
     @Override
     public void onStop() {
-        onlinecheack("offline");
+    //    onlinecheack("offline");
         super.onStop();
     }
 
     @Override
     public void onResume() {
-        onlinecheack("online");
+    //    onlinecheack("online");
         super.onResume();
     }
 }

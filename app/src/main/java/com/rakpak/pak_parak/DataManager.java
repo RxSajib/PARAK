@@ -19,7 +19,9 @@ public class DataManager {
     public static final String UsertActivDate = "active_date";
     public static final String UserOnlineRoot = "Online";
     public static final String UserLocation = "location";
-
+    public static final String OnlineUseRoot = "Online";
+    public static final String UserTypeRoot = "Type";
+    public static final String GlobalTypeRoot = "GlobalType";
 
     // todo user data
 
@@ -74,4 +76,13 @@ public class DataManager {
     // todo message
     public static final String Audio  = "Audio";
     // todo message
+
+    /// todo image forward
+    public static final String ForwardImage = "ForwardImage";
+    public static final String FowardByName = "FoewardByName";
+    public static final String ForwardImageType = "ForwardImage";
+    public static final String ForwardTexType = "ForwardText";
+    public static final String ForwardPdfType = "ForwardPdf";
+    public static final String ForwardAudioType = "ForwardAudio";
+    /// todo image forward
 }

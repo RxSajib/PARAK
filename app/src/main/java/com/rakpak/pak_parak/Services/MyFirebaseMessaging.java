@@ -113,7 +113,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         NotificationCompat.Builder notificationBuilder=new NotificationCompat.Builder(this)
                 //        .setContentIntent(pendingIntent)
-                .setSmallIcon( R.drawable.admin_icon)
+                .setSmallIcon( R.drawable.app_icon)
                 .setContentTitle(title)
                 .setContentText(content)
                 .setAutoCancel(true)

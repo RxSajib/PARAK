@@ -50,7 +50,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_toRightOf="@+id/MyMenuButtonID"
-                    android:text="PAK PARAK"
+                    android:text="@string/app_name"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
                     app:fontFamily="@font/ubuntureguiar">

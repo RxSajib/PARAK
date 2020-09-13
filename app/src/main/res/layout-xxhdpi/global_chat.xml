@@ -76,14 +76,23 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ChatListID"
+    <RelativeLayout
         android:layout_below="@+id/GlobalToolbarID"
-        android:layout_above="@+id/ChatBox"
         android:layout_width="match_parent"
+        android:layout_above="@+id/ChatBox"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ChatListID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/ChatBox"
@@ -129,7 +138,7 @@
                 android:layout_centerVertical="true"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/_20sdp"
-                android:layout_height="45dp">
+                android:layout_height="wrap_content">
 
                 <RelativeLayout
                     android:layout_centerVertical="true"
@@ -144,7 +153,8 @@
                         android:hint="Enter message"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:padding="7dp"
+                        android:padding="10dp"
+                        android:maxLines="7"
                         android:layout_toLeftOf="@+id/GlobalAttachBox"
                         android:textSize="@dimen/_13sdp"
                         android:background="@null"
@@ -217,7 +227,7 @@
             android:layout_centerVertical="true"
             android:visibility="gone"
             app:cardBackgroundColor="@color/colorPrimary"
-            app:cardCornerRadius="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_38sdp"
             android:layout_height="@dimen/_38sdp">
 
             <RelativeLayout

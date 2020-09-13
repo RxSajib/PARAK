@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.rakpak.pak_parak.BottomSheed.AuidoButtomSheed;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.GlobalChat.GlobalChat;
 import com.rakpak.pak_parak.ImageFullScreen.ImageFullScreen;
@@ -75,6 +76,10 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
         holder.imagebox.setVisibility(View.GONE);
         holder.pdflayout.setVisibility(View.GONE);
         /// todo gone all component
+
+        /// todo audio message
+        holder.audiobox.setVisibility(View.GONE);
+        /// todo audio message
 
         GlobalChatModal globalChatModal = globalChatModalslist.get(position);
         String type = globalChatModal.getType();
@@ -244,6 +249,48 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
 
         }
+
+
+        /// todo audio message
+        if(type.equals(DataManager.Audio)){
+                holder.audiobox.setVisibility(View.VISIBLE);
+
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AuidoButtomSheed auidoButtomSheed = new AuidoButtomSheed(globalChatModal.getMessage());
+                        auidoButtomSheed.show(((AppCompatActivity)holder.context).getSupportFragmentManager(), "show");
+                    }
+                });
+
+                MuserDatabase.child(CurrentUserID)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                        String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+
+                                        if(name.equals(globalChatModal.getName())){
+                                            holder.aduiotime.setText(globalChatModal.getTime());
+                                            holder.senderaudio_username.setText("Me");
+                                        }
+                                        else {
+                                            holder.aduiotime.setText(globalChatModal.getTime());
+                                            holder.senderaudio_username.setText(globalChatModal.getName());
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+        }
+        /// todo audio message
     }
 
     @Override
@@ -263,6 +310,11 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
         private MaterialTextView pdftime, pdfsender;
         private Context context;
         /// todo PDF
+
+        /// todo audio message
+        private RelativeLayout audiobox;
+        private MaterialTextView aduiotime,  senderaudio_username;
+        /// todo audio message
 
 
         public GlobalHolder(@NonNull View itemView) {
@@ -287,6 +339,12 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
             pdftime = itemView.findViewById(R.id.ReciverPdfTime);
             pdfsender = itemView.findViewById(R.id.PdfSenderUserID);
             /// todo PDF
+
+            // todo audio message
+            audiobox = itemView.findViewById(R.id.ReciverAudioBox);
+            aduiotime = itemView.findViewById(R.id.ReciverAudioTime);
+            senderaudio_username = itemView.findViewById(R.id.SenderAudioname);
+            // todo audio message
 
             textmessagebox = itemView.findViewById(R.id.ReciverMessageLayout);
         }

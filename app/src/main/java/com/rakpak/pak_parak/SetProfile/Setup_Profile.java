@@ -1,7 +1,11 @@
 package com.rakpak.pak_parak.SetProfile;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -69,6 +73,8 @@ public class Setup_Profile extends Fragment {
     private EditText location;
     private DatabaseReference MNotifactionDatabase;
 
+    private DatabaseReference TypeData;
+
     public Setup_Profile() {
         // Required empty public constructor
     }
@@ -79,6 +85,53 @@ public class Setup_Profile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.setup__profile, container, false);
+
+
+        TypeData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserTypeRoot);
+
+        /// todo internet connection dioloag
+        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
+
+        boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
+        if(isconnected){
+
+            ///open anythings
+        }
+        else {
+            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
+            dialog.setContentView(R.layout.no_connection_dioloag);
+            dialog.show();
+
+
+            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(true);
+                    dialog.dismiss();
+                }
+            });
+
+            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
+
+            cancelbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+
+        }
+
+
+        /// todo internet connection dialoag
+
+
+
+
 
         MNotifactionDatabase = FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot);
         location = view.findViewById(R.id.LocationID);
@@ -211,13 +264,13 @@ public class Setup_Profile extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
 
-                                        MuserDatabase.child(CurrentUserID).child("type_status")
+                                        TypeData.child(CurrentUserID).child("type_status")
                                                 .child("type").setValue("notype");
 
-                                        MuserDatabase.child(CurrentUserID).child("type_status")
+                                        TypeData.child(CurrentUserID).child("type_status")
                                                 .child("time").setValue(CurrentTime);
 
-                                        MuserDatabase.child(CurrentUserID).child("type_status")
+                                        TypeData.child(CurrentUserID).child("type_status")
                                                 .child("date").setValue(CurrentDate);
 
 

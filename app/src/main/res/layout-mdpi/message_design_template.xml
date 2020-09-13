@@ -204,7 +204,7 @@
 
 
     <RelativeLayout
-        android:visibility="invisible"
+        android:visibility="gone"
         android:id="@+id/SenderPdfBox"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/_7sdp"
@@ -218,11 +218,11 @@
             android:layout_width="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_8sdp"
             android:text="10:00 AM"
             android:id="@+id/SenderPdfTime"
             android:fontFamily="@font/ubuntureguiar"
-            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:layout_height="wrap_content">
 
@@ -233,8 +233,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_10sdp"
             android:src="@drawable/attach_icon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp">
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp">
         </ImageView>
 
 
@@ -254,7 +254,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:visibility="invisible"
+        android:visibility="gone"
         android:id="@+id/ReciverPdfBox"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="@dimen/_7sdp"
@@ -284,8 +284,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_10sdp"
             android:src="@drawable/attach_icon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp">
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp">
         </ImageView>
 
 
@@ -295,7 +295,7 @@
             android:layout_width="wrap_content"
             android:layout_marginLeft="@dimen/_15sdp"
             android:textSize="@dimen/_14sdp"
-            android:textColor="@color/carbon_white"
+            android:textColor="@color/carbon_black_87"
             android:text="Download"
             android:fontFamily="@font/ubuntureguiar"
             android:layout_height="wrap_content">

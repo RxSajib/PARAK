@@ -40,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.rakpak.pak_parak.ChatPage.ChatPages;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.GlobalChat.GlobalChat;
+import com.rakpak.pak_parak.Model.OnBoardingModal;
 import com.rakpak.pak_parak.Model.UserIteamsList;
 import com.rakpak.pak_parak.R;
 import com.rakpak.pak_parak.Search.Search_Page;
@@ -64,6 +65,7 @@ public class Chatpages extends Fragment {
     private FloatingActionButton search_button;
     private Animation animation;
     private RelativeLayout haveuser;
+    private DatabaseReference OnlineData;
 
 
 
@@ -78,6 +80,10 @@ public class Chatpages extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.chatpages, container, false);
+
+        OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
+        OnlineData.keepSynced(true);
+
 
         haveuser = view.findViewById(R.id.haveUser);
         search_button = view.findViewById(R.id.SearchButtonID);
@@ -125,6 +131,57 @@ public class Chatpages extends Fragment {
                             @Override
                             public void onDataChange(final DataSnapshot dataSnapshot) {
                                 if(dataSnapshot.exists()){
+
+
+
+                                    OnlineData.child(UID)
+                                            .addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                    if(dataSnapshot.hasChild(DataManager.OnlineUseRoot)){
+
+                                                        String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                        if(online_status.equals("online")){
+                                                            chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                            chatHolder.onlinetime_date_status.setText("online now");
+                                                        }
+                                                        else if(online_status.equals("offline")){
+                                                            chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+
+
+                                                            Calendar calendar_date = Calendar.getInstance();
+                                                            SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                            String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                            String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                            String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                            if(getoninedate.equals(CurrentDate)){
+                                                                chatHolder.onlinetime_date_status.setText("Last online today: "+getonlinetime);
+                                                            }
+                                                            else {
+                                                                chatHolder.onlinetime_date_status.setText("Last online : "+getoninedate);
+                                                            }
+
+                                                        }
+
+
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+
+
+
+
                                     haveuser.setVisibility(View.GONE);
                                     if(dataSnapshot.hasChild("profileimage")){
                                         String uri = dataSnapshot.child("profileimage").getValue().toString();
@@ -194,6 +251,9 @@ public class Chatpages extends Fragment {
                                     });
 
                                 }
+
+
+
                                 else {
                                     haveuser.setVisibility(View.VISIBLE);
                                 }
@@ -334,14 +394,14 @@ public class Chatpages extends Fragment {
 
     @Override
     public void onStop() {
-        onlinecheack("offline");
+       // onlinecheack("offline");
         readuser_data();
         super.onStop();
     }
 
     @Override
     public void onResume() {
-        onlinecheack("online");
+      //  onlinecheack("online");
         readuser_data();
         super.onResume();
     }

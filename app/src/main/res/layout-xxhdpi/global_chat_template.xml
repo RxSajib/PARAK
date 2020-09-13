@@ -235,4 +235,86 @@
 
     </RelativeLayout>
 
+
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/ReciverAudioBox"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@drawable/reciver_message_design"
+        android:layout_width="@dimen/_175sdp"
+        android:layout_height="@dimen/_45sdp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:textColor="@color/carbon_black_38"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/_10sdp"
+            android:text="10:00 AM"
+            android:id="@+id/ReciverAudioTime"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SenderAudioname"
+            android:textSize="12sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="username"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:textColor="@color/carbon_red_200"
+            android:fontFamily="sans-serif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+
+
+
+        <RelativeLayout
+            android:layout_below="@+id/SenderAudioname"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_3sdp"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/MicICon"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:src="@drawable/mic_black_icon"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp">
+            </ImageView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/MicICon"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="@color/carbon_black"
+                android:text="Play Record"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </RelativeLayout>
+
 </RelativeLayout>

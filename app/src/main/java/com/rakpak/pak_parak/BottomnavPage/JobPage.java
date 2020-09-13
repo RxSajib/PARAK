@@ -70,7 +70,7 @@ public class JobPage extends Fragment {
         View view = inflater.inflate(R.layout.job_page, container, false);
 
         jobhave = view.findViewById(R.id.Jobhave);
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+    //    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         Muserdatabase = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
         Mauth = FirebaseAuth.getInstance();
@@ -283,13 +283,13 @@ public class JobPage extends Fragment {
 
     @Override
     public void onStop() {
-        onlinecheack("offline");
+     //   onlinecheack("offline");
         super.onStop();
     }
 
     @Override
     public void onResume() {
-        onlinecheack("online");
+      //  onlinecheack("online");
         super.onResume();
     }
 }

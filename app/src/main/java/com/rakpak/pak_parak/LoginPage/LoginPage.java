@@ -140,6 +140,7 @@ public class LoginPage extends Fragment {
     private void goto_homepage(Fragment fragment){
         if(fragment != null){
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+
             fragmentTransaction.replace(R.id.MainID, fragment);
             fragmentTransaction.commit();
         }

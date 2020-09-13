@@ -172,21 +172,25 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
 
+
+
+
     <RelativeLayout
+        android:layout_above="@id/ChatBox"
         android:layout_below="@+id/ChatToolbarID"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/MessageList"
             android:layout_width="match_parent"
-            android:layout_above="@id/ChatBox"
             android:layout_height="match_parent">
 
 
         </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
 
 
         <RelativeLayout
@@ -219,7 +223,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="45dp"
+                android:layout_marginRight="40dp"
                 android:layout_height="wrap_content">
 
 
@@ -233,7 +237,7 @@
                     android:layout_centerVertical="true"
                     android:visibility="visible"
                     app:cardCornerRadius="@dimen/_20sdp"
-                    android:layout_height="45dp">
+                    android:layout_height="wrap_content">
 
                     <RelativeLayout
                         android:layout_centerVertical="true"
@@ -248,9 +252,9 @@
                             android:hint="Enter message"
                             android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_marginRight="@dimen/_10sdp"
-                            android:padding="7dp"
+                            android:padding="8dp"
                             android:layout_toLeftOf="@+id/AttachBox"
-                            android:textSize="@dimen/_13sdp"
+                            android:textSize="@dimen/_10sdp"
                             android:background="@null"
                             android:layout_height="wrap_content">
 
@@ -320,14 +324,14 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="@dimen/_38sdp"
+                android:layout_width="@dimen/_32sdp"
                 android:layout_alignParentRight="true"
                 android:id="@+id/SendButtonID"
                 android:layout_centerVertical="true"
                 android:backgroundTint="@color/colorPrimary"
                 android:visibility="gone"
-                app:cardCornerRadius="@dimen/_25sdp"
-                android:layout_height="@dimen/_38sdp">
+                app:cardCornerRadius="@dimen/_35sdp"
+                android:layout_height="@dimen/_32sdp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -336,8 +340,8 @@
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:src="@drawable/send_icon_black"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp">
+                        android:layout_width="20dp"
+                        android:layout_height="20dp">
 
                     </ImageView>
                 </RelativeLayout>
@@ -349,7 +353,7 @@
 
             <com.devlomi.record_view.RecordButton
                 android:background="@drawable/recod_button_back"
-                android:layout_width="@dimen/_38sdp"
+                android:layout_width="@dimen/_32sdp"
                 android:id="@+id/RecodButton"
                 android:visibility="visible"
                 android:scaleType="centerCrop"
@@ -357,7 +361,7 @@
                 android:layout_centerVertical="true"
                 android:padding="7dp"
                 android:layout_alignParentRight="true"
-                android:layout_height="@dimen/_38sdp">
+                android:layout_height="@dimen/_32sdp">
 
             </com.devlomi.record_view.RecordButton>
 
@@ -365,7 +369,7 @@
 
         </RelativeLayout>
 
-    </RelativeLayout>
+
 
 
 </RelativeLayout>

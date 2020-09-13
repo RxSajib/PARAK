@@ -238,7 +238,7 @@
             android:text="10:00 AM"
             android:id="@+id/SenderPdfTime"
             android:fontFamily="@font/ubuntureguiar"
-            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginRight="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:layout_height="wrap_content">
 
@@ -258,7 +258,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/AttachIcon"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
             android:textSize="@dimen/_14sdp"
             android:textColor="@color/carbon_white"
             android:text="Download"
