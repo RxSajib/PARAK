@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MUSTAQEEN</string>
+    <string name="app_name">MUSTAQEEM</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profiletext">Kindly Compelete Your MUSTAQEEM WELFARE GROUP Profile With Your Correct Information</string>
@@ -110,5 +110,24 @@ Organize social events, exhibitions, seminars, conferences and public lectures f
     </string>
     <string name="cancel">Cancel</string>
     <string name="retry">Retry</string>
+    <string name="jobless">Jobless</string>
+    <string name="visitor">Visitor</string>
+    <string name="jobhint">E.g, Accountant/Driver/labor</string>
+    <string name="i_am">I\'am</string>
+    <string name="job_toast">Employment job require</string>
+    <string name="job_number_toast">Number require</string>
+    <string name="email_toast">Email require</string>
+    <string name="lastname_toast">Last name require</string>
+    <string name="firatname_toast">First name require</string>
+    <string name="employment_toast">Employment status require</string>
+    <string name="acivement_toast">Achievement require</string>
+    <string name="status_toast">Your status require</string>
+    <string name="search_by_profession">Search by profession</string>
+    <string name="con">Continue</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="staff_required">Staff Required</string>
+    <string name="notifaction">Notifaction</string>
+    <string name="history">History</string>
+
 
 </resources>

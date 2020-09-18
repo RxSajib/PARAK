@@ -41,7 +41,7 @@ import java.util.Map;
 
 public class JOBApplication_Details extends Fragment {
 
-    private MaterialTextView name, email, number, status, acivement, goals;
+    private MaterialTextView name, email, number, status, acivement, goals, job;
     private String TapUID;
     private DatabaseReference ApplicationRoot;
     private MaterialButton downloadpdfbutton;
@@ -137,6 +137,7 @@ public class JOBApplication_Details extends Fragment {
         status = view.findViewById(R.id.ApplicantStatus);
         acivement = view.findViewById(R.id.Acivement);
         goals = view.findViewById(R.id.Goals);
+        job = view.findViewById(R.id.ApplicantJobs);
 
 
         ApplicationRoot.child(TapUID)
@@ -161,6 +162,10 @@ public class JOBApplication_Details extends Fragment {
                             if(dataSnapshot.hasChild(DataManager.JobApplicantAchievement)){
                                 String acivementtext = dataSnapshot.child(DataManager.JobApplicantAchievement).getValue().toString();
                                 acivement.setText(acivementtext);
+                            }
+                            if(dataSnapshot.hasChild(DataManager.JobName)){
+                                String myjob = dataSnapshot.child(DataManager.JobName).getValue().toString();
+                                job.setText(myjob);
                             }
                             if(dataSnapshot.hasChild(DataManager.JobApplicantGoals)){
                                 String goealstext = dataSnapshot.child(DataManager.JobApplicantGoals).getValue().toString();

@@ -1,10 +1,12 @@
 package com.rakpak.pak_parak.Homepage;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -43,9 +46,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.rakpak.pak_parak.BottomnavPage.Chatpages;
 import com.rakpak.pak_parak.BottomnavPage.JobPage;
 import com.rakpak.pak_parak.BottomnavPage.NewsPage;
+import com.rakpak.pak_parak.BottomnavPage.NotifactionPages;
 import com.rakpak.pak_parak.BottomnavPage.UserCard;
 import com.rakpak.pak_parak.BuildConfig;
 import com.rakpak.pak_parak.DataManager;
@@ -73,6 +80,8 @@ import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class goto_homepage extends Fragment {
 
@@ -89,6 +98,7 @@ public class goto_homepage extends Fragment {
     private boolean chat_isactive = true;
     private boolean jobis_active = true;
     private boolean news_isactive = true;
+    private boolean notifaction_isactive = true;
     private boolean global_isactive = true;
     private RelativeLayout searchbutton;
     private RelativeLayout menu_button;
@@ -96,6 +106,9 @@ public class goto_homepage extends Fragment {
 
 
     private DatabaseReference OnlineData;
+    private static final int IMAGECODE = 1;
+    private StorageReference ImageStores;
+    private ProgressDialog Mprogress;
 
     public goto_homepage() {
         // Required empty public constructor
@@ -110,7 +123,10 @@ public class goto_homepage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.goto_homepage, container, false);
-    //    getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+     //   getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        Mprogress = new ProgressDialog(getActivity());
+        ImageStores = FirebaseStorage.getInstance().getReference().child("UpdateProfileimage");
 
         OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.OnlineUseRoot);
 
@@ -204,6 +220,18 @@ public class goto_homepage extends Fragment {
         final MaterialTextView username = navagation_view.findViewById(R.id.UserNamID);
         final MaterialTextView phonenumber = navagation_view.findViewById(R.id.UserEmailID);
         final CircleImageView profileimage = navagation_view.findViewById(R.id.ProfileIagesNav);
+        final ImageView addimage = navagation_view.findViewById(R.id.AddImageID);
+
+        addimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, IMAGECODE);
+
+                drawerLayout.closeDrawer(Gravity.LEFT);
+            }
+        });
 
         Muserdata.child(Currentuserid)
                 .addValueEventListener(new ValueEventListener() {
@@ -319,7 +347,7 @@ public class goto_homepage extends Fragment {
                         "\n" +
                         "By MUSTAQEEM WELFARE GROUP\n"+"خوش آمدید بھائی / بہن!" +
                         "\nہم یہاں بہت خوش ہیں۔ ہم نے مستقیم ویلفر گروپ (پاکستانی کمیونٹی) کی بنیاد رکھی کیونکہ ہم آپ کے لئے ایک قابل اعتماد اور متاثر کن جگہ بنانا چاہتے تھے جس کی مدد اور مدد کے لئے آپ کی ضرورت ہے اور ساتھ ہی متحدہ عرب امارات کے ہزاروں پاکستانی شہریوں سے رابطہ قائم کرنے کے لئے نیچے لنک پر کلک کریں\n"+
-                        "بذریعہ   مستقیم ویلفر گروپ"+"\n"+sharebody;
+                        "بذریعہ   مستقیم ویلفر گروپ"+"\n"+"Under The UAE law"+"\n"+sharebody;
                 intent.putExtra(Intent.EXTRA_TEXT, sharesubject);
                 //  intent.putExtra(Intent.EXTRA_SUBJECT, sharebody);
                 startActivity(Intent.createChooser(intent, "share with"));
@@ -344,6 +372,18 @@ public class goto_homepage extends Fragment {
                     }
 
                 }*/
+              if(item.getItemId() == R.id.NotifactionID){
+                  if(notifaction_isactive){
+                      goto_notifactionpage(new NotifactionPages());
+                      notifaction_isactive = false;
+                      chat_isactive = true;
+                      idcard_isactive = true;
+                      jobis_active = true;
+                      news_isactive = true;
+                      global_isactive = true;
+
+                  }
+              }
 
                 if (item.getItemId() == R.id.ChatID) {
                     if (chat_isactive) {
@@ -354,6 +394,7 @@ public class goto_homepage extends Fragment {
                         jobis_active = true;
                         news_isactive = true;
                         global_isactive = true;
+                        notifaction_isactive = true;
                     }
 
                 }
@@ -367,6 +408,7 @@ public class goto_homepage extends Fragment {
                         idcard_isactive = true;
                         jobis_active = true;
                         global_isactive = true;
+                        notifaction_isactive = true;
                     }
 
                 }
@@ -379,6 +421,7 @@ public class goto_homepage extends Fragment {
                         idcard_isactive = true;
                         jobis_active = false;
                         global_isactive = true;
+                        notifaction_isactive = true;
                     }
                 }
 
@@ -424,6 +467,15 @@ public class goto_homepage extends Fragment {
     private void goto_chatpages(Fragment fragment) {
 
         if(fragment != null) {
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
+            transaction.replace(R.id.MainFream, fragment);
+            transaction.commit();
+        }
+    }
+
+    private void goto_notifactionpage(Fragment fragment){
+        if(fragment != null){
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
             transaction.replace(R.id.MainFream, fragment);
@@ -497,7 +549,7 @@ public class goto_homepage extends Fragment {
     public void onStart() {
         super.onStart();
 
-        goto_usercard(new Chatpages());
+        goto_notifactionpage(new NotifactionPages());
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
         jobis_active = true;
         idcard_isactive = true;
@@ -620,5 +672,58 @@ public class goto_homepage extends Fragment {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == IMAGECODE && resultCode == RESULT_OK) {
+
+            Mprogress.setTitle("Please wait ...");
+            Mprogress.setMessage("wait for a moment your image is updating");
+            Mprogress.setCanceledOnTouchOutside(false);
+            Mprogress.show();
+            Uri imageuri = data.getData();
+
+            StorageReference filepath = ImageStores.child(imageuri.getLastPathSegment());
+            filepath.putFile(imageuri)
+                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            if(task.isSuccessful()){
+                                String imagedonloaduri = task.getResult().getDownloadUrl().toString();
+                                Muserdata.child(Currentuserid)
+                                        .child(DataManager.profileimage).setValue(imagedonloaduri)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Mprogress.dismiss();
+                                                    Toast.makeText(getActivity(), "profile is updated", Toast.LENGTH_SHORT).show();
+                                                }
+                                                else {
+                                                    Mprogress.dismiss();
+                                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Mprogress.dismiss();
+                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Mprogress.dismiss();
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+        }
+    }
 }

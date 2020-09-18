@@ -108,8 +108,21 @@
         android:visibility="gone"
         android:layout_height="@dimen/_155sdp">
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SenderImageName"
+            android:textSize="12sp"
+            android:elevation="0.1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textColor="@color/carbon_red_200"
+            android:fontFamily="sans-serif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        /// reciver image
+        </com.google.android.material.textview.MaterialTextView>
+
+
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ImageReciver"
             android:layout_width="@dimen/_210sdp"
@@ -236,7 +249,7 @@
 
 
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/ReciverAudioBox"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="@dimen/_7sdp"

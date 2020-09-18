@@ -189,7 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/ubuntureguiar"
-                            android:text="Working time"
+                            android:text="Staff Req."
                             android:layout_marginTop="@dimen/_10sdp"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_10sdp">
@@ -208,7 +208,7 @@
                                 android:layout_centerVertical="true"
                                 android:id="@+id/AddJobsTime"
                                 android:textSize="@dimen/_13sdp"
-                                android:text="Working Hrs. "
+                                android:text="1-5"
                                 android:fontFamily="@font/ubuntureguiar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">

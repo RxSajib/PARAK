@@ -105,8 +105,23 @@
     <RelativeLayout
         android:id="@+id/ImageLayoutID"
         android:layout_width="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_height="@dimen/_160sdp">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/SenderImageName"
+            android:textSize="12sp"
+            android:elevation="0.1dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/carbon_red_200"
+            android:fontFamily="sans-serif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
 
 
         /// reciver image
@@ -236,7 +251,7 @@
 
 
     <RelativeLayout
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/ReciverAudioBox"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="@dimen/_7sdp"

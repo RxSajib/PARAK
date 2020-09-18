@@ -43,13 +43,42 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:id="@+id/Seachbox"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/UserSeachID"
+                android:padding="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:textSize="@dimen/_13sdp"
+                android:hint="Search by username"
+                android:imeOptions="actionSearch"
+                android:textColor="@color/carbon_black_87"
+                android:background="@null"
+                android:singleLine="true"
+                android:drawablePadding="@dimen/_3sdp"
+                android:drawableLeft="@drawable/search_prefession_icon"
+                android:layout_height="wrap_content">
+
+            </EditText>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ChatRecylrarViewID"
             android:layout_width="match_parent"
+            android:layout_below="@+id/Seachbox"
             android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>

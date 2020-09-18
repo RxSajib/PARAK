@@ -92,18 +92,18 @@
 
                         <ImageButton
                             android:background="@null"
-                            android:elevation="0.2dp"
-                            android:src="@drawable/camera_icn_black"
+                            android:src="@drawable/user_plus"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
                         </ImageButton>
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/ProfileImageID"
                             android:layout_width="match_parent"
+                            android:elevation="0.3dp"
                             android:background="@drawable/profile_image_back"
                             android:layout_height="match_parent">
 
@@ -253,7 +253,8 @@
 
                         <RelativeLayout
                             android:id="@+id/ContinueButtonID"
-                            android:background="@drawable/profile_buttn_design"
+                            android:background="@drawable/setupprofile_button_ripple"
+
                             android:layout_marginRight="25dp"
                             android:layout_marginLeft="25dp"
                             android:layout_alignParentBottom="true"
@@ -261,17 +262,27 @@
                             android:layout_width="match_parent"
                             android:layout_height="50dp">
 
-                            <com.google.android.material.textview.MaterialTextView
-                                android:textSize="15sp"
-                                android:text="Continue"
-                                android:layout_centerVertical="true"
-                                android:textColor="@android:color/white"
-                                android:fontFamily="@font/ubuntureguiar"
-                                android:layout_centerHorizontal="true"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:background="@drawable/profile_buttn_design"
 
-                            </com.google.android.material.textview.MaterialTextView>
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:textSize="15sp"
+                                    android:text="Continue"
+                                    android:layout_centerVertical="true"
+                                    android:textColor="@android:color/white"
+                                    android:fontFamily="@font/ubuntureguiar"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </com.google.android.material.textview.MaterialTextView>
+
+
+                            </RelativeLayout>
+
+
 
                         </RelativeLayout>
 

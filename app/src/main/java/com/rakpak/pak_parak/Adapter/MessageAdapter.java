@@ -285,7 +285,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciverimage.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setVisibility(View.VISIBLE);
-                holder.recivemessage_time.setText(MessageModalList.getTime());
+                holder.reciverimagetime.setText(MessageModalList.getTime());
 
 
                 holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
@@ -449,7 +449,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 });
 
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.senderaudiobox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                        AuidoButtomSheed buttomSheed = new AuidoButtomSheed(MessageModalList.getMessage());
@@ -468,6 +468,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                     @Override
                     public boolean onLongClick(View view) {
 
+                        Toast.makeText(holder.context, MessageModalList.getMessage(), Toast.LENGTH_SHORT).show();
+
                         ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
                         forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
 
@@ -476,7 +478,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 });
 
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.reciveraudiobox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         AuidoButtomSheed buttomSheed = new AuidoButtomSheed(MessageModalList.getMessage());
@@ -548,17 +550,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
-                holder.sendderimage.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
 
-
-
-                        return true;
-                    }
-
-
-                });
 
 
 
@@ -566,10 +558,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
             else {
 
+                /// todo wait i am showing the code media recoder ok
 
                 holder.reciverimage.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setVisibility(View.VISIBLE);
-                holder.recivemessage_time.setText(MessageModalList.getTime());
+                holder.reciverimagetime.setText(MessageModalList.getTime());
 
 
                 holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
@@ -860,7 +853,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 });
 
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                holder.reciveraudiobox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         AuidoButtomSheed buttomSheed = new AuidoButtomSheed(MessageModalList.getMessage());

@@ -10,8 +10,6 @@
         android:background="@color/colorPrimary"
         android:layout_height="wrap_content">
 
-
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -170,6 +168,33 @@
 
                     <com.google.android.material.textview.MaterialTextView
                         android:textSize="@dimen/_10sdp"
+                        android:text="@string/i_am"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:textColor="@color/carbon_black_87"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textview.MaterialTextView>
+
+
+                    <EditText
+                        android:id="@+id/MyJobs"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:hint="@string/jobhint"
+                        android:textSize="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/ubuntureguiar"
+                        android:inputType="text"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textSize="@dimen/_10sdp"
                         android:text="@string/employstatus"
                         android:fontFamily="@font/ubuntureguiar"
                         android:textColor="@color/carbon_black_87"
@@ -197,7 +222,7 @@
                         <RadioButton
                             android:textSize="@dimen/_12sdp"
                             android:fontFamily="@font/ubuntureguiar"
-                            android:text="@string/unemployed"
+                            android:text="@string/cancel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -205,7 +230,7 @@
                         <RadioButton
                             android:textSize="@dimen/_12sdp"
                             android:fontFamily="@font/ubuntureguiar"
-                            android:text="@string/self_employed"
+                            android:text="@string/jobless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -213,7 +238,7 @@
                         <RadioButton
                             android:textSize="@dimen/_12sdp"
                             android:fontFamily="@font/ubuntureguiar"
-                            android:text="@string/studen"
+                            android:text="@string/visitor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 

@@ -94,17 +94,25 @@
             android:background="@drawable/phone_login_button_design"
             android:layout_height="50dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:text="Sign In"
-                android:fontFamily="@font/ubuntureguiar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <RelativeLayout
+                android:background="@drawable/loginbutton_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:text="Sign In"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-            </com.google.android.material.textview.MaterialTextView>
+                </com.google.android.material.textview.MaterialTextView>
+
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
@@ -165,15 +173,15 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_width="match_parent"
-            android:background="@drawable/phone_login_button_design"
             android:layout_height="50dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:textSize="16sp"
+                android:id="@+id/ForgotPasswordID"
                 android:textColor="@android:color/black"
-                android:text="Phone Login"
+                android:text="@string/forgot_password"
                 android:fontFamily="@font/ubuntureguiar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

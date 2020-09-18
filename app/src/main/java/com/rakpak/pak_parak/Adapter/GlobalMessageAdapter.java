@@ -167,6 +167,31 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
             holder.imagebox.setVisibility(View.VISIBLE);
 
 
+            MuserDatabase.child(CurrentUserID)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                    String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                                    if(name.equals(globalChatModal.getName())){
+                                        holder.sender_imageusername.setText("Me");
+                                    }
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+            holder.sender_imageusername.setText(globalChatModal.getName());
+
+
+
             Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(holder.imageView, new Callback() {
                 @Override
                 public void onSuccess() {
@@ -302,8 +327,11 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
         private MaterialTextView message, timeright, timetop, username;
         private RelativeLayout textmessagebox, imagebox;
+
+
         private MaterialTextView image_time;
         private RoundedImageView imageView;
+        private MaterialTextView sender_imageusername;
 
         /// todo PDF
         private RelativeLayout pdflayout;
@@ -347,6 +375,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
             // todo audio message
 
             textmessagebox = itemView.findViewById(R.id.ReciverMessageLayout);
+            sender_imageusername = itemView.findViewById(R.id.SenderImageName);
         }
     }
 

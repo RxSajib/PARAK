@@ -22,6 +22,7 @@ public class DataManager {
     public static final String OnlineUseRoot = "Online";
     public static final String UserTypeRoot = "Type";
     public static final String GlobalTypeRoot = "GlobalType";
+    public static final String profileimage = "profileimage";
 
     // todo user data
 
@@ -62,6 +63,7 @@ public class DataManager {
     public static final String JobVisiable = "NewsVisiable";
     public static final String Visiable = "Visiable";
     public static final String InVisiable = "Invisiable";
+    public static final String JobName = "MyJob";
     /// todo job contant
 
     /// todo time and date status
@@ -85,4 +87,26 @@ public class DataManager {
     public static final String ForwardPdfType = "ForwardPdf";
     public static final String ForwardAudioType = "ForwardAudio";
     /// todo image forward
+
+    /// todo search data
+    public static final String search = "search";
+    /// todo search data
+
+
+    /// todo notifaction data manager
+    public static final String Notifactionname = "Name";
+    public static final String NotifactionProfileUrl = "ImageUri";
+    public static final String NotifactionTextBody = "Text";
+    public static final String NotifactionUserUri = "Uri";
+    public static final String NotifactionTime = "Time";
+    public static final String NotifactionDate = "Date";
+    public static final String NotifactionRoot = "MyNotifaction";
+    public static final String Text = "Text";
+    public static final String Type = "Type";
+    public static final String NotifactionSenderID = "ID";
+    public static final String NotifactionShort = "Short";
+    public static final String Image = "Image";
+    public static final String Pdf = "Pdf";
+
+    /// todo notifaction data manager
 }

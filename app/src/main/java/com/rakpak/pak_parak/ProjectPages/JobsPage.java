@@ -65,7 +65,7 @@ import static android.app.Activity.RESULT_OK;
 public class JobsPage extends Fragment {
 
     private RelativeLayout submitbutton;
-    private EditText name, lastname, email, whatsapp, acivement, goeal;
+    private EditText name, lastname, email, whatsapp, acivement, goeal, job;
     private MaterialButton pdfbutton;
     private String CurrentTime, CurrentDate;
     private static final int PDFREQUEST = 100;
@@ -186,6 +186,7 @@ public class JobsPage extends Fragment {
         acivement = view.findViewById(R.id.Achivement);
         goeal = view.findViewById(R.id.Goals);
         pdfbutton = view.findViewById(R.id.PdfButton);
+        job = view.findViewById(R.id.MyJobs);
 
 
         MPdfDatabase.addValueEventListener(new ValueEventListener() {
@@ -285,28 +286,32 @@ public class JobsPage extends Fragment {
                 String whatsappnumber = whatsapp.getText().toString().trim();
                 String acivementtext = acivement.getText().toString().trim();
                 String goealtext = goeal.getText().toString().trim();
+                String myjobtext = job.getText().toString().trim();
 
                 if(firstnametext.isEmpty()){
-                    Toast.makeText(getActivity(), "Firstname require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.firatname_toast, Toast.LENGTH_SHORT).show();
                 }
 
                 else if(lastnametext.isEmpty()){
-                    Toast.makeText(getActivity(), "Lastname require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.lastname_toast, Toast.LENGTH_SHORT).show();
                 }
                 else if(emailtext.isEmpty()){
-                    Toast.makeText(getActivity(), "Email require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.email_toast, Toast.LENGTH_SHORT).show();
                 }
                 else if(whatsappnumber.isEmpty()){
-                    Toast.makeText(getActivity(), "Number require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.job_number_toast, Toast.LENGTH_SHORT).show();
+                }
+                else if(myjobtext.isEmpty()){
+                    Toast.makeText(getActivity(), R.string.job_toast, Toast.LENGTH_SHORT).show();
                 }
                 else if(EmploymentStatus.isEmpty()){
-                    Toast.makeText(getActivity(), "Employment status require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.employment_toast, Toast.LENGTH_SHORT).show();
                 }
                 else if(acivementtext.isEmpty()){
-                    Toast.makeText(getActivity(), "Achievement require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.acivement_toast, Toast.LENGTH_SHORT).show();
                 }
                 else if(goealtext.isEmpty()){
-                    Toast.makeText(getActivity(), "Your status require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.status_toast, Toast.LENGTH_SHORT).show();
                 }
 
                 else {
@@ -344,6 +349,8 @@ public class JobsPage extends Fragment {
                     pdfmap.put(DataManager.JobApplicationFile, Pdfdownloaduri);
                     pdfmap.put(DataManager.JobApplicantEmploymentStatus, EmploymentStatus);
                     pdfmap.put(DataManager.JobApplicantShort, childnegative);
+                    pdfmap.put(DataManager.JobName, myjobtext);
+                    pdfmap.put(DataManager.search, myjobtext.toLowerCase());
 
 
                    MPdfDatabase.push().updateChildren(pdfmap)

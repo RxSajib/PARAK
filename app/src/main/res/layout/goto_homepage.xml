@@ -70,6 +70,7 @@
                         android:id="@+id/SearchButtonToolbarID"
                         android:background="@drawable/back_button_ripple"
                         android:layout_width="wrap_content"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/_5sdp">
 

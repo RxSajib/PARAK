@@ -37,17 +37,17 @@
             android:layout_marginBottom="70dp">
 
             <EditText
-                android:background="@drawable/login_edittext_design"
-                android:drawableLeft="@drawable/email_icon_icon"
-                android:drawablePadding="@dimen/_3sdp"
-
                 android:id="@+id/LoginEmailID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+                android:background="@drawable/login_edittext_design"
+                android:drawableLeft="@drawable/email_icon_icon"
+                android:drawablePadding="@dimen/_3sdp"
+                android:fontFamily="@font/ubuntureguiar"
                 android:hint="Enter Email"
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
-                android:fontFamily="@font/ubuntureguiar"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC"
@@ -57,21 +57,21 @@
             </EditText>
 
             <EditText
-                android:background="@drawable/login_edittext_design"
-
-                android:drawableLeft="@drawable/lock_icon_icon"
-                android:drawablePadding="@dimen/_3sdp"
-
-
                 android:id="@+id/LoginPasswordID"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+
                 android:layout_below="@+id/LoginEmailID"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/login_edittext_design"
+                android:drawableLeft="@drawable/lock_icon_icon"
+                android:drawablePadding="@dimen/_3sdp"
+                android:fontFamily="@font/ubuntureguiar"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
                 android:padding="15dp"
-                android:fontFamily="@font/ubuntureguiar"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
                 android:textColorHint="#CCCCCC"
@@ -91,22 +91,32 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="40dp"
-            android:background="@drawable/phone_login_button_design">
+            android:background="@drawable/phone_login_button_design"
+            >
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:fontFamily="@font/ubuntureguiar"
-                android:text="Sign In"
-                android:textColor="@android:color/black"
-                android:textSize="18sp">
+            <RelativeLayout
+                android:background="@drawable/loginbutton_ripple"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
 
-            </com.google.android.material.textview.MaterialTextView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Sign In"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/MidleTextID"
@@ -127,24 +137,24 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/donthaveaccounttext"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/ubuntureguiar"
                     android:layout_height="wrap_content"
-                    android:text="Don't have an Account ?"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="Don't have an Account ?"
                     android:textColor="@android:color/white"
                     android:textSize="17sp">
 
                 </com.google.android.material.textview.MaterialTextView>
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/SignUpButtonID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
-                    android:id="@+id/SignUpButtonID"
-                    android:layout_toRightOf="@+id/donthaveaccounttext"
-                    android:text="SIGN UP"
-                    android:fontFamily="@font/ubuntureguiar"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="7dp"
+                    android:layout_toRightOf="@+id/donthaveaccounttext"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:text="SIGN UP"
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
                     android:textStyle="bold">
@@ -162,16 +172,16 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/phone_login_button_design">
+            android:layout_marginBottom="20dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ForgotPasswordID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:fontFamily="@font/ubuntureguiar"
-                android:text="Phone Login"
+                android:text="@string/forgot_password"
                 android:textColor="@android:color/black"
                 android:textSize="18sp">
 

@@ -9,6 +9,11 @@
         ></item>
 -->
 
+    <item
+        android:id="@+id/NotifactionID"
+        android:title="@string/history"
+        android:icon="@drawable/notifaction_black"
+        ></item>
 
     <item
         android:id="@+id/ChatID"

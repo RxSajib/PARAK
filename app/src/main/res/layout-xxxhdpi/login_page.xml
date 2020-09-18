@@ -88,21 +88,32 @@
             android:layout_marginBottom="40dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_width="match_parent"
             android:background="@drawable/phone_login_button_design"
+
+            android:layout_width="match_parent"
+
             android:layout_height="55dp">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:text="Sign In"
-                android:fontFamily="@font/ubuntureguiar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+            <RelativeLayout
+                android:background="@drawable/loginbutton_ripple"
 
-            </com.google.android.material.textview.MaterialTextView>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:text="Sign In"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
@@ -161,15 +172,15 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:layout_width="match_parent"
-            android:background="@drawable/phone_login_button_design"
             android:layout_height="55dp">
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:text="Phone Login"
+                android:id="@+id/ForgotPasswordID"
+                android:textColor="@color/carbon_black_87"
+                android:text="@string/forgot_password"
                 android:fontFamily="@font/ubuntureguiar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

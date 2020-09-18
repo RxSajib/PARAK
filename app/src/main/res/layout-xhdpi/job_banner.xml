@@ -85,6 +85,28 @@
                             android:textSize="@dimen/_10sdp"
                             android:fontFamily="@font/ubuntureguiar"
                             android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/i_am"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_13sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:id="@+id/ApplicantJob"
+                            android:text="Developer"
+                            android:layout_marginTop="@dimen/_7sdp"
+                            android:textColor="@color/carbon_black_87"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:textSize="@dimen/_10sdp"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:layout_marginTop="@dimen/_10sdp"
                             android:text="Applicant info"
                             android:layout_height="wrap_content">
 

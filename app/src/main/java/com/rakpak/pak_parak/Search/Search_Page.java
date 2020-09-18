@@ -343,7 +343,7 @@ public class Search_Page extends Fragment {
 
     private void search_iteams(String mysearch){
         String query = mysearch.toLowerCase();
-        final Query firebaseQry = MuserDatabase.orderByChild("search").startAt(query).endAt(query + "\uf8ff");
+        final Query firebaseQry = MuserDatabase.orderByChild(DataManager.search).startAt(query).endAt(query + "\uf8ff");
 
 
 

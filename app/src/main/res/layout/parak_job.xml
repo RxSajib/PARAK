@@ -88,12 +88,58 @@
 
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/JobsReclerView"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </androidx.recyclerview.widget.RecyclerView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <EditText
+                        android:id="@+id/SearchBywork"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_13sdp"
+                        android:imeOptions="actionSearch"
+                        android:background="@null"
+                        android:drawablePadding="@dimen/_3sdp"
+                        android:drawableLeft="@drawable/search_prefession_icon"
+                        android:textColor="@color/carbon_black_87"
+                        android:hint="@string/search_by_profession"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+                android:ma>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/JobsReclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        </LinearLayout>
+
+
 
     </RelativeLayout>
 

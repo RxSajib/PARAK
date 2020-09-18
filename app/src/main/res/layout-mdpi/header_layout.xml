@@ -14,9 +14,10 @@
         android:layout_height="80dp">
 
         <ImageView
-            android:src="@drawable/camera_icn_black"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:id="@+id/AddImageID"
+            android:src="@drawable/plus_circle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:elevation="0.01dp"
             android:layout_width="25dp"
             android:layout_height="25dp">

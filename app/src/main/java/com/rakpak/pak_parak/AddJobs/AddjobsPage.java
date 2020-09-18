@@ -186,23 +186,31 @@ public class AddjobsPage extends Fragment {
                 MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
 
                 CharSequence iteams[] = new CharSequence[]{
-                        "Full Time",
-                        "Free Lance",
-                        "Half Time"
+                        "1-2",
+                        "3-6",
+                        "7-12",
+                        "13-17",
+                        "18-25"
                 };
 
                 Mbuilder.setItems(iteams, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                        if(i == 0){
-                        addtime.setText("Full Time");
+                        addtime.setText("1-2");
 
                        }
                        if(i == 1){
-                           addtime.setText("Free Lance");
+                           addtime.setText("3-6");
                        }
                        if(i == 2){
-                           addtime.setText("Half Time");
+                           addtime.setText("7-12");
+                       }
+                       if(i == 3){
+                           addtime.setText("13-17");
+                       }
+                       if(i == 4){
+                           addtime.setText("18-25");
                        }
                     }
                 });
@@ -215,7 +223,7 @@ public class AddjobsPage extends Fragment {
         submitjobbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String jobtitletext = jobtitle.getText().toString().trim();
+                String jobtitletext = jobtitle.getText().toString().trim().toUpperCase();
                 String companynametext = companyname.getText().toString().trim();
                 String minsalarytext = minsalary.getText().toString().trim();
                 String maxsalarytext = maxsalary.getText().toString().trim();
@@ -237,7 +245,7 @@ public class AddjobsPage extends Fragment {
                     Toast.makeText(getActivity(), "Maximum salary require", Toast.LENGTH_SHORT).show();
                 }
                 else if(jobdescptriontext.isEmpty()){
-                    Toast.makeText(getActivity(), "job descptrion require", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "job description require", Toast.LENGTH_SHORT).show();
                 }
                 else if(contactnumbertext.isEmpty()){
                     Toast.makeText(getActivity(), "contact number require", Toast.LENGTH_SHORT).show();

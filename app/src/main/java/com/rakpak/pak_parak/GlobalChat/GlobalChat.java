@@ -144,6 +144,7 @@ public class GlobalChat extends Fragment {
     /// todo all function is there
 
 
+
     public GlobalChat() {
         // Required empty public constructor
     }
@@ -160,15 +161,14 @@ public class GlobalChat extends Fragment {
         GlobalTypeData = FirebaseDatabase.getInstance().getReference().child(DataManager.GlobalTypeRoot);
 
         /// todo internet connection dioloag
-        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
         NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
 
         boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
-        if(isconnected){
+        if (isconnected) {
 
             ///open anythings
-        }
-        else {
+        } else {
             final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
             dialog.setContentView(R.layout.no_connection_dioloag);
@@ -200,10 +200,6 @@ public class GlobalChat extends Fragment {
         /// todo internet connection dialoag
 
 
-
-
-
-
         MNotifactionUserDatabase = FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot);
 
         messgecard = view.findViewById(R.id.MessageCard);
@@ -213,13 +209,10 @@ public class GlobalChat extends Fragment {
         recordButton = view.findViewById(R.id.GlobalRecordButtonID);
         recordView = view.findViewById(R.id.GlobalRecordViewID);
 
-        audiofile  = FirebaseStorage.getInstance().getReference().child("GroupAudio");
-
+        audiofile = FirebaseStorage.getInstance().getReference().child("GroupAudio");
 
 
         /// todo all function is there
-
-
 
 
         attachbox = view.findViewById(R.id.GlobalAttachBox);
@@ -231,10 +224,9 @@ public class GlobalChat extends Fragment {
             @Override
             public void onStart() {
 
-                if(checkpermission()){
+                if (checkpermission()) {
                     startrecoding();
-                }
-                else {
+                } else {
 
                 }
 
@@ -271,12 +263,6 @@ public class GlobalChat extends Fragment {
         });
 
 
-
-
-
-
-
-
         mservices = Common.getFCMClient();
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -287,7 +273,6 @@ public class GlobalChat extends Fragment {
         });
 
 
-
         typingview = view.findViewById(R.id.CouuentUserTypingID);
         typingview.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -295,7 +280,7 @@ public class GlobalChat extends Fragment {
 
         PdfStores = FirebaseStorage.getInstance().getReference().child("GlobalPDF");
         Mprogress = new ProgressDialog(getActivity());
-        MimageStores  = FirebaseStorage.getInstance().getReference().child("GlobalImage");
+        MimageStores = FirebaseStorage.getInstance().getReference().child("GlobalImage");
 
         attach_button = view.findViewById(R.id.GlobalAttach);
         Muser_database = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
@@ -307,12 +292,11 @@ public class GlobalChat extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 Currentuser_name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
                             }
-                        }
-                        else {
+                        } else {
 
                         }
                     }
@@ -345,13 +329,12 @@ public class GlobalChat extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String input = editable.toString();
-                if(input.isEmpty()){
+                if (input.isEmpty()) {
                     sendbutton.setVisibility(View.GONE);
                     recordButton.setVisibility(View.VISIBLE);
 
                     attachbox.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     recordButton.setVisibility(View.GONE);
                     sendbutton.setVisibility(View.VISIBLE);
 
@@ -369,10 +352,9 @@ public class GlobalChat extends Fragment {
             @Override
             public void onClick(View view) {
                 messagetext = inputmessage.getText().toString();
-                if(messagetext.isEmpty()){
+                if (messagetext.isEmpty()) {
                     Toast.makeText(getActivity(), "Type any message", Toast.LENGTH_LONG).show();
-                }
-                else {
+                } else {
 
                     Calendar calendar_time = Calendar.getInstance();
                     SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
@@ -393,11 +375,10 @@ public class GlobalChat extends Fragment {
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         find_userand_sendnotifaction();
 
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -416,7 +397,7 @@ public class GlobalChat extends Fragment {
 
 
         attach_button.setOnTouchListener((view1, motionEvent) -> {
-            if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 attach_button.setBackgroundResource(R.drawable.click_animaction_attach);
                 MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
                 CharSequence options[] = new CharSequence[]{
@@ -425,12 +406,12 @@ public class GlobalChat extends Fragment {
                 };
 
                 Mbuilder.setItems(options, (dialogInterface, i) -> {
-                    if(i == 0){
+                    if (i == 0) {
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("image/*");
                         startActivityForResult(intent, IMAGEREQUEST_CODE);
                     }
-                    if(i == 1){
+                    if (i == 1) {
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
                         intent.setType("application/pdf");
                         startActivityForResult(intent, PDFCODE);
@@ -438,8 +419,7 @@ public class GlobalChat extends Fragment {
                 });
                 AlertDialog alertDialog = Mbuilder.create();
                 alertDialog.show();
-            }
-            else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+            } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                 attach_button.setBackgroundResource(R.drawable.unclick_animaction_attach);
             }
 
@@ -465,15 +445,14 @@ public class GlobalChat extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 String typing = editable.toString();
-                if(!typing.isEmpty()){
+                if (!typing.isEmpty()) {
 
-                    Map<String , Object> tyeingmap = new HashMap<String, Object>();
+                    Map<String, Object> tyeingmap = new HashMap<String, Object>();
                     tyeingmap.put(DataManager.GlobalChatTypeStatus, "typing ...");
 
                     GlobalTypeData.child(CurrentUserID).updateChildren(tyeingmap);
-                }
-                else {
-                    Map<String , Object> tyeingmap = new HashMap<String, Object>();
+                } else {
+                    Map<String, Object> tyeingmap = new HashMap<String, Object>();
                     tyeingmap.put(DataManager.GlobalChatTypeStatus, "notyping ...");
 
                     GlobalTypeData.child(CurrentUserID).updateChildren(tyeingmap);
@@ -485,8 +464,8 @@ public class GlobalChat extends Fragment {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 get_name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
                             }
                         }
@@ -499,7 +478,6 @@ public class GlobalChat extends Fragment {
                 });
 
         onlinecheack("online");
-
 
 
         return view;
@@ -540,7 +518,6 @@ public class GlobalChat extends Fragment {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
 
@@ -559,7 +536,7 @@ public class GlobalChat extends Fragment {
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 String Imagedownloaduri = task.getResult().getDownloadUrl().toString();
 
                                 Calendar calendar_time = Calendar.getInstance();
@@ -584,7 +561,7 @@ public class GlobalChat extends Fragment {
 
                                                 find_user_sendimage_notifaction();
 
-                                            Mprogress.dismiss();
+                                                Mprogress.dismiss();
 
 
                                             }
@@ -597,23 +574,22 @@ public class GlobalChat extends Fragment {
                                             }
                                         });
 
-                            }
-                            else {
+                            } else {
                                 Mprogress.dismiss();
                                 Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     })
-                   .addOnFailureListener(new OnFailureListener() {
-                       @Override
-                       public void onFailure(@NonNull Exception e) {
-                           Mprogress.dismiss();
-                           Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                       }
-                   });
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Mprogress.dismiss();
+                            Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
 
-        if(requestCode == PDFCODE && resultCode == RESULT_OK){
+        if (requestCode == PDFCODE && resultCode == RESULT_OK) {
             Mprogress.setMessage("wait for a moment your pdf is sending");
             Mprogress.setTitle("Please wait ...");
             Mprogress.setCanceledOnTouchOutside(false);
@@ -625,7 +601,7 @@ public class GlobalChat extends Fragment {
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 String PDfdownloduri = task.getResult().getDownloadUrl().toString();
 
                                 Calendar calendar_time = Calendar.getInstance();
@@ -647,12 +623,11 @@ public class GlobalChat extends Fragment {
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
+                                                if (task.isSuccessful()) {
 
                                                     fine_user_send_pdf_notifaction();
                                                     Mprogress.dismiss();
-                                                }
-                                                else {
+                                                } else {
                                                     Mprogress.dismiss();
                                                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
@@ -662,11 +637,10 @@ public class GlobalChat extends Fragment {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
                                                 Mprogress.dismiss();
-                                               Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                            }
-                            else {
+                            } else {
                                 Mprogress.dismiss();
                                 Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -699,45 +673,43 @@ public class GlobalChat extends Fragment {
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
+                                if (dataSnapshot.exists()) {
 
+                                    Muser_database.child(UID)
+                                            .addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.hasChild(DataManager.GlobalChatTypeStatus)) {
+                                                        String typing_status = dataSnapshot.child(DataManager.GlobalChatTypeStatus).getValue().toString();
+                                                        if (typing_status.equals(DataManager.GlobalChatTyping)) {
+                                                            typeHolder.typelayout.setVisibility(View.VISIBLE);
 
+                                                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
+                                                                Username = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
 
-                                    if(dataSnapshot.hasChild(DataManager.GlobalChatTypeStatus)){
-                                        String typing_status = dataSnapshot.child(DataManager.GlobalChatTypeStatus).getValue().toString();
-                                        if(typing_status.equals(DataManager.GlobalChatTyping)){
-                                            typeHolder.typelayout.setVisibility(View.VISIBLE);
+                                                                if (!get_name.isEmpty()) {
+                                                                    if (get_name.equals(Username)) {
+                                                                        typeHolder.typelayout.setVisibility(View.GONE);
+                                                                    } else {
+                                                                        typeHolder.setUsernameset(Username);
+                                                                        typeHolder.setTypestatusset("Typing ...");
+                                                                    }
+                                                                }
+                                                            }
 
-                                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
-                                                Username = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                                                        } else if (typing_status.equals(DataManager.GlobalChatNoTyping)) {
+                                                            typeHolder.typelayout.setVisibility(View.GONE);
 
-                                                if(!get_name.isEmpty()){
-                                                    if(get_name.equals(Username)){
-                                                        typeHolder.typelayout.setVisibility(View.GONE);
-                                                    }
-                                                    else {
-                                                        typeHolder.setUsernameset(Username);
-                                                        typeHolder.setTypestatusset("Typing ...");
+                                                        }
                                                     }
                                                 }
-                                            }
 
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
 
+                                                }
+                                            });
 
-
-
-
-
-
-
-                                        }
-                                        else if(typing_status.equals(DataManager.GlobalChatNoTyping)) {
-                                            typeHolder.typelayout.setVisibility(View.GONE);
-
-                                        }
-                                    }
-                                }
-                                else {
 
                                 }
                             }
@@ -755,12 +727,13 @@ public class GlobalChat extends Fragment {
     }
     /// todo typing status global chat
 
-    public static class TypeHolder extends RecyclerView.ViewHolder{
+    public static class TypeHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView username, typestatus;
         private View Mview;
         private Context context;
         private LinearLayout typelayout;
+
 
         public TypeHolder(@NonNull View itemView) {
             super(itemView);
@@ -772,10 +745,11 @@ public class GlobalChat extends Fragment {
             typelayout = Mview.findViewById(R.id.TypeLayout);
         }
 
-        public void setUsernameset(String nam){
+        public void setUsernameset(String nam) {
             username.setText(nam);
         }
-        public void setTypestatusset(String status){
+
+        public void setTypestatusset(String status) {
             typestatus.setText(status);
         }
 
@@ -784,7 +758,7 @@ public class GlobalChat extends Fragment {
     @Override
     public void onStop() {
         onlinecheack("offline");
-        Map<String , Object> tyeingmap = new HashMap<String, Object>();
+        Map<String, Object> tyeingmap = new HashMap<String, Object>();
         tyeingmap.put(DataManager.GlobalChatTypeStatus, "notyping ...");
 
         Muser_database.child(CurrentUserID).updateChildren(tyeingmap);
@@ -792,19 +766,17 @@ public class GlobalChat extends Fragment {
     }
 
 
-
     /// todo find user and send notifaction
-    private void find_userand_sendnotifaction(){
+    private void find_userand_sendnotifaction() {
         FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                if(!name.isEmpty()){
+                                if (!name.isEmpty()) {
                                     send_notfaction(name);
-
 
 
                                 }
@@ -822,21 +794,21 @@ public class GlobalChat extends Fragment {
 
 
     /// todo send notifaction to reciver
-    private void send_notfaction(final String username){
+    private void send_notfaction(final String username) {
         FirebaseDatabase.getInstance().getReference().child("Token")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
 
-                            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                                 Token token = ds.getValue(Token.class);
                                 String sendermessage = username;
                                 String title = messagetext;
 
                                 Notifaction notifaction = new Notifaction(title, sendermessage);
-                                Sender sender  = new Sender(token.getToken(), notifaction);
+                                Sender sender = new Sender(token.getToken(), notifaction);
 
                                 mservices.sendNotification(sender).enqueue(new Callback<Myresponse>() {
                                     @Override
@@ -853,7 +825,6 @@ public class GlobalChat extends Fragment {
                             }
 
 
-
                         }
                     }
 
@@ -864,24 +835,20 @@ public class GlobalChat extends Fragment {
                 });
 
 
-
-
-
-
     }
     /// todo send notifaction to reciver  user -> lastmessage
 
 
     /// todo find user send image notifaction
-    private void find_user_sendimage_notifaction (){
+    private void find_user_sendimage_notifaction() {
         FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                if(!name.isEmpty()){
+                                if (!name.isEmpty()) {
                                     send_image_notfaction(name);
                                 }
                             }
@@ -897,21 +864,21 @@ public class GlobalChat extends Fragment {
     /// todo find user send image notifaction
 
     // todo find user and send image
-    private void send_image_notfaction(final String username){
+    private void send_image_notfaction(final String username) {
         FirebaseDatabase.getInstance().getReference().child("Token")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
 
-                            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                                 Token token = ds.getValue(Token.class);
                                 String sendermessage = username;
                                 String title = messagetext;
 
                                 Notifaction notifaction = new Notifaction("Send a image", sendermessage);
-                                Sender sender  = new Sender(token.getToken(), notifaction);
+                                Sender sender = new Sender(token.getToken(), notifaction);
 
                                 mservices.sendNotification(sender).enqueue(new Callback<Myresponse>() {
                                     @Override
@@ -928,7 +895,6 @@ public class GlobalChat extends Fragment {
                             }
 
 
-
                         }
                     }
 
@@ -939,23 +905,19 @@ public class GlobalChat extends Fragment {
                 });
 
 
-
-
-
-
     }
     // todo find user and send image''
 
     // todo fine user and send PDF notifaction
-    private void fine_user_send_pdf_notifaction(){
+    private void fine_user_send_pdf_notifaction() {
         FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                if(!name.isEmpty()){
+                                if (!name.isEmpty()) {
                                     send_PDF_notfaction(name);
                                 }
                             }
@@ -971,21 +933,21 @@ public class GlobalChat extends Fragment {
     // todo fine user and send PDF notifaction
 
     /// todo send PDF
-    private void send_PDF_notfaction(final String username){
+    private void send_PDF_notfaction(final String username) {
         FirebaseDatabase.getInstance().getReference().child("Token")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
 
-                            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                                 Token token = ds.getValue(Token.class);
                                 String sendermessage = username;
                                 String title = messagetext;
 
                                 Notifaction notifaction = new Notifaction("Send a PDF", sendermessage);
-                                Sender sender  = new Sender(token.getToken(), notifaction);
+                                Sender sender = new Sender(token.getToken(), notifaction);
 
                                 mservices.sendNotification(sender).enqueue(new Callback<Myresponse>() {
                                     @Override
@@ -1002,7 +964,6 @@ public class GlobalChat extends Fragment {
                             }
 
 
-
                         }
                     }
 
@@ -1013,15 +974,11 @@ public class GlobalChat extends Fragment {
                 });
 
 
-
-
-
-
     }
     /// todo send PDF
 
 
-    private void onlinecheack(String online){
+    private void onlinecheack(String online) {
 
         Calendar calendar_time = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
@@ -1043,10 +1000,9 @@ public class GlobalChat extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
-                        }
-                        else {
+                        } else {
                             Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -1069,14 +1025,14 @@ public class GlobalChat extends Fragment {
 
 
     /// todo start recoding and stop recoding
-    private void startrecoding(){
+    private void startrecoding() {
 
         Calendar calendar_time = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm:ss");
         String CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName += "/AudioRecording"+CurrentTime+".3gp";
+        mFileName += "/AudioRecording" + CurrentTime + ".3gp";
 
         mediaRecorder = new MediaRecorder();
 
@@ -1097,23 +1053,21 @@ public class GlobalChat extends Fragment {
     }
 
 
-    private void stoprecoding(){
+    private void stoprecoding() {
 
-        if(mediaRecorder != null){
+        if (mediaRecorder != null) {
             try {
                 mediaRecorder.stop();
                 mediaRecorder.release();
                 saveing_data_firebase(mFileName);
 
-                mediaRecorder =  null;
+                mediaRecorder = null;
             } catch (IllegalStateException e) {
                 e.printStackTrace();
 
-                mediaRecorder =  null;
+                mediaRecorder = null;
             }
         }
-
-
 
 
     }
@@ -1134,7 +1088,7 @@ public class GlobalChat extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
                             String audiouri = task.getResult().getDownloadUrl().toString();
 
@@ -1157,12 +1111,11 @@ public class GlobalChat extends Fragment {
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
 
                                                 fine_user_send_audio_notifaction();
                                                 Mprogress.dismiss();
-                                            }
-                                            else {
+                                            } else {
                                                 Mprogress.dismiss();
                                                 Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                             }
@@ -1176,8 +1129,7 @@ public class GlobalChat extends Fragment {
                                         }
                                     });
 
-                        }
-                        else {
+                        } else {
 
                             Mprogress.dismiss();
                         }
@@ -1191,7 +1143,6 @@ public class GlobalChat extends Fragment {
                     }
                 });
     }
-
 
 
     class ExampleRunnable implements Runnable {
@@ -1227,12 +1178,11 @@ public class GlobalChat extends Fragment {
     }
 
 
-    private boolean checkpermission(){
+    private boolean checkpermission() {
         if (ActivityCompat.checkSelfPermission(getActivity(), RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED) {
 
             return true;
-        }
-        else {
+        } else {
 
             ActivityCompat.requestPermissions(getActivity(), permission, REQUEST_AUDIO_PERMISSION_CODE);
             return false;
@@ -1242,15 +1192,15 @@ public class GlobalChat extends Fragment {
 
 
     /// todo send audio notifaction is there
-    private void fine_user_send_audio_notifaction(){
+    private void fine_user_send_audio_notifaction() {
         FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
-                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                        if (dataSnapshot.exists()) {
+                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                if(!name.isEmpty()){
+                                if (!name.isEmpty()) {
                                     send_Audio_notfaction(name);
                                 }
                             }
@@ -1265,21 +1215,21 @@ public class GlobalChat extends Fragment {
     }
 
 
-    private void send_Audio_notfaction(String name){
+    private void send_Audio_notfaction(String name) {
         FirebaseDatabase.getInstance().getReference().child("Token")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()){
+                        if (dataSnapshot.exists()) {
 
-                            for(DataSnapshot ds : dataSnapshot.getChildren()){
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                                 Token token = ds.getValue(Token.class);
                                 String sendermessage = name;
                                 String title = messagetext;
 
                                 Notifaction notifaction = new Notifaction("Send a Audio", sendermessage);
-                                Sender sender  = new Sender(token.getToken(), notifaction);
+                                Sender sender = new Sender(token.getToken(), notifaction);
 
                                 mservices.sendNotification(sender).enqueue(new Callback<Myresponse>() {
                                     @Override
@@ -1296,7 +1246,6 @@ public class GlobalChat extends Fragment {
                             }
 
 
-
                         }
                     }
 
@@ -1305,7 +1254,6 @@ public class GlobalChat extends Fragment {
 
                     }
                 });
-
 
 
     }

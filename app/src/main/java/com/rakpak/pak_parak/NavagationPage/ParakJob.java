@@ -14,10 +14,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -57,6 +60,8 @@ public class ParakJob extends Fragment {
     private LinearLayout nodata;
     private DatabaseReference OnlineData;
 
+    private EditText search_by_work;
+
     public ParakJob() {
 
     }
@@ -67,6 +72,8 @@ public class ParakJob extends Fragment {
 
         View view = inflater.inflate(R.layout.parak_job, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        search_by_work = view.findViewById(R.id.SearchBywork);
 
         OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
         OnlineData.keepSynced(true);
@@ -135,10 +142,173 @@ public class ParakJob extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
+
+        search_by_work.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String work_text = editable.toString();
+                if(work_text.isEmpty()){
+                    read_data();
+                }
+                else {
+                    searchingwork(work_text);
+                }
+            }
+        });
+
+
         onlinecheack("online");
         return view;
+
+
     }
 
+
+
+    private void searchingwork(String work){
+
+      String lowercase = work.toLowerCase();
+      Query searchquery = MjobRoot.orderByChild("search").startAt(lowercase).endAt(lowercase + "\uf8ff");
+
+
+        FirebaseRecyclerAdapter<JobList, JobViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<JobList, JobViewHolder>(
+                JobList.class,
+                R.layout.job_banner,
+                JobViewHolder.class,
+                searchquery
+        ) {
+            @Override
+            protected void populateViewHolder(JobViewHolder jobViewHolder, JobList jobList, int i) {
+                String UID = getRef(i).getKey();
+                MjobRoot.child(UID)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    nodata.setVisibility(View.INVISIBLE);
+                                    if(dataSnapshot.hasChild(DataManager.JobApplicantFirstName) || dataSnapshot.hasChild(DataManager.JobApplicantLastName)) {
+                                        String firstnametext = dataSnapshot.child(DataManager.JobApplicantFirstName).getValue().toString();
+                                        String lastnametext = dataSnapshot.child(DataManager.JobApplicantLastName).getValue().toString();
+
+                                        jobViewHolder.setFullnameset(firstnametext+" "+lastnametext);
+                                    }
+                                    if(dataSnapshot.hasChild(DataManager.JobApplicantGoals)){
+                                        String goealtext = dataSnapshot.child(DataManager.JobApplicantGoals).getValue().toString();
+
+                                        jobViewHolder.setApplicantgoealset(goealtext);
+                                    }
+
+                                    if(dataSnapshot.hasChild(DataManager.JobApplicantDate)){
+                                        String date = dataSnapshot.child(DataManager.JobApplicantDate).getValue().toString();
+
+                                        jobViewHolder.setDateset(date);
+                                    }
+                                    if(dataSnapshot.hasChild(DataManager.JobName)){
+                                        String myjob = dataSnapshot.child(DataManager.JobName).getValue().toString();
+                                        jobViewHolder.setmyjobs(myjob);
+                                    }
+
+                                    jobViewHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            goto_jobdetailspage(new JOBApplication_Details(), UID);
+                                        }
+                                    });
+                                }
+                                else {
+                                    nodata.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        };
+
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+
+    }
+
+
+    private void read_data(){
+
+        Query firebaseshort_qury = MjobRoot.orderByChild(DataManager.JobApplicantShort);
+
+        FirebaseRecyclerAdapter<JobList, JobViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<JobList, JobViewHolder>(
+                JobList.class,
+                R.layout.job_banner,
+                JobViewHolder.class,
+                firebaseshort_qury
+        ) {
+            @Override
+            protected void populateViewHolder(JobViewHolder jobViewHolder, JobList jobList, int i) {
+                String UID = getRef(i).getKey();
+                MjobRoot.child(UID)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+                                    nodata.setVisibility(View.INVISIBLE);
+                                    if(dataSnapshot.hasChild(DataManager.JobApplicantFirstName) || dataSnapshot.hasChild(DataManager.JobApplicantLastName)) {
+                                        String firstnametext = dataSnapshot.child(DataManager.JobApplicantFirstName).getValue().toString();
+                                        String lastnametext = dataSnapshot.child(DataManager.JobApplicantLastName).getValue().toString();
+
+                                        jobViewHolder.setFullnameset(firstnametext+" "+lastnametext);
+                                    }
+                                    if(dataSnapshot.hasChild(DataManager.JobApplicantGoals)){
+                                        String goealtext = dataSnapshot.child(DataManager.JobApplicantGoals).getValue().toString();
+
+                                        jobViewHolder.setApplicantgoealset(goealtext);
+                                    }
+
+                                    if(dataSnapshot.hasChild(DataManager.JobApplicantDate)){
+                                        String date = dataSnapshot.child(DataManager.JobApplicantDate).getValue().toString();
+
+                                        jobViewHolder.setDateset(date);
+                                    }
+                                    if(dataSnapshot.hasChild(DataManager.JobName)){
+                                        String myjob = dataSnapshot.child(DataManager.JobName).getValue().toString();
+                                        jobViewHolder.setmyjobs(myjob);
+                                    }
+
+                                    jobViewHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            goto_jobdetailspage(new JOBApplication_Details(), UID);
+                                        }
+                                    });
+                                }
+                                else {
+                                    nodata.setVisibility(View.GONE);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        };
+
+
+        recyclerView.setAdapter(firebaseRecyclerAdapter);
+    }
 
     @Override
     public void onStart() {
@@ -177,6 +347,10 @@ public class ParakJob extends Fragment {
 
                                         jobViewHolder.setDateset(date);
                                     }
+                                    if(dataSnapshot.hasChild(DataManager.JobName)){
+                                        String myjob = dataSnapshot.child(DataManager.JobName).getValue().toString();
+                                        jobViewHolder.setmyjobs(myjob);
+                                    }
 
                                     jobViewHolder.Mview.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -207,7 +381,7 @@ public class ParakJob extends Fragment {
 
         private View Mview;
         private Context context;
-        private MaterialTextView fullname, date, applicantgoeal;
+        private MaterialTextView fullname, date, applicantgoeal, job;
 
         public JobViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -217,6 +391,7 @@ public class ParakJob extends Fragment {
             fullname = Mview.findViewById(R.id.ApplicantFullname);
             date = Mview.findViewById(R.id.CurrentDate);
             applicantgoeal = Mview.findViewById(R.id.ApplicantGoel);
+            job = Mview.findViewById(R.id.ApplicantJob);
         }
 
         public void setFullnameset(String name){
@@ -227,6 +402,9 @@ public class ParakJob extends Fragment {
         }
         public void setApplicantgoealset(String applicationgoeal){
             applicantgoeal.setText(applicationgoeal);
+        }
+        public void setmyjobs(String jobs){
+            job.setText(jobs);
         }
     }
 

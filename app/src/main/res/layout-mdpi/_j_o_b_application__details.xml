@@ -157,6 +157,28 @@
                     android:textSize="@dimen/_10sdp"
                     android:fontFamily="@font/ubuntureguiar"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Applicant Job"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:id="@+id/ApplicantJobs"
+                    android:text="Applicant job empty"
+                    android:textColor="@color/carbon_black_87"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/ubuntureguiar"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="Employ Status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">

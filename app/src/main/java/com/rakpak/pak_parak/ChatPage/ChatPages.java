@@ -97,6 +97,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ChatPages extends Fragment {
 
+    private DatabaseReference NotifactionData;
     private String ReciverUID;
     private FirebaseAuth Mauth;
     private String SenderID;
@@ -145,7 +146,6 @@ public class ChatPages extends Fragment {
     private String recodfile;
     private StorageReference audiofile;
 
-
     private String permission[] = {RECORD_AUDIO, WRITE_EXTERNAL_STORAGE};
     private String mFileName;
 
@@ -163,7 +163,12 @@ public class ChatPages extends Fragment {
 
 
     private DatabaseReference MtypeData;
+    private String reciverimageuri, recivername;
 
+
+    // todo short notifaction
+    private int ShortDesPositive, ShortDesNegative;
+    // todo short notifaction
 
     public ChatPages() {
         // Required empty public constructor
@@ -177,6 +182,7 @@ public class ChatPages extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.chat_pages, container, false);
 
+        NotifactionData = FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot);
 
         MtypeData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserTypeRoot);
 
@@ -257,6 +263,7 @@ public class ChatPages extends Fragment {
         });
 
 
+        /// this is the button on
         recordView.setOnRecordListener(new OnRecordListener() {
             @Override
             public void onStart() {
@@ -511,20 +518,20 @@ public class ChatPages extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.exists()){
                             if(dataSnapshot.hasChild(DataManager.UserFullname)){
-                                String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                username.setText(name);
+                                 recivername = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                                username.setText(recivername);
                             }
                             if(dataSnapshot.hasChild("profileimage")){
-                                String uri = dataSnapshot.child("profileimage").getValue().toString();
+                                 reciverimageuri = dataSnapshot.child("profileimage").getValue().toString();
                                 if(getContext() != null){
-                                    Picasso.with(getContext()).load(uri).resize(110, 110).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.profile_image_back).into(profileimage, new com.squareup.picasso.Callback() {
+                                    Picasso.with(getContext()).load(reciverimageuri).resize(110, 110).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).placeholder(R.drawable.profile_image_back).into(profileimage, new com.squareup.picasso.Callback() {
                                         @Override
                                         public void onSuccess() {
                                         }
 
                                         @Override
                                         public void onError() {
-                                            Picasso.with(getContext()).load(uri).resize(110, 110).centerCrop().placeholder(R.drawable.profile_image_back).into(profileimage);
+                                            Picasso.with(getContext()).load(reciverimageuri).resize(110, 110).centerCrop().placeholder(R.drawable.profile_image_back).into(profileimage);
 
                                         }
                                     });
@@ -590,7 +597,7 @@ public class ChatPages extends Fragment {
             @Override
             public void onClick(View view) {
 
-                 message = inputmessage.getText().toString();
+                 message = inputmessage.getText().toString().toString();
                 if (message.isEmpty()) {
                     Toast.makeText(getActivity(), "input any message", Toast.LENGTH_SHORT).show();
                 } else {
@@ -622,6 +629,26 @@ public class ChatPages extends Fragment {
 
 
 
+        /// todo DES Order history
+        NotifactionData.child(ReciverUID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            ShortDesPositive = (int) dataSnapshot.getChildrenCount();
+                            ShortDesNegative = (~(ShortDesPositive - 1));
+                        }
+                        else {
+                            ShortDesNegative = 0;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+        /// todo DES Order history
 
 
 
@@ -683,7 +710,7 @@ public class ChatPages extends Fragment {
 
         Map<String, Object> message_map = new HashMap<String, Object>();
         message_map.put("Message", Message);
-        message_map.put("Type", "Text");
+        message_map.put("Type", DataManager.Text);
         message_map.put("From", SenderID);
         message_map.put("Time", CurrentTime);
         message_map.put("Date", CurrentDate);
@@ -699,6 +726,8 @@ public class ChatPages extends Fragment {
                         if (task.isSuccessful()) {
 
                             find_userand_sendnotifaction();
+
+                            set_history_textmessage(Message, recivername, DataManager.Text);
 
                         } else {
                             Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -811,6 +840,11 @@ public class ChatPages extends Fragment {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     Mprogress.dismiss();
+
+                                                    find_imaguser_andsend_notifacion();
+
+                                                    set_history_textmessage(Imagedownloaduri, recivername, DataManager.Image);
+
                                                 } else {
                                                     Mprogress.dismiss();
                                                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -887,6 +921,7 @@ public class ChatPages extends Fragment {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     finduser_sendPDF();
+                                                    set_history_textmessage(pdf_downloaduri, recivername, DataManager.Pdf);
                                                     Mprogress.dismiss();
                                                 } else {
                                                     Mprogress.dismiss();
@@ -1044,6 +1079,63 @@ public class ChatPages extends Fragment {
     }
 
 
+    private void find_imaguser_andsend_notifacion(){
+        FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                                if(!name.isEmpty()){
+                                    send_imagenotfaction(name);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
+    private void send_imagenotfaction(final String username){
+        FirebaseDatabase.getInstance().getReference().child("Token").child(ReciverUID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            Token token = dataSnapshot.getValue(Token.class);
+                            String sendermessage = username;
+                            String title = message;
+
+                            Notifaction notifaction = new Notifaction(sendermessage, "Send a image");
+                            Sender sender  = new Sender(token.getToken(), notifaction);
+
+                            mservices.sendNotification(sender).enqueue(new Callback<Myresponse>() {
+                                @Override
+                                public void onResponse(Call<Myresponse> call, Response<Myresponse> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<Myresponse> call, Throwable t) {
+                                    Log.i("ERROR", "MESSAGE");
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+    }
+
     /// todo send notication
 
 
@@ -1177,9 +1269,13 @@ public class ChatPages extends Fragment {
 
                     }
                 });
+
+        // ok now work its working now ?
+
     }
 
 
+    /// todo this is the start recoding function its work android low devices but android 10 is not working
     private void startrecoding(){
 
 
@@ -1189,10 +1285,12 @@ public class ChatPages extends Fragment {
         SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm:ss");
         String CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
+        try {
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
         mFileName += "/AudioRecording"+CurrentTime+".3gp";
 
+        // app is not working after your changes when it s in debug state its waits just ok u do on your own
 
         mediaRecorder = new MediaRecorder();
 
@@ -1201,20 +1299,19 @@ public class ChatPages extends Fragment {
         mediaRecorder.setOutputFile(mFileName);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
-        try {
-
-
-            mediaRecorder.prepare();
+            mediaRecorder.prepare(); // check it s ok ? yes its work kindly check on all devices and then send tme the amount. thanks ok bro thanks i am teasting the other devices ok where are you from tepalkistan
 
             mediaRecorder.start();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
 
+    // todo wait
 
+    /// todo stop recoding
     private void stoprecoding(){
 
         if(mediaRecorder != null){
@@ -1228,7 +1325,7 @@ public class ChatPages extends Fragment {
 
 
                 mediaRecorder =  null;
-            } catch (IllegalStateException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
 
                 mediaRecorder =  null;
@@ -1240,6 +1337,11 @@ public class ChatPages extends Fragment {
 
     }
 
+    // todo u understand bro where is the line ?
+    /// save to firebase ok
+
+
+    /// todo its not working my mobile its android 10 running other low devices its work bro its the problem
     private void saveing_data_firebase(String recodfile) {
 
         if(recodfile != null) {
@@ -1293,6 +1395,9 @@ public class ChatPages extends Fragment {
                                                 if (task.isSuccessful()) {
                                                     /// todo notifaction
                                                     Mprogress.dismiss();
+
+                                                    set_history_textmessage(AudioURI, recivername, DataManager.Audio);
+
                                                 } else {
                                                     Mprogress.dismiss();
                                                     Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -1344,4 +1449,46 @@ public class ChatPages extends Fragment {
     }
 
 
+    private void set_history_textmessage(String Message, String name, String type){
+        Calendar calendar_time = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
+        Current_time = simpleDateFormat_time.format(calendar_time.getTime());
+
+        Calendar calendar_date = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
+        Current_date = simpleDateFormat_date.format(calendar_date.getTime());
+
+        Map<String, Object> message_map = new HashMap<String, Object>();
+        message_map.put(DataManager.NotifactionProfileUrl, reciverimageuri);
+        message_map.put(DataManager.NotifactionDate, Current_date);
+        message_map.put(DataManager.NotifactionTime, Current_time);
+        message_map.put(DataManager.Notifactionname, recivername);
+        message_map.put(DataManager.NotifactionTextBody, Message);
+        message_map.put(DataManager.Type, type);
+        message_map.put(DataManager.NotifactionSenderID, SenderID);
+        message_map.put(DataManager.NotifactionShort, ShortDesNegative);
+
+
+        NotifactionData.child(ReciverUID)
+                .push()
+                .updateChildren(message_map)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            
+                        }
+                        else {
+                            Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
 }

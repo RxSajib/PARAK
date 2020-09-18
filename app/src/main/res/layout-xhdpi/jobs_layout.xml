@@ -88,7 +88,7 @@
                 android:fontFamily="@font/ubuntureguiar"
                 android:text="71W Software company"
                 android:textColor="@color/carbon_lightBlue_800"
-                android:textSize="@dimen/_10sdp">
+                android:textSize="@dimen/_12sdp">
 
             </com.google.android.material.textview.MaterialTextView>
 
@@ -117,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="Employment Type"
+                    android:text="@string/staff_required"
                     android:textColor="@color/carbon_black_54"
                     android:textSize="@dimen/_13sdp">
 

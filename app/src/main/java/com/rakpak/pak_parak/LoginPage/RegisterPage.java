@@ -42,6 +42,7 @@ public class RegisterPage extends Fragment {
     private DatabaseReference MuserDatabase;
 
     private MaterialTextView loginpage;
+    private MaterialTextView forgetpassword;
 
     public RegisterPage() {
         // Required empty public constructor
@@ -54,6 +55,13 @@ public class RegisterPage extends Fragment {
         View view = inflater.inflate(R.layout.register_page, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        forgetpassword = view.findViewById(R.id.ForgotPassword);
+        forgetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotforget_password(new ForgotPassword_Page());
+            }
+        });
 
         loginpage = view.findViewById(R.id.RegestatonTextID);
         loginpage.setOnClickListener(new View.OnClickListener() {
@@ -175,6 +183,15 @@ public class RegisterPage extends Fragment {
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
             fragmentTransaction.replace(R.id.MainID, fragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    private void gotforget_password(Fragment fragment){
+        if(fragment != null){
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
+            fragmentTransaction.replace(R.id.MainID, fragment).addToBackStack(null);
             fragmentTransaction.commit();
         }
     }

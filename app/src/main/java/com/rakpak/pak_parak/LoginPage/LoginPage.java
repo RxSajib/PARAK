@@ -36,6 +36,8 @@ public class LoginPage extends Fragment {
     private ProgressDialog Mprogress;
     private FirebaseAuth mauth;
 
+    private MaterialTextView forgotpassword;
+
     public LoginPage() {
         // Required empty public constructor
     }
@@ -47,6 +49,14 @@ public class LoginPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.login_page, container, false);
+
+        forgotpassword = view.findViewById(R.id.ForgotPasswordID);
+        forgotpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goto_forgotpasswordpage(new ForgotPassword_Page());
+            }
+        });
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         Mauth = FirebaseAuth.getInstance();
@@ -153,6 +163,15 @@ public class LoginPage extends Fragment {
         FirebaseUser Muser = Mauth.getCurrentUser();
         if(Muser != null){
             goto_homepage(new goto_homepage());
+        }
+    }
+
+    private void goto_forgotpasswordpage(Fragment fragment){
+        if(fragment != null){
+            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
+            fragmentTransaction.replace(R.id.MainID, fragment).addToBackStack(null);
+            fragmentTransaction.commit();
         }
     }
 }

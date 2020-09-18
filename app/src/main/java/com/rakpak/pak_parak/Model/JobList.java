@@ -2,12 +2,12 @@ package com.rakpak.pak_parak.Model;
 
 public class JobList {
 
-    private String Achievement, Date, Email, EmploymentStatus, File, Firstname, Goals, Lastname, Time, WhatsAppNumber;
+    private String Achievement, Date, Email, EmploymentStatus, File, Firstname, Goals, Lastname, Time, WhatsAppNumber, MyJob;
 
     public JobList() {
     }
 
-    public JobList(String achievement, String date, String email, String employmentStatus, String file, String firstname, String goals, String lastname, String time, String whatsAppNumber) {
+    public JobList(String achievement, String date, String email, String employmentStatus, String file, String firstname, String goals, String lastname, String time, String whatsAppNumber, String myJob) {
         Achievement = achievement;
         Date = date;
         Email = email;
@@ -18,6 +18,7 @@ public class JobList {
         Lastname = lastname;
         Time = time;
         WhatsAppNumber = whatsAppNumber;
+        MyJob = myJob;
     }
 
     public String getAchievement() {
@@ -98,5 +99,13 @@ public class JobList {
 
     public void setWhatsAppNumber(String whatsAppNumber) {
         WhatsAppNumber = whatsAppNumber;
+    }
+
+    public String getMyJob() {
+        return MyJob;
+    }
+
+    public void setMyJob(String myJob) {
+        MyJob = myJob;
     }
 }
