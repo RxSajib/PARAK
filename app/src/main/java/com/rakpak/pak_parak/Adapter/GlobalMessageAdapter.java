@@ -192,7 +192,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
 
 
-            Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(holder.imageView, new Callback() {
+            Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.imageView, new Callback() {
                 @Override
                 public void onSuccess() {
 
@@ -200,7 +200,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
                 @Override
                 public void onError() {
-                    Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).resize(700, 700).centerCrop().into(holder.imageView);
+                    Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).into(holder.imageView);
                 }
             });
 

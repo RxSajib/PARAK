@@ -16,6 +16,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,6 +42,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.anstrontechnologies.corehelper.AnstronCoreHelper;
 import com.devlomi.record_view.OnRecordClickListener;
 import com.devlomi.record_view.OnRecordListener;
 import com.devlomi.record_view.RecordButton;
@@ -63,6 +65,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.iceteck.silicompressorr.FileUtils;
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.rakpak.pak_parak.Adapter.MessageAdapter;
 import com.rakpak.pak_parak.Common.Common;
 import com.rakpak.pak_parak.DataManager;
@@ -169,6 +173,8 @@ public class ChatPages extends Fragment {
     // todo short notifaction
     private int ShortDesPositive, ShortDesNegative;
     // todo short notifaction
+    private static final int REQUESTCODE = 100;
+    private AnstronCoreHelper helper;
 
     public ChatPages() {
         // Required empty public constructor
@@ -181,6 +187,8 @@ public class ChatPages extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.chat_pages, container, false);
+
+        helper = new AnstronCoreHelper(getActivity());
 
         NotifactionData = FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot);
 
@@ -372,9 +380,16 @@ public class ChatPages extends Fragment {
                 MaterialAlertDialogBuilder Mbuider = new MaterialAlertDialogBuilder(getActivity());
                 Mbuider.setItems(charSequence, (dialogInterface, i) -> {
                     if (i == 0) {
-                        Intent intent = new Intent(Intent.ACTION_PICK);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, IMAGECODE);
+
+                        if(imagepermission()){
+                            Intent intent = new Intent(Intent.ACTION_PICK);
+                            intent.setType("image/*");
+                            startActivityForResult(intent, IMAGECODE);
+                        }
+                        else {
+
+                        }
+
                     }
                     if (i == 1) {
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -802,7 +817,86 @@ public class ChatPages extends Fragment {
             Mprogress.show();
             Uri uri = data.getData();
 
-            StorageReference filepath = Msendimage_stores.child(uri.getLastPathSegment());
+            if(uri != null){
+                final  File file = new File(SiliCompressor.with(getActivity())
+                .compress(FileUtils.getPath(getActivity(), uri), new File(getActivity().getCacheDir(), "open")));
+
+                Uri from_file = Uri.fromFile(file);
+
+                Msendimage_stores.child(helper.getFileNameFromUri(from_file))
+                        .putFile(from_file)
+                        .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    String Imagedownloaduri = task.getResult().getDownloadUrl().toString();
+                                    String SenderMessageRef = "Message/" + SenderID + "/" + ReciverUID;
+                                    String ReciverMessageRef = "Message/" + ReciverUID + "/" + SenderID;
+
+                                    DatabaseReference MessagePushID = Message_database.child("Message").child(SenderID).child(ReciverUID).push();
+                                    String usermaessageid = MessagePushID.getKey();
+                                    Calendar calendar_time = Calendar.getInstance();
+                                    SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
+                                    CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
+
+                                    Calendar calendar_date = Calendar.getInstance();
+                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
+                                    CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                    Map<String, Object> message_map = new HashMap<String, Object>();
+                                    message_map.put("Message", Imagedownloaduri);
+                                    message_map.put("Type", "Image");
+                                    message_map.put("From", SenderID);
+                                    message_map.put("Time", CurrentTime);
+                                    message_map.put("Date", CurrentDate);
+
+                                    Map<String, Object> message_body = new HashMap<String, Object>();
+                                    message_body.put(SenderMessageRef + "/" + usermaessageid, message_map);
+                                    message_body.put(ReciverMessageRef + "/" + usermaessageid, message_map);
+
+                                    Message_database.updateChildren(message_body)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        Mprogress.dismiss();
+
+                                                        find_imaguser_andsend_notifacion();
+
+                                                        set_history_textmessage(Imagedownloaduri, recivername, DataManager.Image);
+
+                                                    } else {
+                                                        Mprogress.dismiss();
+                                                        Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Mprogress.dismiss();
+                                                    Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+
+                                }
+                                else {
+                                    Mprogress.dismiss();
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Mprogress.dismiss();
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+
+
+            /*StorageReference filepath = Msendimage_stores.child(uri.getLastPathSegment());
             filepath.putFile(uri)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -870,7 +964,7 @@ public class ChatPages extends Fragment {
                         public void onFailure(@NonNull Exception e) {
 
                         }
-                    });
+                    });*/
         }
 
         if(requestCode == CAMERAINTENT && resultCode == RESULT_OK){
@@ -1490,5 +1584,15 @@ public class ChatPages extends Fragment {
                     }
                 });
 
+    }
+
+    private boolean imagepermission(){
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUESTCODE);
+            return false;
+        }
     }
 }

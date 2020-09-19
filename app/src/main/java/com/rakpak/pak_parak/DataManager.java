@@ -109,4 +109,9 @@ public class DataManager {
     public static final String Pdf = "Pdf";
 
     /// todo notifaction data manager
+
+    /// todo root of image
+    public static final String ProfileImageRoot = "ProfileImage";
+    public static final String GlobalImageRoot = "GlobalImage";
+    /// todo root of image
 }

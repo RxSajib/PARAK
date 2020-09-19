@@ -41,6 +41,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.anstrontechnologies.corehelper.AnstronCoreHelper;
 import com.devlomi.record_view.OnRecordListener;
 import com.devlomi.record_view.RecordButton;
 import com.devlomi.record_view.RecordView;
@@ -61,6 +62,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.iceteck.silicompressorr.FileUtils;
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.rakpak.pak_parak.Adapter.GlobalMessageAdapter;
 import com.rakpak.pak_parak.Adapter.MessageAdapter;
 import com.rakpak.pak_parak.Common.Common;
@@ -141,6 +144,8 @@ public class GlobalChat extends Fragment {
     private DatabaseReference MNotifactionUserDatabase;
     private DatabaseReference GlobalTypeData;
     private DatabaseReference OnlineRoot;
+    private static final int IMAGEREQUESTCODE = 100;
+    private AnstronCoreHelper anstronCoreHelper;
     /// todo all function is there
 
 
@@ -238,12 +243,8 @@ public class GlobalChat extends Fragment {
 
             @Override
             public void onCancel() {
-
-
                 ExampleRunnable runnable = new ExampleRunnable(5);
                 new Thread(runnable).start();
-
-
             }
 
             @Override
@@ -256,8 +257,6 @@ public class GlobalChat extends Fragment {
 
             @Override
             public void onLessThanSecond() {
-
-
                 messgecard.setVisibility(View.VISIBLE);
             }
         });
@@ -280,7 +279,8 @@ public class GlobalChat extends Fragment {
 
         PdfStores = FirebaseStorage.getInstance().getReference().child("GlobalPDF");
         Mprogress = new ProgressDialog(getActivity());
-        MimageStores = FirebaseStorage.getInstance().getReference().child("GlobalImage");
+        MimageStores = FirebaseStorage.getInstance().getReference().child(DataManager.GlobalImageRoot);
+        anstronCoreHelper = new AnstronCoreHelper(getActivity());
 
         attach_button = view.findViewById(R.id.GlobalAttach);
         Muser_database = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
@@ -407,9 +407,17 @@ public class GlobalChat extends Fragment {
 
                 Mbuilder.setItems(options, (dialogInterface, i) -> {
                     if (i == 0) {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, IMAGEREQUEST_CODE);
+
+                        if(requrstpermission()){
+                            Intent intent = new Intent(Intent.ACTION_PICK);
+                            intent.setType("image/*");
+                            startActivityForResult(intent, IMAGEREQUEST_CODE);
+                        }
+                        else {
+
+                        }
+
+
                     }
                     if (i == 1) {
                         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -531,6 +539,75 @@ public class GlobalChat extends Fragment {
             Mprogress.show();
 
             Uri imageuri = data.getData();
+
+            if(imageuri != null){
+
+                File file = new File(SiliCompressor.with(getActivity())
+                .compress(FileUtils.getPath(getActivity(), imageuri), new File(getActivity().getCacheDir(), "teams")));
+
+                Uri fromfile = Uri.fromFile(file);
+
+                MimageStores.child(anstronCoreHelper.getFileNameFromUri(fromfile))
+                        .putFile(fromfile)
+                        .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                                if(task.isSuccessful()){
+                                    String Imagedownloaduri = task.getResult().getDownloadUrl().toString();
+
+                                    Calendar calendar_time = Calendar.getInstance();
+                                    SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
+                                    CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
+
+                                    Calendar calendar_date = Calendar.getInstance();
+                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
+                                    CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                    Map<String, Object> globalmap = new HashMap<String, Object>();
+                                    globalmap.put("message", Imagedownloaduri);
+                                    globalmap.put("name", Currentuser_name);
+                                    globalmap.put("time", CurrentTime);
+                                    globalmap.put("date", CurrentDate);
+                                    globalmap.put("type", "image");
+
+                                    MglobalChat.push().updateChildren(globalmap)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                    find_user_sendimage_notifaction();
+
+                                                    Mprogress.dismiss();
+
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Mprogress.dismiss();
+                                                    Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                                else {
+                                    Mprogress.dismiss();
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+
+
+            /*
             StorageReference filepath = MimageStores.child(imageuri.getLastPathSegment());
             filepath.putFile(imageuri)
                     .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -540,11 +617,11 @@ public class GlobalChat extends Fragment {
                                 String Imagedownloaduri = task.getResult().getDownloadUrl().toString();
 
                                 Calendar calendar_time = Calendar.getInstance();
-                                SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
                                 CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
                                 Calendar calendar_date = Calendar.getInstance();
-                                SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
                                 CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
                                 Map<String, Object> globalmap = new HashMap<String, Object>();
@@ -587,6 +664,8 @@ public class GlobalChat extends Fragment {
                             Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
+            */
         }
 
         if (requestCode == PDFCODE && resultCode == RESULT_OK) {
@@ -605,11 +684,11 @@ public class GlobalChat extends Fragment {
                                 String PDfdownloduri = task.getResult().getDownloadUrl().toString();
 
                                 Calendar calendar_time = Calendar.getInstance();
-                                SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
+                                SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
                                 CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
                                 Calendar calendar_date = Calendar.getInstance();
-                                SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
                                 CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
                                 Map<String, Object> globalmap = new HashMap<String, Object>();
@@ -1261,5 +1340,15 @@ public class GlobalChat extends Fragment {
 
     /// todo send audio notifaction is there
 
+
+    private boolean requrstpermission(){
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGEREQUESTCODE);
+            return false;
+        }
+    }
 
 }

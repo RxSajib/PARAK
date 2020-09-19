@@ -1,7 +1,9 @@
 package com.rakpak.pak_parak.SetProfile;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,6 +26,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.anstrontechnologies.corehelper.AnstronCoreHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -36,10 +40,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.iceteck.silicompressorr.FileUtils;
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.Homepage.goto_homepage;
 import com.rakpak.pak_parak.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -74,6 +81,9 @@ public class Setup_Profile extends Fragment {
     private DatabaseReference MNotifactionDatabase;
 
     private DatabaseReference TypeData;
+    private final int IMAGE_PERMISSION_CODE = 100;
+    private AnstronCoreHelper anstronCoreHelper;
+
 
     public Setup_Profile() {
         // Required empty public constructor
@@ -148,7 +158,8 @@ public class Setup_Profile extends Fragment {
             }
         });
 
-        MprofileStores = FirebaseStorage.getInstance().getReference().child("ProfileImage");
+        MprofileStores = FirebaseStorage.getInstance().getReference();
+        anstronCoreHelper = new AnstronCoreHelper(getActivity());
         String newstring = value.substring(0, Math.min(value.length(), 5));
 
 
@@ -188,9 +199,17 @@ public class Setup_Profile extends Fragment {
         profileimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, ACTION_CODE);
+
+                if(cheacking_read_image_permission()){
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, ACTION_CODE);
+                }
+                else{
+
+                }
+
+
 
             }
         });
@@ -274,23 +293,8 @@ public class Setup_Profile extends Fragment {
                                                 .child("date").setValue(CurrentDate);
 
 
-
-                                        MNotifactionDatabase.child(CurrentUserID).updateChildren(usermap)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if(task.isSuccessful()){
-                                                            alertDialog.dismiss();
-
-                                                            homepage(new goto_homepage());
-
-                                                        }
-                                                        else {
-                                                            alertDialog.dismiss();
-                                                           Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
-                                                });
+                                        alertDialog.dismiss();
+                                            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 
 
@@ -308,6 +312,7 @@ public class Setup_Profile extends Fragment {
                 }
             }
         });
+
 
 
         return view;
@@ -334,31 +339,38 @@ public class Setup_Profile extends Fragment {
             lp.height = 1000;
             alertDialog.getWindow().setAttributes(lp);
 
-            StorageReference filapath = MprofileStores.child(imageuri.getLastPathSegment());
-            filapath.putFile(imageuri)
-                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
-                                alertDialog.dismiss();
 
-                                DownloadUri = task.getResult().getDownloadUrl().toString();
-//                                MuserDatabase.child(CurrentUserID).child("profileimage").setValue(DownloadUri);
 
+            if(imageuri != null){
+
+                final File file = new File(SiliCompressor.with(getActivity())
+                .compress(FileUtils.getPath(getActivity(), imageuri), new File(getActivity().getCacheDir(), "temp")));
+
+                Uri fromfile = Uri.fromFile(file);
+
+                MprofileStores.child("ProfileImage/").child(anstronCoreHelper.getFileNameFromUri(fromfile))
+                        .putFile(fromfile)
+                        .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DownloadUri = task.getResult().getDownloadUrl().toString();
+                                    alertDialog.dismiss();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
+                                }
                             }
-                            else {
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
                                 alertDialog.dismiss();
-                                Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            alertDialog.dismiss();
-                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        });
+
+            }
 
 
         }
@@ -370,6 +382,17 @@ public class Setup_Profile extends Fragment {
             transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
             transaction.replace(R.id.MainID, fragment);
             transaction.commit();
+        }
+    }
+
+    private boolean cheacking_read_image_permission(){
+        if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGE_PERMISSION_CODE);
+
+            return false;
         }
     }
 }

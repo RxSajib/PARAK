@@ -1,8 +1,10 @@
 package com.rakpak.pak_parak.Homepage;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,6 +13,8 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -30,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.anstrontechnologies.corehelper.AnstronCoreHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -49,6 +54,8 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.iceteck.silicompressorr.FileUtils;
+import com.iceteck.silicompressorr.SiliCompressor;
 import com.rakpak.pak_parak.BottomnavPage.Chatpages;
 import com.rakpak.pak_parak.BottomnavPage.JobPage;
 import com.rakpak.pak_parak.BottomnavPage.NewsPage;
@@ -72,6 +79,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -109,6 +117,8 @@ public class goto_homepage extends Fragment {
     private static final int IMAGECODE = 1;
     private StorageReference ImageStores;
     private ProgressDialog Mprogress;
+    private final int PERMISSION_CODE = 100;
+    private AnstronCoreHelper coreHelper;
 
     public goto_homepage() {
         // Required empty public constructor
@@ -123,10 +133,11 @@ public class goto_homepage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.goto_homepage, container, false);
-     //   getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         Mprogress = new ProgressDialog(getActivity());
-        ImageStores = FirebaseStorage.getInstance().getReference().child("UpdateProfileimage");
+        ImageStores = FirebaseStorage.getInstance().getReference().child(DataManager.ProfileImageRoot);
+        coreHelper = new AnstronCoreHelper(getActivity());
 
         OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.OnlineUseRoot);
 
@@ -205,7 +216,7 @@ public class goto_homepage extends Fragment {
 
         Mauth = FirebaseAuth.getInstance();
         Currentuserid = Mauth.getCurrentUser().getUid();
-        Muserdata = FirebaseDatabase.getInstance().getReference().child("Users");
+        Muserdata = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
         Muserdata.keepSynced(true);
         read_user();
 
@@ -225,11 +236,18 @@ public class goto_homepage extends Fragment {
         addimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, IMAGECODE);
 
-                drawerLayout.closeDrawer(Gravity.LEFT);
+                if (permission_extranal_stores()) {
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, IMAGECODE);
+                    drawerLayout.closeDrawer(Gravity.LEFT);
+                }
+                else {
+
+                }
+
+
             }
         });
 
@@ -242,7 +260,7 @@ public class goto_homepage extends Fragment {
                                 String uri = dataSnapshot.child("profileimage").getValue().toString();
                                 if (getContext() != null) {
 
-                                    Picasso.with(getContext()).load(uri).resize(200, 200).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(profileimage, new Callback() {
+                                    Picasso.with(getContext()).load(uri).networkPolicy(NetworkPolicy.OFFLINE).into(profileimage, new Callback() {
                                         @Override
                                         public void onSuccess() {
 
@@ -250,7 +268,7 @@ public class goto_homepage extends Fragment {
 
                                         @Override
                                         public void onError() {
-                                            Picasso.with(getContext()).load(uri).resize(200, 200).centerCrop().placeholder(R.drawable.profile_image_back).into(profileimage);
+                                            Picasso.with(getContext()).load(uri).placeholder(R.drawable.profile_image_back).into(profileimage);
 
                                         }
                                     });
@@ -684,46 +702,70 @@ public class goto_homepage extends Fragment {
             Mprogress.show();
             Uri imageuri = data.getData();
 
-            StorageReference filepath = ImageStores.child(imageuri.getLastPathSegment());
-            filepath.putFile(imageuri)
-                    .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                            if(task.isSuccessful()){
-                                String imagedonloaduri = task.getResult().getDownloadUrl().toString();
-                                Muserdata.child(Currentuserid)
-                                        .child(DataManager.profileimage).setValue(imagedonloaduri)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Mprogress.dismiss();
-                                                    Toast.makeText(getActivity(), "profile is updated", Toast.LENGTH_SHORT).show();
-                                                }
-                                                else {
-                                                    Mprogress.dismiss();
-                                                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Mprogress.dismiss();
-                                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Mprogress.dismiss();
-                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            if(imageuri != null){
+
+               final  File file = new File(SiliCompressor.with(getActivity())
+               .compress(FileUtils.getPath(getActivity(), imageuri), new File(getActivity().getCacheDir(), "temp")));
+
+               Uri fromfile = Uri.fromFile(file);
 
 
+              ImageStores.child(coreHelper.getFileNameFromUri(fromfile))
+                      .putFile(fromfile)
+                      .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                          @Override
+                          public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                              if(task.isSuccessful()){
+                                  String imagedonloaduri = task.getResult().getDownloadUrl().toString();
+                                  Muserdata.child(Currentuserid)
+                                          .child(DataManager.profileimage).setValue(imagedonloaduri)
+                                          .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                              @Override
+                                              public void onComplete(@NonNull Task<Void> task) {
+                                                  if(task.isSuccessful()){
+                                                      Mprogress.dismiss();
+                                                      Toast.makeText(getActivity(), "profile is updated", Toast.LENGTH_SHORT).show();
+                                                  }
+                                                  else {
+                                                      Mprogress.dismiss();
+                                                      Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                  }
+                                              }
+                                          }).addOnFailureListener(new OnFailureListener() {
+                                      @Override
+                                      public void onFailure(@NonNull Exception e) {
+                                          Mprogress.dismiss();
+                                          Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                      }
+                                  });
+                              }
+                              else {
+                                  Mprogress.dismiss();
+                                  Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                              }
+                          }
+                      })
+                      .addOnFailureListener(new OnFailureListener() {
+                          @Override
+                          public void onFailure(@NonNull Exception e) {
+                              Mprogress.dismiss();
+                              Toast.makeText(getActivity(), e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                          }
+                      });
 
+            }
+
+
+        }
+    }
+
+    private boolean permission_extranal_stores(){
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_CODE);
+            return false;
         }
     }
 }

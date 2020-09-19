@@ -86,10 +86,18 @@ public class NotifactionPages extends Fragment {
                 if(dataSnapshot.exists()){
                     history.setVisibility(View.GONE);
                     delatebutton.setVisibility(View.VISIBLE);
+
+                    delatebutton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MnotifactionData.removeValue();
+                        }
+                    });
                 }
                 else {
                     history.setVisibility(View.VISIBLE);
                     delatebutton.setVisibility(View.GONE);
+
                 }
             }
 
@@ -99,7 +107,6 @@ public class NotifactionPages extends Fragment {
             }
         });
 
-        MnotifactionData.keepSynced(true);
 
         Calendar calendar_time = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
@@ -121,7 +128,7 @@ public class NotifactionPages extends Fragment {
         notifactionview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        read_all_notifaction();
+       read_all_notifaction();
 
         delatebutton.setOnClickListener(new View.OnClickListener() {
 
@@ -177,236 +184,228 @@ public class NotifactionPages extends Fragment {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                if(dataSnapshot.exists()){
-                                    String type = dataSnapshot.child(DataManager.Type).getValue().toString();
+                                if(dataSnapshot.exists()) {
+
+                                    if (dataSnapshot.hasChild(DataManager.Type)) {
+                                        String type = dataSnapshot.child(DataManager.Type).getValue().toString();
 
 
+                                        if (type.equals(DataManager.Text)) {
+                                            notifactionHolder.textbox.setVisibility(View.VISIBLE);
+                                            notifactionHolder.imagebox.setVisibility(View.GONE);
+                                            notifactionHolder.pdfbox.setVisibility(View.GONE);
+                                            notifactionHolder.audiobox.setVisibility(View.GONE);
 
-
-
-                                    if(type.equals(DataManager.Text)){
-                                        notifactionHolder.textbox.setVisibility(View.VISIBLE);
-                                        notifactionHolder.imagebox.setVisibility(View.GONE);
-                                        notifactionHolder.pdfbox.setVisibility(View.GONE);
-                                        notifactionHolder.audiobox.setVisibility(View.GONE);
-
-                                        if(dataSnapshot.hasChild(DataManager.Notifactionname)){
-                                            String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
-                                            notifactionHolder.setNotifactionusernameset(name);
-                                        }
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)){
-                                            String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
-                                            notifactionHolder.notifactionimageset(uri);
-                                        }
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionTextBody)){
-                                            String message = dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString();
-                                            notifactionHolder.setnotifactionmessage(message);
-                                        }
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)){
-                                            String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
-                                            String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
-                                            if(time.equals(CurrentTime)){
-                                                notifactionHolder.time.setText("Today");
-                                                notifactionHolder.time.setTextColor(Color.RED);
+                                            if (dataSnapshot.hasChild(DataManager.Notifactionname)) {
+                                                String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
+                                                notifactionHolder.setNotifactionusernameset(name);
                                             }
-                                            else {
-                                                notifactionHolder.setnotifaction_time(date);
-                                                notifactionHolder.time.setTextColor(Color.GRAY);
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)) {
+                                                String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
+                                                notifactionHolder.notifactionimageset(uri);
                                             }
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionSenderID)){
-                                            String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
-
-                                            if(!id.isEmpty()){
-                                                notifactionHolder.Mview.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        goto_chat_page(new ChatPages(), id);
-
-                                                    }
-                                                });
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionTextBody)) {
+                                                String message = dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString();
+                                                notifactionHolder.setnotifactionmessage(message);
+                                            }
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)) {
+                                                String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
+                                                String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
+                                                if (time.equals(CurrentTime)) {
+                                                    notifactionHolder.time.setText("Today");
+                                                    notifactionHolder.time.setTextColor(Color.RED);
+                                                } else {
+                                                    notifactionHolder.setnotifaction_time(date);
+                                                    notifactionHolder.time.setTextColor(Color.GRAY);
+                                                }
                                             }
 
-                                        }
-                                    }
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionSenderID)) {
+                                                String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
 
+                                                if (!id.isEmpty()) {
+                                                    notifactionHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            goto_chat_page(new ChatPages(), id);
 
-                                    if(type.equals(DataManager.Image)){
-                                        notifactionHolder.imagebox.setVisibility(View.VISIBLE);
-                                        notifactionHolder.textbox.setVisibility(View.GONE);
-                                        notifactionHolder.pdfbox.setVisibility(View.GONE);
-                                        notifactionHolder.audiobox.setVisibility(View.GONE);
+                                                        }
+                                                    });
+                                                }
 
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionTextBody)){
-                                            String uri = dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString();
-                                            notifactionHolder.setsernderimage(uri);
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)){
-                                            String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
-                                            notifactionHolder.set_imageprofile(uri);
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.Notifactionname)){
-                                            String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
-                                            notifactionHolder.setimageusername(name);
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)){
-                                            String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
-                                            String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
-                                            if(time.equals(CurrentTime)){
-                                                notifactionHolder.imagetime.setText("Today");
-                                                notifactionHolder.imagetime.setTextColor(Color.RED);
-                                            }
-                                            else {
-                                                notifactionHolder.setimagesenderTime(date);
-                                                notifactionHolder.imagetime.setTextColor(Color.GRAY);
                                             }
                                         }
+                                        if (type.equals(DataManager.Image)) {
+                                            notifactionHolder.imagebox.setVisibility(View.VISIBLE);
+                                            notifactionHolder.textbox.setVisibility(View.GONE);
+                                            notifactionHolder.pdfbox.setVisibility(View.GONE);
+                                            notifactionHolder.audiobox.setVisibility(View.GONE);
 
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionSenderID)){
-                                            String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
 
-                                            if(!id.isEmpty()){
-                                                notifactionHolder.Mview.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        goto_chat_page(new ChatPages(), id);
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionTextBody)) {
+                                                String uri = dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString();
+                                                notifactionHolder.setsernderimage(uri);
+                                            }
 
-                                                    }
-                                                });
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)) {
+                                                String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
+                                                notifactionHolder.set_imageprofile(uri);
+                                            }
+
+                                            if (dataSnapshot.hasChild(DataManager.Notifactionname)) {
+                                                String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
+                                                notifactionHolder.setimageusername(name);
+                                            }
+
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)) {
+                                                String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
+                                                String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
+                                                if (time.equals(CurrentTime)) {
+                                                    notifactionHolder.imagetime.setText("Today");
+                                                    notifactionHolder.imagetime.setTextColor(Color.RED);
+                                                } else {
+                                                    notifactionHolder.setimagesenderTime(date);
+                                                    notifactionHolder.imagetime.setTextColor(Color.GRAY);
+                                                }
+                                            }
+
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionSenderID)) {
+                                                String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
+
+                                                if (!id.isEmpty()) {
+                                                    notifactionHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            goto_chat_page(new ChatPages(), id);
+
+                                                        }
+                                                    });
+                                                }
+
                                             }
 
                                         }
 
-                                    }
-
-                                    if(type.equals(DataManager.Pdf)){
-                                        notifactionHolder.imagebox.setVisibility(View.GONE);
-                                        notifactionHolder.textbox.setVisibility(View.GONE);
-                                        notifactionHolder.pdfbox.setVisibility(View.VISIBLE);
-                                        notifactionHolder.audiobox.setVisibility(View.GONE);
+                                        if (type.equals(DataManager.Pdf)) {
+                                            notifactionHolder.imagebox.setVisibility(View.GONE);
+                                            notifactionHolder.textbox.setVisibility(View.GONE);
+                                            notifactionHolder.pdfbox.setVisibility(View.VISIBLE);
+                                            notifactionHolder.audiobox.setVisibility(View.GONE);
 
 
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)){
-                                            String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
-                                            notifactionHolder.set_pdf_profileimage(uri);
-                                        }
-                                        if(dataSnapshot.hasChild(DataManager.Notifactionname)){
-                                            String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
-                                            notifactionHolder.set_pdf_username(name);
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)){
-                                            String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
-                                            String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
-                                            if(time.equals(CurrentTime)){
-                                                notifactionHolder.pdf_time.setText("Today");
-                                                notifactionHolder.pdf_time.setTextColor(Color.RED);
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)) {
+                                                String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
+                                                notifactionHolder.set_pdf_profileimage(uri);
                                             }
-                                            else {
-                                                notifactionHolder.set_pdf_time(date);
-                                                notifactionHolder.pdf_time.setTextColor(Color.GRAY);
-                                            }
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionSenderID)){
-                                            String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
-
-                                            if(!id.isEmpty()){
-                                                notifactionHolder.pdfbox.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        goto_chat_page(new ChatPages(), id);
-
-                                                    }
-                                                });
+                                            if (dataSnapshot.hasChild(DataManager.Notifactionname)) {
+                                                String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
+                                                notifactionHolder.set_pdf_username(name);
                                             }
 
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)) {
+                                                String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
+                                                String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
+                                                if (time.equals(CurrentTime)) {
+                                                    notifactionHolder.pdf_time.setText("Today");
+                                                    notifactionHolder.pdf_time.setTextColor(Color.RED);
+                                                } else {
+                                                    notifactionHolder.set_pdf_time(date);
+                                                    notifactionHolder.pdf_time.setTextColor(Color.GRAY);
+                                                }
+                                            }
+
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionSenderID)) {
+                                                String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
+
+                                                if (!id.isEmpty()) {
+                                                    notifactionHolder.pdfbox.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            goto_chat_page(new ChatPages(), id);
+
+                                                        }
+                                                    });
+                                                }
+
+                                            }
+
+
+                                            notifactionHolder.pdfbox.setOnLongClickListener(new View.OnLongClickListener() {
+                                                @Override
+                                                public boolean onLongClick(View view) {
+
+                                                    Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString()));
+                                                    notifactionHolder.context.startActivity(myIntent);
+
+                                                    return true;
+                                                }
+                                            });
+
+
+                                        }
+                                        if (type.equals(DataManager.Audio)) {
+                                            notifactionHolder.imagebox.setVisibility(View.GONE);
+                                            notifactionHolder.textbox.setVisibility(View.GONE);
+                                            notifactionHolder.pdfbox.setVisibility(View.GONE);
+                                            notifactionHolder.audiobox.setVisibility(View.VISIBLE);
+
+
+                                            if (dataSnapshot.hasChild(DataManager.Notifactionname)) {
+                                                String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
+                                                notifactionHolder.set_audio_username(name);
+                                            }
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)) {
+                                                String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
+                                                notifactionHolder.set_audio_profileimage(uri);
+                                            }
+
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)) {
+                                                String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
+                                                String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
+                                                if (time.equals(CurrentTime)) {
+                                                    notifactionHolder.audio_time.setText("Today");
+                                                    notifactionHolder.audio_time.setTextColor(Color.RED);
+                                                } else {
+                                                    notifactionHolder.set_pdf_time(date);
+                                                    notifactionHolder.audio_time.setTextColor(Color.GRAY);
+                                                }
+                                            }
+
+                                            if (dataSnapshot.hasChild(DataManager.NotifactionSenderID)) {
+                                                String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
+
+                                                if (!id.isEmpty()) {
+                                                    notifactionHolder.audiobox.setOnClickListener(new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            goto_chat_page(new ChatPages(), id);
+
+                                                        }
+                                                    });
+                                                }
+
+                                            }
+
+
+                                            notifactionHolder.audiobox.setOnLongClickListener(new View.OnLongClickListener() {
+                                                @Override
+                                                public boolean onLongClick(View view) {
+
+                                                    AuidoButtomSheed buttomSheed = new AuidoButtomSheed(dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString());
+                                                    buttomSheed.show(getActivity().getSupportFragmentManager(), "show");
+
+                                                    return true;
+                                                }
+                                            });
+
                                         }
 
 
-                                        notifactionHolder.pdfbox.setOnLongClickListener(new View.OnLongClickListener() {
-                                            @Override
-                                            public boolean onLongClick(View view) {
-
-                                                Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString()));
-                                                notifactionHolder.context.startActivity(myIntent);
-
-                                                return true;
-                                            }
-                                        });
-
-
-                                    }
-                                    if(type.equals(DataManager.Audio)){
-                                        notifactionHolder.imagebox.setVisibility(View.GONE);
-                                        notifactionHolder.textbox.setVisibility(View.GONE);
-                                        notifactionHolder.pdfbox.setVisibility(View.GONE);
-                                        notifactionHolder.audiobox.setVisibility(View.VISIBLE);
-
-
-                                        if(dataSnapshot.hasChild(DataManager.Notifactionname)){
-                                            String name = dataSnapshot.child(DataManager.Notifactionname).getValue().toString();
-                                            notifactionHolder.set_audio_username(name);
-                                        }
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionProfileUrl)){
-                                            String uri = dataSnapshot.child(DataManager.NotifactionProfileUrl).getValue().toString();
-                                            notifactionHolder.set_audio_profileimage(uri);
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionTime) || dataSnapshot.hasChild(DataManager.NotifactionDate)){
-                                            String time = dataSnapshot.child(DataManager.NotifactionTime).getValue().toString();
-                                            String date = dataSnapshot.child(DataManager.NotifactionDate).getValue().toString();
-                                            if(time.equals(CurrentTime)){
-                                                notifactionHolder.audio_time.setText("Today");
-                                                notifactionHolder.audio_time.setTextColor(Color.RED);
-                                            }
-                                            else {
-                                                notifactionHolder.set_pdf_time(date);
-                                                notifactionHolder.audio_time.setTextColor(Color.GRAY);
-                                            }
-                                        }
-
-                                        if(dataSnapshot.hasChild(DataManager.NotifactionSenderID)){
-                                            String id = dataSnapshot.child(DataManager.NotifactionSenderID).getValue().toString();
-
-                                            if(!id.isEmpty()){
-                                                notifactionHolder.audiobox.setOnClickListener(new View.OnClickListener() {
-                                                    @Override
-                                                    public void onClick(View view) {
-                                                        goto_chat_page(new ChatPages(), id);
-
-                                                    }
-                                                });
-                                            }
-
-                                        }
-
-
-                                        notifactionHolder.audiobox.setOnLongClickListener(new View.OnLongClickListener() {
-                                            @Override
-                                            public boolean onLongClick(View view) {
-
-                                                AuidoButtomSheed buttomSheed = new AuidoButtomSheed(dataSnapshot.child(DataManager.NotifactionTextBody).getValue().toString());
-                                                buttomSheed.show(getActivity().getSupportFragmentManager(), "show");
-
-                                                return true;
-                                            }
-                                        });
+                                    } else {
 
                                     }
-
-
 
                                 }
-                                else {
-
-                                }
-
                             }
 
                             @Override
@@ -421,6 +420,7 @@ public class NotifactionPages extends Fragment {
     }
 
     public static class NotifactionHolder extends RecyclerView.ViewHolder{
+
 
 
         /// todo message box
@@ -451,6 +451,7 @@ public class NotifactionPages extends Fragment {
         private RelativeLayout  audioplaybutton;
         private MaterialCardView audiobox;
         /// todo audio
+
 
 
 
@@ -494,6 +495,7 @@ public class NotifactionPages extends Fragment {
 
 
         }
+
 
 
 
@@ -613,6 +615,7 @@ public class NotifactionPages extends Fragment {
 
 
 
+
     }
 
     private void goto_chat_page(Fragment fragment, String ID){
@@ -629,4 +632,6 @@ public class NotifactionPages extends Fragment {
 
         }
     }
+
+
 }

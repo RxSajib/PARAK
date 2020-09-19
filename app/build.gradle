@@ -66,4 +66,8 @@ dependencies {
     implementation 'com.squareup.okhttp:okhttp:2.4.0'
     implementation 'com.devlomi.record-view:record-view:2.0.1'
 
+
+    implementation 'com.github.abhidiwakar:AnstronCoreHelper:1.1'
+    implementation 'com.iceteck.silicompressorr:silicompressor:2.2.3'
+
 }

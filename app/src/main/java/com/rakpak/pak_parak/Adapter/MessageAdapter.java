@@ -305,7 +305,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
-                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE)
+                Picasso.with(holder.context).load(MessageModalList.getMessage()).networkPolicy(NetworkPolicy.OFFLINE)
                         .into(holder.reciverimage, new Callback() {
                             @Override
                             public void onSuccess() {
@@ -314,7 +314,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
                             @Override
                             public void onError() {
-                                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().into(holder.reciverimage);
+                                Picasso.with(holder.context).load(MessageModalList.getMessage()).into(holder.reciverimage);
                             }
                         });
 
@@ -534,7 +534,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                     }
                 });
 
-                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(holder.sendderimage,
+                Picasso.with(holder.context).load(MessageModalList.getMessage()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.sendderimage,
                         new Callback() {
                             @Override
                             public void onSuccess() {
@@ -543,7 +543,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
                             @Override
                             public void onError() {
-                                Picasso.with(holder.context).load(MessageModalList.getMessage()).resize(800, 800).centerCrop().into(holder.sendderimage);
+                                Picasso.with(holder.context).load(MessageModalList.getMessage()).into(holder.sendderimage);
                             }
                         });
 
