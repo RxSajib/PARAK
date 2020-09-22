@@ -126,7 +126,7 @@
                     android:background="@color/app_color">
 
                     <ImageView
-                        android:src="@drawable/applogo"
+                        android:src="@drawable/mustakim_flag"
                         android:scaleType="fitXY"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">

@@ -77,35 +77,9 @@ public class NotifactionPages extends Fragment {
         delatebutton = view.findViewById(R.id.RemoveButton);
         Mauth = FirebaseAuth.getInstance();
         CurrentUserID = Mauth.getCurrentUser().getUid();
-        MnotifactionData = FirebaseDatabase.getInstance().getReference().child(DataManager.NotifactionUserRoot).child(CurrentUserID);
+        MnotifactionData = FirebaseDatabase.getInstance().getReference().child(DataManager.My_HistoryRoot).child(CurrentUserID);
         MnotifactionData.keepSynced(true);
 
-        MnotifactionData.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    history.setVisibility(View.GONE);
-                    delatebutton.setVisibility(View.VISIBLE);
-
-                    delatebutton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            MnotifactionData.removeValue();
-                        }
-                    });
-                }
-                else {
-                    history.setVisibility(View.VISIBLE);
-                    delatebutton.setVisibility(View.GONE);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
         Calendar calendar_time = Calendar.getInstance();
@@ -128,7 +102,8 @@ public class NotifactionPages extends Fragment {
         notifactionview.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-       read_all_notifaction();
+
+        
 
         delatebutton.setOnClickListener(new View.OnClickListener() {
 
@@ -165,9 +140,10 @@ public class NotifactionPages extends Fragment {
     }
 
 
-    private void read_all_notifaction(){
+    @Override
+    public void onStart() {
 
-        Query DESQUERY = MnotifactionData.orderByChild(DataManager.NotifactionShort);
+    Query DESQUERY = MnotifactionData.orderByChild(DataManager.NotifactionShort);
 
         FirebaseRecyclerAdapter<HistoryModel, NotifactionHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<HistoryModel, NotifactionHolder>(
                 HistoryModel.class,
@@ -417,7 +393,9 @@ public class NotifactionPages extends Fragment {
         };
 
         notifactionview.setAdapter(firebaseRecyclerAdapter);
+        super.onStart();
     }
+
 
     public static class NotifactionHolder extends RecyclerView.ViewHolder{
 
@@ -618,6 +596,7 @@ public class NotifactionPages extends Fragment {
 
     }
 
+
     private void goto_chat_page(Fragment fragment, String ID){
         if(fragment != null){
             Bundle bundle = new Bundle();
@@ -633,5 +612,44 @@ public class NotifactionPages extends Fragment {
         }
     }
 
+
+   /* @Override
+    public void onStart() {
+
+        FirebaseRecyclerAdapter<HistoryModel, NotifactionHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<HistoryModel, NotifactionHolder>(
+                HistoryModel.class,
+                R.layout.mess_notifaction,
+                NotifactionHolder.class,
+                MnotifactionData
+        ) {
+            @Override
+            protected void populateViewHolder(NotifactionHolder notifactionHolder, HistoryModel historyModel, int i) {
+                String UID = getRef(i).getKey();
+                MnotifactionData.child(UID)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if(dataSnapshot.exists()){
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        };
+
+        super.onStart();
+    }
+
+    public static class NotifactionHolder extends RecyclerView.ViewHolder{
+
+        public NotifactionHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }*/
 
 }

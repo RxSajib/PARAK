@@ -35,6 +35,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -49,6 +51,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
@@ -174,30 +177,28 @@ public class GlobalChat extends Fragment {
 
             ///open anythings
         } else {
-            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-
-            dialog.setContentView(R.layout.no_connection_dioloag);
-            dialog.show();
 
 
-            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                    dialog.dismiss();
-                }
-            });
 
-            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
+            MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
+            View viewinternet = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_message, null, false);
 
-            cancelbutton.setOnClickListener(new View.OnClickListener() {
+
+
+
+            MaterialButton exitbutton = viewinternet.findViewById(R.id.ExitButton);
+            exitbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     getActivity().finish();
                 }
             });
+
+            Mbuilder.setView(viewinternet);
+            AlertDialog alertDialog = Mbuilder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
+
 
         }
 
@@ -357,12 +358,16 @@ public class GlobalChat extends Fragment {
                 } else {
 
                     Calendar calendar_time = Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
+                    SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
                     CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
                     Calendar calendar_date = Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("dd MMM yyyy");
+                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
                     CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                 DatabaseReference   NewNode = FirebaseDatabase.getInstance().getReference().child("GlobalChat").push();
+
+                    String push_id = NewNode.getKey();
 
                     Map<String, Object> globalmap = new HashMap<String, Object>();
                     globalmap.put("message", messagetext);
@@ -370,8 +375,11 @@ public class GlobalChat extends Fragment {
                     globalmap.put("time", CurrentTime);
                     globalmap.put("date", CurrentDate);
                     globalmap.put("type", "text");
+                    globalmap.put("MessageKey", push_id);
+                    globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                    MglobalChat.push().updateChildren(globalmap)
+
+                    NewNode.updateChildren(globalmap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -506,10 +514,12 @@ public class GlobalChat extends Fragment {
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
+
                     }
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
+                        messageAdapter.notifyDataSetChanged();
 
                     }
 
@@ -564,14 +574,20 @@ public class GlobalChat extends Fragment {
                                     SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
                                     CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
+                                    DatabaseReference   NewNode = FirebaseDatabase.getInstance().getReference().child("GlobalChat").push();
+
+                                    String push_id = NewNode.getKey();
+
                                     Map<String, Object> globalmap = new HashMap<String, Object>();
                                     globalmap.put("message", Imagedownloaduri);
                                     globalmap.put("name", Currentuser_name);
                                     globalmap.put("time", CurrentTime);
                                     globalmap.put("date", CurrentDate);
                                     globalmap.put("type", "image");
+                                    globalmap.put("MessageKey", push_id);
+                                    globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                                    MglobalChat.push().updateChildren(globalmap)
+                                    NewNode.updateChildren(globalmap)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
@@ -691,14 +707,20 @@ public class GlobalChat extends Fragment {
                                 SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
                                 CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
+                                DatabaseReference   NewNode = FirebaseDatabase.getInstance().getReference().child("GlobalChat").push();
+
+                                String push_id = NewNode.getKey();
+
                                 Map<String, Object> globalmap = new HashMap<String, Object>();
                                 globalmap.put("message", PDfdownloduri);
                                 globalmap.put("name", Currentuser_name);
                                 globalmap.put("time", CurrentTime);
                                 globalmap.put("date", CurrentDate);
                                 globalmap.put("type", "PDf");
+                                globalmap.put("MessageKey", push_id);
+                                globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                                MglobalChat.push().updateChildren(globalmap)
+                                NewNode.updateChildren(globalmap)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
@@ -1179,14 +1201,21 @@ public class GlobalChat extends Fragment {
                             SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("dd MMM yyyy");
                             CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
+                            DatabaseReference   NewNode = FirebaseDatabase.getInstance().getReference().child("GlobalChat").push();
+
+                            String push_id = NewNode.getKey();
+
+
                             Map<String, Object> globalmap = new HashMap<String, Object>();
                             globalmap.put("message", audiouri);
                             globalmap.put("name", Currentuser_name);
                             globalmap.put("time", CurrentTime);
                             globalmap.put("date", CurrentDate);
                             globalmap.put("type", "Audio");
+                            globalmap.put("MessageKey", push_id);
+                            globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
 
-                            MglobalChat.push().updateChildren(globalmap)
+                            NewNode.updateChildren(globalmap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {

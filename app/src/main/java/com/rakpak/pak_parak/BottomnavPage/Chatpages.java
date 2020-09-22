@@ -164,125 +164,130 @@ public class Chatpages extends Fragment {
                                 if (dataSnapshot.exists()) {
 
                                     /// todo start the code
+                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                        if (dataSnapshot.hasChild("MYID")) {
+                                            String myuid = dataSnapshot.child("MYID").getValue().toString();
 
-                                    if (dataSnapshot.hasChild("MYID")) {
-                                        String myuid = dataSnapshot.child("MYID").getValue().toString();
-
-                                        if (myuid.equals(CurrentUserID)) {
-                                            chatHolder.mylayout.setVisibility(View.GONE);
-                                        }
-                                        else {
-
-
-                                            //// todo code
-                                            OnlineData.child(UID)
-                                                    .addValueEventListener(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                                            if (dataSnapshot.hasChild(DataManager.OnlineUseRoot)) {
-
-                                                                String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
-                                                                if (online_status.equals("online")) {
-                                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
-                                                                    chatHolder.onlinetime_date_status.setText("online now");
-                                                                } else if (online_status.equals("offline")) {
-                                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+                                            if (myuid.equals(CurrentUserID)) {
+                                                chatHolder.mylayout.setVisibility(View.GONE);
+                                            }
+                                            else {
 
 
-                                                                    Calendar calendar_date = Calendar.getInstance();
-                                                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
-                                                                    String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+                                                //// todo code
+                                                OnlineData.child(UID)
+                                                        .addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                                    String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
-                                                                    String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+                                                                if (dataSnapshot.hasChild(DataManager.OnlineUseRoot)) {
+
+                                                                    String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                                    if (online_status.equals("online")) {
+                                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                                        chatHolder.onlinetime_date_status.setText("online now");
+                                                                    } else if (online_status.equals("offline")) {
+                                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
 
 
-                                                                    if (getoninedate.equals(CurrentDate)) {
-                                                                        chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
-                                                                    } else {
-                                                                        chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
+                                                                        Calendar calendar_date = Calendar.getInstance();
+                                                                        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                                        String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                                        String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                                        String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                                        if (getoninedate.equals(CurrentDate)) {
+                                                                            chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
+                                                                        } else {
+                                                                            chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
+                                                                        }
+
                                                                     }
+
 
                                                                 }
 
-
                                                             }
 
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+
+                                                haveuser.setVisibility(View.GONE);
+                                                if (dataSnapshot.hasChild("profileimage")) {
+                                                    String uri = dataSnapshot.child("profileimage").getValue().toString();
+                                                    chatHolder.setProfileimageset(uri);
+                                                }
+
+                                                if (dataSnapshot.hasChild("Username")) {
+                                                    String name = dataSnapshot.child("Username").getValue().toString();
+                                                    chatHolder.setUsernameset(name);
+                                                }
+
+
+                                                if (dataSnapshot.hasChild(DataManager.UserOnlineRoot)) {
+                                                    String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                    if (online_status.equals("online")) {
+                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                        chatHolder.onlinetime_date_status.setText("online now");
+                                                    } else if (online_status.equals("offline")) {
+                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+
+
+                                                        Calendar calendar_date = Calendar.getInstance();
+                                                        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                        String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                        String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                        String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                        if (getoninedate.equals(CurrentDate)) {
+                                                            chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
+                                                        } else {
+                                                            chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
                                                         }
 
-                                                        @Override
-                                                        public void onCancelled(DatabaseError databaseError) {
-
-                                                        }
-                                                    });
-
-
-                                            haveuser.setVisibility(View.GONE);
-                                            if (dataSnapshot.hasChild("profileimage")) {
-                                                String uri = dataSnapshot.child("profileimage").getValue().toString();
-                                                chatHolder.setProfileimageset(uri);
-                                            }
-
-                                            if (dataSnapshot.hasChild("Username")) {
-                                                String name = dataSnapshot.child("Username").getValue().toString();
-                                                chatHolder.setUsernameset(name);
-                                            }
-
-
-                                            if (dataSnapshot.hasChild(DataManager.UserOnlineRoot)) {
-                                                String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
-                                                if (online_status.equals("online")) {
-                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
-                                                    chatHolder.onlinetime_date_status.setText("online now");
-                                                } else if (online_status.equals("offline")) {
-                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
-
-
-                                                    Calendar calendar_date = Calendar.getInstance();
-                                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
-                                                    String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
-
-                                                    String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
-                                                    String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
-
-
-                                                    if (getoninedate.equals(CurrentDate)) {
-                                                        chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
-                                                    } else {
-                                                        chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
                                                     }
-
                                                 }
+
+
+                                                if (dataSnapshot.child("TypeStatus").hasChild(CurrentUserID)) {
+                                                    String type = dataSnapshot.child("TypeStatus").child(CurrentUserID).child("type").getValue().toString();
+                                                    if (type.equals("notype")) {
+                                                        chatHolder.typingstatus.setText("Notype");
+
+                                                    }
+                                                    if (type.equals("typing ...")) {
+                                                        chatHolder.typingstatus.setText("typing ...");
+                                                    }
+                                                }
+
+                                                chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+
+                                                        String _id = dataSnapshot.child("MYID").getValue().toString();
+                                                        gotochatPage(new ChatPages(), _id);
+                                                    }
+                                                });
+
+
                                             }
-
-
-                                            if (dataSnapshot.child("TypeStatus").hasChild(CurrentUserID)) {
-                                                String type = dataSnapshot.child("TypeStatus").child(CurrentUserID).child("type").getValue().toString();
-                                                if (type.equals("notype")) {
-                                                    chatHolder.typingstatus.setText("Notype");
-
-                                                }
-                                                if (type.equals("typing ...")) {
-                                                    chatHolder.typingstatus.setText("typing ...");
-                                                }
-                                            }
-
-                                            chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
-
-                                                    String _id = dataSnapshot.child("MYID").getValue().toString();
-                                                    gotochatPage(new ChatPages(), _id);
-                                                }
-                                            });
 
 
                                             //// todo code
 
                                         }
                                     }
-
+                                    else {
+                                        chatHolder.mylayout.setVisibility(View.GONE);
+                                    }
 
 
 
@@ -329,130 +334,136 @@ public class Chatpages extends Fragment {
                                 if (dataSnapshot.exists()) {
 
                                     /// todo start the code
+                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                        if (dataSnapshot.hasChild("MYID")) {
+                                            String myuid = dataSnapshot.child("MYID").getValue().toString();
 
-                                    if (dataSnapshot.hasChild("MYID")) {
-                                        String myuid = dataSnapshot.child("MYID").getValue().toString();
-
-                                        if (myuid.equals(CurrentUserID)) {
-                                            chatHolder.mylayout.setVisibility(View.GONE);
-                                        }
-                                        else {
-
-
-                                            //// todo code
-                                            OnlineData.child(UID)
-                                                    .addValueEventListener(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                                            if (dataSnapshot.hasChild(DataManager.OnlineUseRoot)) {
-
-                                                                String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
-                                                                if (online_status.equals("online")) {
-                                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
-                                                                    chatHolder.onlinetime_date_status.setText("online now");
-                                                                } else if (online_status.equals("offline")) {
-                                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+                                            if (myuid.equals(CurrentUserID)) {
+                                                chatHolder.mylayout.setVisibility(View.GONE);
+                                            }
+                                            else {
 
 
-                                                                    Calendar calendar_date = Calendar.getInstance();
-                                                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
-                                                                    String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+                                                //// todo code
+                                                OnlineData.child(UID)
+                                                        .addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                                    String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
-                                                                    String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+                                                                if (dataSnapshot.hasChild(DataManager.OnlineUseRoot)) {
+
+                                                                    String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                                    if (online_status.equals("online")) {
+                                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                                        chatHolder.onlinetime_date_status.setText("online now");
+                                                                    } else if (online_status.equals("offline")) {
+                                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
 
 
-                                                                    if (getoninedate.equals(CurrentDate)) {
-                                                                        chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
-                                                                    } else {
-                                                                        chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
+                                                                        Calendar calendar_date = Calendar.getInstance();
+                                                                        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                                        String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                                        String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                                        String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                                        if (getoninedate.equals(CurrentDate)) {
+                                                                            chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
+                                                                        } else {
+                                                                            chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
+                                                                        }
+
                                                                     }
+
 
                                                                 }
 
-
                                                             }
 
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+
+                                                haveuser.setVisibility(View.GONE);
+                                                if (dataSnapshot.hasChild("profileimage")) {
+                                                    String uri = dataSnapshot.child("profileimage").getValue().toString();
+                                                    chatHolder.setProfileimageset(uri);
+                                                }
+
+                                                if (dataSnapshot.hasChild("Username")) {
+                                                    String name = dataSnapshot.child("Username").getValue().toString();
+                                                    chatHolder.setUsernameset(name);
+                                                }
+
+
+                                                if (dataSnapshot.hasChild(DataManager.UserOnlineRoot)) {
+                                                    String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                    if (online_status.equals("online")) {
+                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                        chatHolder.onlinetime_date_status.setText("online now");
+                                                    } else if (online_status.equals("offline")) {
+                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+
+
+                                                        Calendar calendar_date = Calendar.getInstance();
+                                                        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                        String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                        String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                        String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                        if (getoninedate.equals(CurrentDate)) {
+                                                            chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
+                                                        } else {
+                                                            chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
                                                         }
 
-                                                        @Override
-                                                        public void onCancelled(DatabaseError databaseError) {
-
-                                                        }
-                                                    });
-
-
-                                            haveuser.setVisibility(View.GONE);
-                                            if (dataSnapshot.hasChild("profileimage")) {
-                                                String uri = dataSnapshot.child("profileimage").getValue().toString();
-                                                chatHolder.setProfileimageset(uri);
-                                            }
-
-                                            if (dataSnapshot.hasChild("Username")) {
-                                                String name = dataSnapshot.child("Username").getValue().toString();
-                                                chatHolder.setUsernameset(name);
-                                            }
-
-
-                                            if (dataSnapshot.hasChild(DataManager.UserOnlineRoot)) {
-                                                String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
-                                                if (online_status.equals("online")) {
-                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
-                                                    chatHolder.onlinetime_date_status.setText("online now");
-                                                } else if (online_status.equals("offline")) {
-                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
-
-
-                                                    Calendar calendar_date = Calendar.getInstance();
-                                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
-                                                    String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
-
-                                                    String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
-                                                    String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
-
-
-                                                    if (getoninedate.equals(CurrentDate)) {
-                                                        chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
-                                                    } else {
-                                                        chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
                                                     }
-
                                                 }
+
+
+                                                if (dataSnapshot.child("TypeStatus").hasChild(CurrentUserID)) {
+                                                    String type = dataSnapshot.child("TypeStatus").child(CurrentUserID).child("type").getValue().toString();
+                                                    if (type.equals("notype")) {
+                                                        chatHolder.typingstatus.setText("Notype");
+
+                                                    }
+                                                    if (type.equals("typing ...")) {
+                                                        chatHolder.typingstatus.setText("typing ...");
+                                                    }
+                                                }
+
+                                                chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+
+                                                        String _id = dataSnapshot.child("MYID").getValue().toString();
+                                                        gotochatPage(new ChatPages(), _id);
+                                                    }
+                                                });
+
+
+                                                //// todo code
+
                                             }
-
-
-                                            if (dataSnapshot.child("TypeStatus").hasChild(CurrentUserID)) {
-                                                String type = dataSnapshot.child("TypeStatus").child(CurrentUserID).child("type").getValue().toString();
-                                                if (type.equals("notype")) {
-                                                    chatHolder.typingstatus.setText("Notype");
-
-                                                }
-                                                if (type.equals("typing ...")) {
-                                                    chatHolder.typingstatus.setText("typing ...");
-                                                }
-                                            }
-
-                                            chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
-
-                                                    String _id = dataSnapshot.child("MYID").getValue().toString();
-                                                    gotochatPage(new ChatPages(), _id);
-                                                }
-                                            });
-
-
-                                            //// todo code
-
                                         }
+
+
+
+
+
+                                        //// todo end of the code
+
+                                    }
+                                    else {
+                                        chatHolder.mylayout.setVisibility(View.GONE);
                                     }
 
-
-
-
-
-                                    //// todo end of the code
 
 
                                 } else {
@@ -497,127 +508,133 @@ public class Chatpages extends Fragment {
                                 if (dataSnapshot.exists()) {
 
                                     /// todo start the code
+                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                        if (dataSnapshot.hasChild("MYID")) {
+                                            String myuid = dataSnapshot.child("MYID").getValue().toString();
 
-                                    if (dataSnapshot.hasChild("MYID")) {
-                                        String myuid = dataSnapshot.child("MYID").getValue().toString();
-
-                                        if (myuid.equals(CurrentUserID)) {
-                                            chatHolder.mylayout.setVisibility(View.GONE);
-                                        }
-                                        else {
-
-
-                                            //// todo code
-                                            OnlineData.child(UID)
-                                                    .addValueEventListener(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                                            if (dataSnapshot.hasChild(DataManager.OnlineUseRoot)) {
-
-                                                                String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
-                                                                if (online_status.equals("online")) {
-                                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
-                                                                    chatHolder.onlinetime_date_status.setText("online now");
-                                                                } else if (online_status.equals("offline")) {
-                                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+                                            if (myuid.equals(CurrentUserID)) {
+                                                chatHolder.mylayout.setVisibility(View.GONE);
+                                            }
+                                            else {
 
 
-                                                                    Calendar calendar_date = Calendar.getInstance();
-                                                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
-                                                                    String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+                                                //// todo code
+                                                OnlineData.child(UID)
+                                                        .addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                                                    String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
-                                                                    String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+                                                                if (dataSnapshot.hasChild(DataManager.OnlineUseRoot)) {
+
+                                                                    String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                                    if (online_status.equals("online")) {
+                                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                                        chatHolder.onlinetime_date_status.setText("online now");
+                                                                    } else if (online_status.equals("offline")) {
+                                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
 
 
-                                                                    if (getoninedate.equals(CurrentDate)) {
-                                                                        chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
-                                                                    } else {
-                                                                        chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
+                                                                        Calendar calendar_date = Calendar.getInstance();
+                                                                        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                                        String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                                        String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                                        String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                                        if (getoninedate.equals(CurrentDate)) {
+                                                                            chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
+                                                                        } else {
+                                                                            chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
+                                                                        }
+
                                                                     }
+
 
                                                                 }
 
-
                                                             }
 
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+
+
+                                                haveuser.setVisibility(View.GONE);
+                                                if (dataSnapshot.hasChild("profileimage")) {
+                                                    String uri = dataSnapshot.child("profileimage").getValue().toString();
+                                                    chatHolder.setProfileimageset(uri);
+                                                }
+
+                                                if (dataSnapshot.hasChild("Username")) {
+                                                    String name = dataSnapshot.child("Username").getValue().toString();
+                                                    chatHolder.setUsernameset(name);
+                                                }
+
+
+                                                if (dataSnapshot.hasChild(DataManager.UserOnlineRoot)) {
+                                                    String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                    if (online_status.equals("online")) {
+                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                        chatHolder.onlinetime_date_status.setText("online now");
+                                                    } else if (online_status.equals("offline")) {
+                                                        chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+
+
+                                                        Calendar calendar_date = Calendar.getInstance();
+                                                        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                        String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                        String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                        String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                        if (getoninedate.equals(CurrentDate)) {
+                                                            chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
+                                                        } else {
+                                                            chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
                                                         }
 
-                                                        @Override
-                                                        public void onCancelled(DatabaseError databaseError) {
-
-                                                        }
-                                                    });
-
-
-                                            haveuser.setVisibility(View.GONE);
-                                            if (dataSnapshot.hasChild("profileimage")) {
-                                                String uri = dataSnapshot.child("profileimage").getValue().toString();
-                                                chatHolder.setProfileimageset(uri);
-                                            }
-
-                                            if (dataSnapshot.hasChild("Username")) {
-                                                String name = dataSnapshot.child("Username").getValue().toString();
-                                                chatHolder.setUsernameset(name);
-                                            }
-
-
-                                            if (dataSnapshot.hasChild(DataManager.UserOnlineRoot)) {
-                                                String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
-                                                if (online_status.equals("online")) {
-                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
-                                                    chatHolder.onlinetime_date_status.setText("online now");
-                                                } else if (online_status.equals("offline")) {
-                                                    chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
-
-
-                                                    Calendar calendar_date = Calendar.getInstance();
-                                                    SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
-                                                    String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
-
-                                                    String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
-                                                    String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
-
-
-                                                    if (getoninedate.equals(CurrentDate)) {
-                                                        chatHolder.onlinetime_date_status.setText("Last online today: " + getonlinetime);
-                                                    } else {
-                                                        chatHolder.onlinetime_date_status.setText("Last online : " + getoninedate);
                                                     }
-
                                                 }
+
+
+                                                if (dataSnapshot.child("TypeStatus").hasChild(CurrentUserID)) {
+                                                    String type = dataSnapshot.child("TypeStatus").child(CurrentUserID).child("type").getValue().toString();
+                                                    if (type.equals("notype")) {
+                                                        chatHolder.typingstatus.setText("Notype");
+
+                                                    }
+                                                    if (type.equals("typing ...")) {
+                                                        chatHolder.typingstatus.setText("typing ...");
+                                                    }
+                                                }
+
+                                                chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+
+                                                        String _id = dataSnapshot.child("MYID").getValue().toString();
+                                                        gotochatPage(new ChatPages(), _id);
+                                                    }
+                                                });
+
+
+                                                //// todo code
+
                                             }
-
-
-                                            if (dataSnapshot.child("TypeStatus").hasChild(CurrentUserID)) {
-                                                String type = dataSnapshot.child("TypeStatus").child(CurrentUserID).child("type").getValue().toString();
-                                                if (type.equals("notype")) {
-                                                    chatHolder.typingstatus.setText("Notype");
-
-                                                }
-                                                if (type.equals("typing ...")) {
-                                                    chatHolder.typingstatus.setText("typing ...");
-                                                }
-                                            }
-
-                                            chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View view) {
-
-                                                    String _id = dataSnapshot.child("MYID").getValue().toString();
-                                                    gotochatPage(new ChatPages(), _id);
-                                                }
-                                            });
-
-
-                                            //// todo code
-
                                         }
+
+
+
+
+
                                     }
-
-
-
+                                    else {
+                                        chatHolder.mylayout.setVisibility(View.GONE);
+                                    }
 
 
                                     //// todo end of the code

@@ -113,5 +113,6 @@ public class DataManager {
     /// todo root of image
     public static final String ProfileImageRoot = "ProfileImage";
     public static final String GlobalImageRoot = "GlobalImage";
+    public static final String My_HistoryRoot = "My History";
     /// todo root of image
 }

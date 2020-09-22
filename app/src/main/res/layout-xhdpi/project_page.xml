@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:src="@drawable/back_icon"
+                    android:src="@drawable/back_white"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp">
 
@@ -35,7 +35,7 @@
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
                 android:textColor="@color/carbon_white"
                 android:textSize="@dimen/_15sdp"
                 android:text="Project"

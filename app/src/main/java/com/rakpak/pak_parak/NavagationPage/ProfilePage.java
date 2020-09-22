@@ -5,11 +5,15 @@ import android.app.ProgressDialog;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -24,6 +28,8 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rakpak.pak_parak.DataManager;
+import com.rakpak.pak_parak.InternetDioloag.NoConnectionDioloadPage;
 import com.rakpak.pak_parak.R;
 
 import java.text.SimpleDateFormat;
@@ -62,6 +69,8 @@ public class ProfilePage extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
 
+
+
         OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
         OnlineData.keepSynced(true);
 
@@ -75,30 +84,25 @@ public class ProfilePage extends Fragment {
             ///open anythings
         }
         else {
-            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
-            dialog.setContentView(R.layout.no_connection_dioloag);
-            dialog.show();
+            MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
+            View viewinternet = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_message, null, false);
 
 
-            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                    dialog.dismiss();
-                }
-            });
 
-            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
 
-            cancelbutton.setOnClickListener(new View.OnClickListener() {
+            MaterialButton exitbutton = viewinternet.findViewById(R.id.ExitButton);
+            exitbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     getActivity().finish();
                 }
             });
+
+            Mbuilder.setView(viewinternet);
+            AlertDialog alertDialog = Mbuilder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
 
         }
 
@@ -282,4 +286,16 @@ public class ProfilePage extends Fragment {
         onlinecheack("online");
         super.onResume();
     }
+
+
+    private void goto_page(Fragment fragment){
+        if(fragment != null){
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.fedein    , R.anim.fedeout);
+            transaction.replace(R.id.MainID, fragment);
+            transaction.commit();
+        }
+    }
+
+
 }

@@ -109,30 +109,25 @@ public class JobsPage extends Fragment {
             ///open anythings
         }
         else {
-            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
-            dialog.setContentView(R.layout.no_connection_dioloag);
-            dialog.show();
+            MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
+            View viewinternet = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_message, null, false);
 
 
-            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                    dialog.dismiss();
-                }
-            });
 
-            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
 
-            cancelbutton.setOnClickListener(new View.OnClickListener() {
+            MaterialButton exitbutton = viewinternet.findViewById(R.id.ExitButton);
+            exitbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     getActivity().finish();
                 }
             });
+
+            Mbuilder.setView(viewinternet);
+            AlertDialog alertDialog = Mbuilder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
 
         }
 

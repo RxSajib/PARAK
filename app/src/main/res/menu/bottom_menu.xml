@@ -11,13 +11,13 @@
 
     <item
         android:id="@+id/NotifactionID"
-        android:title="@string/history"
+        android:title="@string/chat"
         android:icon="@drawable/notifaction_black"
         ></item>
 
     <item
         android:id="@+id/ChatID"
-        android:title="Chat"
+        android:title="@string/contacts"
         android:icon="@drawable/chat_icon"
         ></item>
 

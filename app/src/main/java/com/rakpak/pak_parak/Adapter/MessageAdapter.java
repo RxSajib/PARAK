@@ -2,6 +2,7 @@ package com.rakpak.pak_parak.Adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -122,20 +123,41 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
-                holder.sendermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
+                holder.sendermessagelayout.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public boolean onLongClick(View view) {
+                    public void onClick(View view) {
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+                                "Unsent"
+                        };
 
 
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
 
-                        return true;
+                                }
+                                if(i == 1){
+
+                                }
+                                if(i == 2){
+
+                                }
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
                     }
-
-
                 });
+
 
 
 
@@ -862,6 +884,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 });
             }
         }
+
+
+
+
 
 
     }

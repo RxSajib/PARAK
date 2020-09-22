@@ -4,6 +4,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:elevation="0.1dp"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/BackButton"
+                android:layout_width="wrap_content"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/back_button_ripple"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/back_white"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:id="@+id/SenderNames"
+                android:layout_toRightOf="@+id/BackButton"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_toLeftOf="@+id/ImageDownloadButonID"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_14sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+
+            <RelativeLayout
+                android:id="@+id/ImageDownloadButonID"
+                android:layout_width="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:background="@drawable/back_button_ripple"
+                android:padding="@dimen/_5sdp"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/three_dot"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+            </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/PhotoView"
         android:layout_width="match_parent"

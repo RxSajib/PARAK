@@ -23,7 +23,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:src="@drawable/back_icon"
+                    android:src="@drawable/back_white"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp">
 
@@ -32,7 +32,7 @@
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
                 android:layout_width="wrap_content"
                 android:textColor="@color/carbon_white"
                 android:text="Mission And Vision"

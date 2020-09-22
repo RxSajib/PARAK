@@ -3,61 +3,95 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="50dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginBottom="15dp">
+    >
 
-
-    <RelativeLayout
-        android:id="@+id/ImageContinerIDS"
-        android:layout_width="80dp"
-        android:layout_height="80dp">
+    <LinearLayout
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
-
-            android:id="@+id/AddImageID"
-            android:src="@drawable/plus_circle"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:elevation="0.01dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp">
+            android:src="@drawable/youtube"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_7sdp"
+            android:layout_height="@dimen/_25sdp">
 
         </ImageView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
-            android:background="@drawable/profile_image_back"
-            android:layout_height="match_parent">
 
 
-        </de.hdodenhof.circleimageview.CircleImageView>
+        <ImageView
+            android:src="@drawable/facebook"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp">
 
+        </ImageView>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/ImageContinerIDS"
+            android:layout_width="80dp"
+            android:layout_height="80dp">
+
+            <ImageView
+
+                android:id="@+id/AddImageID"
+                android:src="@drawable/plus_circle"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:elevation="0.01dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp">
+
+            </ImageView>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="match_parent"
+                android:background="@drawable/profile_image_back"
+                android:layout_height="match_parent">
+
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+        </RelativeLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/UserNamID"
+            android:layout_below="@+id/ImageContinerIDS"
+            android:layout_width="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:text="@string/loadingdot"
+            android:layout_marginTop="15dp"
+            android:fontFamily="sans-serif-condensed"
+            android:layout_height="wrap_content">
+        </com.google.android.material.textview.MaterialTextView>
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/UserEmailID"
+            android:layout_below="@+id/UserNamID"
+            android:layout_width="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/loading"
+            android:layout_marginTop="7dp"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.textview.MaterialTextView>
     </RelativeLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/UserNamID"
-        android:layout_below="@+id/ImageContinerIDS"
-        android:layout_width="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:text="@string/loadingdot"
-        android:layout_marginTop="15dp"
-        android:fontFamily="sans-serif-condensed"
-        android:layout_height="wrap_content">
-    </com.google.android.material.textview.MaterialTextView>
 
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/UserEmailID"
-        android:layout_below="@+id/UserNamID"
-        android:layout_width="wrap_content"
-        android:fontFamily="sans-serif-condensed"
-        android:text="@string/loading"
-        android:layout_marginTop="7dp"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.textview.MaterialTextView>
 
 
 

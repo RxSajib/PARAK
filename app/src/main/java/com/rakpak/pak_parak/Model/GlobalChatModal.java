@@ -2,17 +2,19 @@ package com.rakpak.pak_parak.Model;
 
 public class GlobalChatModal {
 
-    private String message, name, time, date, type;
+    private String message, name, time, date, type, MessageKey, MyID;
 
     public GlobalChatModal() {
     }
 
-    public GlobalChatModal(String message, String name, String time, String date, String type) {
+    public GlobalChatModal(String message, String name, String time, String date, String type, String messageKey, String myID) {
         this.message = message;
         this.name = name;
         this.time = time;
         this.date = date;
         this.type = type;
+        MessageKey = messageKey;
+        MyID = myID;
     }
 
     public String getMessage() {
@@ -53,5 +55,21 @@ public class GlobalChatModal {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getMessageKey() {
+        return MessageKey;
+    }
+
+    public void setMessageKey(String messageKey) {
+        MessageKey = messageKey;
+    }
+
+    public String getMyID() {
+        return MyID;
+    }
+
+    public void setMyID(String myID) {
+        MyID = myID;
     }
 }

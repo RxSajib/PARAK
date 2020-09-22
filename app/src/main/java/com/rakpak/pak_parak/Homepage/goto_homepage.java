@@ -13,6 +13,7 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -41,6 +43,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -64,6 +67,7 @@ import com.rakpak.pak_parak.BottomnavPage.UserCard;
 import com.rakpak.pak_parak.BuildConfig;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.GlobalChat.GlobalChat;
+import com.rakpak.pak_parak.InternetDioloag.NoConnectionDioloadPage;
 import com.rakpak.pak_parak.MainActivity;
 import com.rakpak.pak_parak.Model.Token;
 import com.rakpak.pak_parak.NavagationPage.IDcard_Page;
@@ -145,47 +149,6 @@ public class goto_homepage extends Fragment {
 
 
 
-
-
-        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
-        NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
-
-        boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
-        if(isconnected){
-
-            ///open anythings
-        }
-        else {
-            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-
-            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.send_message);
-
-
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.setContentView(R.layout.no_connection_dioloag);
-            dialog.show();
-
-
-            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                    dialog.dismiss();
-                }
-            });
-
-            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
-
-            cancelbutton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getActivity().finish();
-                }
-            });
-
-        }
 
 
 
@@ -446,9 +409,110 @@ public class goto_homepage extends Fragment {
 
 
 
+
+
+
+
+
+
+
+
                 return true;
             }
         });
+
+
+
+
+
+        ConnectivityManager cm =(ConnectivityManager)getActivity().getSystemService(getActivity().CONNECTIVITY_SERVICE);
+        NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
+
+        boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
+        if(isconnected){
+
+            ///open anythings
+        }
+        // todo getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen, R.style.PauseDialog
+        else {
+
+           /* MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
+            View aleartview = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_dioloag, null, false);
+            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.fedein);
+            aleartview.setAnimation(animation);
+            Mbuilder.setView(aleartview);
+
+            AlertDialog alertDialog = Mbuilder.create();
+            alertDialog.show();*/
+
+
+          /*  View _v = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_dioloag, null, false);
+
+
+            final Dialog dialog = new Dialog(getActivity(), R.style.PauseDialog);
+
+            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.send_message);
+
+
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.setContentView(R.layout.no_connection_dioloag);
+            dialog.show();
+
+
+            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
+                    wifiManager.setWifiEnabled(true);
+                    dialog.dismiss();
+                }
+            });
+
+            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
+
+            cancelbutton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getActivity().finish();
+                }
+            });
+
+
+
+*/
+
+
+
+          MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
+          View viewinternet = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_message, null, false);
+
+
+
+
+          MaterialButton exitbutton = viewinternet.findViewById(R.id.ExitButton);
+          exitbutton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  getActivity().finish();
+              }
+          });
+
+          Mbuilder.setView(viewinternet);
+          AlertDialog alertDialog = Mbuilder.create();
+          alertDialog.setCanceledOnTouchOutside(false);
+          alertDialog.show();
+
+
+
+
+        }
+
+        //goto_page(new NoConnectionDioloadPage());
+
+
+
+
 
 
         onlinecheack("online");
@@ -462,6 +526,7 @@ public class goto_homepage extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (!dataSnapshot.exists()) {
+
                             goto_profilepage(new Setup_Profile());
                         }
                     }
@@ -766,6 +831,16 @@ public class goto_homepage extends Fragment {
         else {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_CODE);
             return false;
+        }
+    }
+
+
+    private void goto_page(Fragment fragment){
+        if(fragment != null){
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.slider_from_right    , R.anim.slide_outfrom_left);
+            transaction.replace(R.id.MainID, fragment);
+            transaction.commit();
         }
     }
 }

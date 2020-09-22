@@ -128,6 +128,12 @@ Organize social events, exhibitions, seminars, conferences and public lectures f
     <string name="staff_required">Staff Required</string>
     <string name="notifaction">Notifaction</string>
     <string name="history">History</string>
+    <string name="download_image">Download Image</string>
+    <string name="download_message">If you want to download file you make sure your data charge apply</string>
+    <string name="download">Download</string>
+    <string name="no_need">No Need</string>
+    <string name="chat">Chat</string>
+    <string name="contacts">Contacts</string>
 
 
 </resources>

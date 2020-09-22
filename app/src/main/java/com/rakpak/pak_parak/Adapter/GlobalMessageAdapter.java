@@ -1,8 +1,13 @@
 package com.rakpak.pak_parak.Adapter;
 
 import android.app.Dialog;
+import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +15,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +54,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
     public GlobalMessageAdapter(List<GlobalChatModal> globalChatModalslist) {
         this.globalChatModalslist = globalChatModalslist;
     }
+
     private DatabaseReference MglobalDatabase;
     private FirebaseAuth Mauth;
     private String CurrentUserID;
@@ -85,26 +94,25 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
         String type = globalChatModal.getType();
 
 
-        if(type.equals(DataManager.GlobalchatTextType)){
+        if (type.equals(DataManager.GlobalchatTextType)) {
             holder.textmessagebox.setVisibility(View.VISIBLE);
 
-            if(globalChatModal.getMessage().length() >= 15){
+            if (globalChatModal.getMessage().length() >= 15) {
                 holder.timetop.setVisibility(View.VISIBLE);
                 MuserDatabase.child(CurrentUserID)
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
-                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                if (dataSnapshot.exists()) {
+                                    if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                         String myname = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                        if(globalChatModal.getName().equals(myname)){
+                                        if (globalChatModal.getName().equals(myname)) {
 
                                             holder.message.setText(globalChatModal.getMessage());
                                             holder.username.setText("Me");
                                             holder.timetop.setText(globalChatModal.getTime());
                                             holder.timeright.setText(globalChatModal.getTime());
-                                        }
-                                        else {
+                                        } else {
                                             holder.message.setText(globalChatModal.getMessage());
                                             holder.username.setText(globalChatModal.getName());
                                             holder.timetop.setText(globalChatModal.getTime());
@@ -121,25 +129,22 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                         });
 
 
-
-            }
-            else {
+            } else {
                 holder.timeright.setVisibility(View.VISIBLE);
                 MuserDatabase.child(CurrentUserID)
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
-                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                if (dataSnapshot.exists()) {
+                                    if (dataSnapshot.hasChild(DataManager.UserFullname)) {
 
                                         String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                        if(name.equals(globalChatModal.getName())){
+                                        if (name.equals(globalChatModal.getName())) {
                                             holder.message.setText(globalChatModal.getMessage());
                                             holder.username.setText("Me");
                                             holder.timetop.setText(globalChatModal.getTime());
                                             holder.timeright.setText(globalChatModal.getTime());
-                                        }
-                                        else {
+                                        } else {
                                             holder.message.setText(globalChatModal.getMessage());
                                             holder.username.setText(globalChatModal.getName());
                                             holder.timetop.setText(globalChatModal.getTime());
@@ -163,18 +168,23 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
         }
 
-        if(type.equals(DataManager.GlobalImageType)){
+        if (type.equals(DataManager.GlobalImageType)) {
             holder.imagebox.setVisibility(View.VISIBLE);
+
+
+
+
+
 
 
             MuserDatabase.child(CurrentUserID)
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()){
-                                if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                            if (dataSnapshot.exists()) {
+                                if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                     String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
-                                    if(name.equals(globalChatModal.getName())){
+                                    if (name.equals(globalChatModal.getName())) {
                                         holder.sender_imageusername.setText("Me");
                                     }
 
@@ -189,7 +199,6 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                     });
 
             holder.sender_imageusername.setText(globalChatModal.getName());
-
 
 
             Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.imageView, new Callback() {
@@ -208,22 +217,114 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
             holder.image_time.setText(globalChatModal.getTime());
 
 
+
+            /*holder.imagebox.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+
+                    if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(globalChatModalslist.get(position).getMyID())) {
+
+                        MaterialAlertDialogBuilder Mbulder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbulder.setTitle("Delete Message ?");
+                        Mbulder.setMessage("Make sure if you delete your message its you permanently lost your data");
+                        Mbulder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                MglobalDatabase.child(globalChatModalslist.get(position).getMessageKey()).removeValue();
+                            }
+                        })
+                                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+
+                        AlertDialog alertDialog = Mbulder.create();
+                        alertDialog.show();
+
+                    }
+
+
+                    return true;
+                }
+            });*/
+
+
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
+                    // new ContextThemeWrapper(holder.context, R.style.PauseDialog), android.R.style.Theme_Black_NoTitleBar_Fullscreen
                     final Dialog dialog = new Dialog(holder.context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
                     dialog.setContentView(R.layout.full_screenimage_bottomsheeed);
 
                     PhotoView photoView = dialog.findViewById(R.id.PhotoView);
+                    MaterialTextView photoname = dialog.findViewById(R.id.SenderNames);
+                    photoname.setText(globalChatModal.getName());
+                    RelativeLayout downloadbutton = dialog.findViewById(R.id.ImageDownloadButonID);
+
+
+                    downloadbutton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+
+                            Mbuilder.setTitle(R.string.download_image);
+                            Mbuilder.setMessage(R.string.download_message);
+
+                            Mbuilder.setPositiveButton(R.string.download, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    DownloadManager downloadManager = (DownloadManager) holder.context.getSystemService(Context.DOWNLOAD_SERVICE);
+                                    Uri uri = Uri.parse(globalChatModal.getMessage());
+
+                                    DownloadManager.Request request = new DownloadManager.Request(uri);
+                                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                                    downloadManager.enqueue(request);
+                                    Toast.makeText(holder.context, "Downloading ...", Toast.LENGTH_LONG).show();
+                                }
+                            });
+
+                            Mbuilder.setNegativeButton(R.string.no_need, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+
+                            Mbuilder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+
+                            AlertDialog alertDialog = Mbuilder.create();
+                            alertDialog.show();
+                        }
+                    });
+
+                    RelativeLayout backbutton = dialog.findViewById(R.id.BackButton);
+                    backbutton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.dismiss();
+                        }
+                    });
+
+
                     Picasso.with(holder.context).load(globalChatModal.getMessage()).into(photoView);
                     dialog.show();
                 }
 
                 private void goto_fullscreen(Fragment fragment) {
 
-                    if(fragment != null){
+                    if (fragment != null) {
                         Bundle bundle = new Bundle();
                         bundle.putString("URI", globalChatModal.getMessage());
                         bundle.putString("TIME", globalChatModal.getTime());
@@ -238,26 +339,67 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
 
 
+
+            holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+                    String click_id = globalChatModalslist.get(position).getMyID();
+
+                    if(click_id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        MaterialAlertDialogBuilder Mbulder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbulder.setTitle("Delete Message ?");
+                        Mbulder.setIcon(R.drawable.remove_icon_black);
+                        Mbulder.setMessage("Make sure if you delete your message its you permanently lost your data");
+                        Mbulder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                MglobalDatabase.child(globalChatModalslist.get(position).getMessageKey()).removeValue();
+
+                                globalChatModalslist.remove(position);
+
+                                notifyDataSetChanged();
+
+                            }
+                        })
+                                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+
+                        AlertDialog alertDialog = Mbulder.create();
+                        alertDialog.show();
+                    }
+
+
+
+
+                    return true;
+                }
+            });
+
+
         }
 
 
-
-        if(type.equals(DataManager.GlobalPdfType)){
+        if (type.equals(DataManager.GlobalPdfType)) {
 
             holder.pdflayout.setVisibility(View.VISIBLE);
             MuserDatabase.child(CurrentUserID)
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()){
-                                if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                            if (dataSnapshot.exists()) {
+                                if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                     String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
 
-                                    if(name.equals(globalChatModal.getName())){
+                                    if (name.equals(globalChatModal.getName())) {
                                         holder.pdftime.setText(globalChatModal.getTime());
                                         holder.pdfsender.setText("Me");
-                                    }
-                                    else {
+                                    } else {
                                         holder.pdftime.setText(globalChatModal.getTime());
                                         holder.pdfsender.setText(globalChatModal.getName());
                                     }
@@ -273,49 +415,191 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                     });
 
 
+
+            holder.pdflayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(globalChatModalslist.get(position).getMessage()));
+                    holder.context.startActivity(myIntent);
+
+                }
+            });
+
+
+            holder.pdflayout.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+                    String click_id = globalChatModalslist.get(position).getMyID();
+
+                    if(click_id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        MaterialAlertDialogBuilder Mbulder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbulder.setTitle("Delete Message ?");
+                        Mbulder.setIcon(R.drawable.remove_icon_black);
+                        Mbulder.setMessage("Make sure if you delete your message its you permanently lost your data");
+                        Mbulder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                MglobalDatabase.child(globalChatModalslist.get(position).getMessageKey()).removeValue();
+
+                                globalChatModalslist.remove(position);
+
+                                notifyDataSetChanged();
+
+                            }
+                        })
+                                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+
+                        AlertDialog alertDialog = Mbulder.create();
+                        alertDialog.show();
+                    }
+
+
+
+
+                    return true;
+                }
+            });
+
         }
 
 
         /// todo audio message
-        if(type.equals(DataManager.Audio)){
-                holder.audiobox.setVisibility(View.VISIBLE);
+        if (type.equals(DataManager.Audio)) {
+            holder.audiobox.setVisibility(View.VISIBLE);
 
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        AuidoButtomSheed auidoButtomSheed = new AuidoButtomSheed(globalChatModal.getMessage());
-                        auidoButtomSheed.show(((AppCompatActivity)holder.context).getSupportFragmentManager(), "show");
-                    }
-                });
 
-                MuserDatabase.child(CurrentUserID)
-                        .addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
-                                    if(dataSnapshot.hasChild(DataManager.UserFullname)){
-                                        String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
 
-                                        if(name.equals(globalChatModal.getName())){
-                                            holder.aduiotime.setText(globalChatModal.getTime());
-                                            holder.senderaudio_username.setText("Me");
-                                        }
-                                        else {
-                                            holder.aduiotime.setText(globalChatModal.getTime());
-                                            holder.senderaudio_username.setText(globalChatModal.getName());
-                                        }
+
+            holder.audiobox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AuidoButtomSheed auidoButtomSheed = new AuidoButtomSheed(globalChatModal.getMessage());
+                    auidoButtomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+                }
+            });
+            MuserDatabase.child(CurrentUserID)
+                    .addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                if (dataSnapshot.hasChild(DataManager.UserFullname)) {
+                                    String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+
+                                    if (name.equals(globalChatModal.getName())) {
+                                        holder.aduiotime.setText(globalChatModal.getTime());
+                                        holder.senderaudio_username.setText("Me");
+                                    } else {
+                                        holder.aduiotime.setText(globalChatModal.getTime());
+                                        holder.senderaudio_username.setText(globalChatModal.getName());
                                     }
                                 }
                             }
+                        }
 
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+
+            holder.audiobox.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+
+                    String click_id = globalChatModalslist.get(position).getMyID();
+
+                    if(click_id.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                        MaterialAlertDialogBuilder Mbulder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbulder.setTitle("Delete Message ?");
+                        Mbulder.setIcon(R.drawable.remove_icon_black);
+                        Mbulder.setMessage("Make sure if you delete your message its you permanently lost your data");
+                        Mbulder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                MglobalDatabase.child(globalChatModalslist.get(position).getMessageKey()).removeValue();
+
+                                globalChatModalslist.remove(position);
+
+                                notifyDataSetChanged();
 
                             }
-                        });
+                        })
+                                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+
+
+                        AlertDialog alertDialog = Mbulder.create();
+                        alertDialog.show();
+                    }
+
+
+
+
+                    return true;
+                }
+            });
+
         }
         /// todo audio message
+
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+
+                if (FirebaseAuth.getInstance().getCurrentUser().getUid().equals(globalChatModalslist.get(position).getMyID())) {
+
+                    MaterialAlertDialogBuilder Mbulder = new MaterialAlertDialogBuilder(holder.context);
+                    Mbulder.setTitle("Delete Message ?");
+                    Mbulder.setMessage("Make sure if you delete your message its you permanently lost your data");
+                    Mbulder.setIcon(R.drawable.remove_icon_black);
+                    Mbulder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            MglobalDatabase.child(globalChatModalslist.get(position).getMessageKey()).removeValue();
+
+                            globalChatModalslist.remove(position);
+
+                            notifyDataSetChanged();
+
+                        }
+                    })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+
+
+                    AlertDialog alertDialog = Mbulder.create();
+                    alertDialog.show();
+
+                }
+
+
+                return true;
+            }
+        });
+
+
+
+
     }
 
     @Override
@@ -323,7 +607,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
         return globalChatModalslist.size();
     }
 
-    public class GlobalHolder extends RecyclerView.ViewHolder{
+    public class GlobalHolder extends RecyclerView.ViewHolder {
 
         private MaterialTextView message, timeright, timetop, username;
         private RelativeLayout textmessagebox, imagebox;
@@ -341,7 +625,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
         /// todo audio message
         private RelativeLayout audiobox;
-        private MaterialTextView aduiotime,  senderaudio_username;
+        private MaterialTextView aduiotime, senderaudio_username;
         /// todo audio message
 
 
@@ -378,7 +662,6 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
             sender_imageusername = itemView.findViewById(R.id.SenderImageName);
         }
     }
-
 
 
 }

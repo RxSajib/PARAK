@@ -176,6 +176,13 @@ public class ChatPages extends Fragment {
     private static final int REQUESTCODE = 100;
     private AnstronCoreHelper helper;
 
+    private DatabaseReference MhistoryOneSide;
+
+    /// todo my current info
+    private String MyCurrentName, MyCurrentPicURi;
+    /// todo my current info
+
+
     public ChatPages() {
         // Required empty public constructor
     }
@@ -187,6 +194,8 @@ public class ChatPages extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.chat_pages, container, false);
+
+        MhistoryOneSide = FirebaseDatabase.getInstance().getReference().child(DataManager.My_HistoryRoot);
 
         helper = new AnstronCoreHelper(getActivity());
 
@@ -209,30 +218,25 @@ public class ChatPages extends Fragment {
             ///open anythings
         }
         else {
-            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
-            dialog.setContentView(R.layout.no_connection_dioloag);
-            dialog.show();
+            MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(getActivity());
+            View viewinternet = LayoutInflater.from(getActivity()).inflate(R.layout.no_connection_message, null, false);
 
 
-            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                    dialog.dismiss();
-                }
-            });
 
-            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
 
-            cancelbutton.setOnClickListener(new View.OnClickListener() {
+            MaterialButton exitbutton = viewinternet.findViewById(R.id.ExitButton);
+            exitbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     getActivity().finish();
                 }
             });
+
+            Mbuilder.setView(viewinternet);
+            AlertDialog alertDialog = Mbuilder.create();
+            alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.show();
 
         }
 
@@ -344,6 +348,10 @@ public class ChatPages extends Fragment {
         Mpdf_Stores = FirebaseStorage.getInstance().getReference().child("Pdf");
         Muser_database = FirebaseDatabase.getInstance().getReference().child("Users");
         Muser_database.keepSynced(true);
+
+
+
+
 
 
 
@@ -523,6 +531,34 @@ public class ChatPages extends Fragment {
 
         Mauth = FirebaseAuth.getInstance();
         SenderID = Mauth.getCurrentUser().getUid();
+
+
+        /// todo fatch my user data
+        Muser_database.child(SenderID)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()){
+                            if(dataSnapshot.hasChild(DataManager.UserFullname)){
+                                MyCurrentName = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                            }
+                            if(dataSnapshot.hasChild(DataManager.profileimage)){
+                                MyCurrentPicURi = dataSnapshot.child(DataManager.profileimage).getValue().toString();
+                            }
+                        }
+                        else {
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+        /// todo fatch my user data
+
+
 
         Bundle build = getArguments();
         ReciverUID = build.getString("UID");
@@ -742,7 +778,8 @@ public class ChatPages extends Fragment {
 
                             find_userand_sendnotifaction();
 
-                            set_history_textmessage(Message, recivername, DataManager.Text);
+                         //   set_history_textmessage(Message, recivername, DataManager.Text);
+                            sethistory_one_side(Message, recivername, DataManager.Text);
 
                         } else {
                             Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -863,8 +900,8 @@ public class ChatPages extends Fragment {
 
                                                         find_imaguser_andsend_notifacion();
 
-                                                        set_history_textmessage(Imagedownloaduri, recivername, DataManager.Image);
-
+                                                        //set_history_textmessage(Imagedownloaduri, recivername, DataManager.Image);
+                                                        sethistory_one_side(Imagedownloaduri, recivername, DataManager.Image);
                                                     } else {
                                                         Mprogress.dismiss();
                                                         Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -1015,7 +1052,8 @@ public class ChatPages extends Fragment {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
                                                     finduser_sendPDF();
-                                                    set_history_textmessage(pdf_downloaduri, recivername, DataManager.Pdf);
+                                                    //set_history_textmessage(pdf_downloaduri, recivername, DataManager.Pdf);
+                                                    sethistory_one_side(pdf_downloaduri, recivername, DataManager.Pdf);
                                                     Mprogress.dismiss();
                                                 } else {
                                                     Mprogress.dismiss();
@@ -1489,8 +1527,8 @@ public class ChatPages extends Fragment {
                                                 if (task.isSuccessful()) {
                                                     /// todo notifaction
                                                     Mprogress.dismiss();
-
-                                                    set_history_textmessage(AudioURI, recivername, DataManager.Audio);
+                                                    sethistory_one_side(AudioURI, recivername, DataManager.Audio);
+                                       //             set_history_textmessage(AudioURI, recivername, DataManager.Audio);
 
                                                 } else {
                                                     Mprogress.dismiss();
@@ -1543,7 +1581,7 @@ public class ChatPages extends Fragment {
     }
 
 
-    private void set_history_textmessage(String Message, String name, String type){
+/*    private void set_history_textmessage(String Message, String name, String type){
         Calendar calendar_time = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
         Current_time = simpleDateFormat_time.format(calendar_time.getTime());
@@ -1564,8 +1602,7 @@ public class ChatPages extends Fragment {
 
 
         NotifactionData.child(ReciverUID)
-                .push()
-                .updateChildren(message_map)
+                .push().updateChildren(message_map)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -1584,7 +1621,7 @@ public class ChatPages extends Fragment {
                     }
                 });
 
-    }
+    }*/
 
     private boolean imagepermission(){
         if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
@@ -1594,5 +1631,32 @@ public class ChatPages extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUESTCODE);
             return false;
         }
+    }
+
+
+    /// todo set data the history
+    private void sethistory_one_side(String Message, String Name, String Type){
+        Calendar calendar_time = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
+        Current_time = simpleDateFormat_time.format(calendar_time.getTime());
+
+        Calendar calendar_date = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
+        Current_date = simpleDateFormat_date.format(calendar_date.getTime());
+
+        Map<String, Object> message_map = new HashMap<String, Object>();
+        message_map.put(DataManager.NotifactionProfileUrl, MyCurrentPicURi);
+        message_map.put(DataManager.NotifactionDate, Current_date);
+        message_map.put(DataManager.NotifactionTime, Current_time);
+        message_map.put(DataManager.Notifactionname, MyCurrentName);
+        message_map.put(DataManager.NotifactionTextBody, Message);
+        message_map.put(DataManager.Type, Type);
+        message_map.put(DataManager.NotifactionSenderID, SenderID);
+        message_map.put(DataManager.NotifactionShort, ShortDesNegative);
+
+
+        MhistoryOneSide.child(ReciverUID)
+                .child(SenderID).updateChildren(message_map);
+
     }
 }
