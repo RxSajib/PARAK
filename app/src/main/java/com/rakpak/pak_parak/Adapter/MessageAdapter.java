@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
@@ -123,9 +126,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
-                holder.sendermessagelayout.setOnClickListener(new View.OnClickListener() {
+                holder.sendermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
-                    public void onClick(View view) {
+                    public boolean onLongClick(View view) {
+
                         CharSequence[] options = new CharSequence[]{
                                 "Forward",
                                 "Remove for you",
@@ -145,16 +149,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
                                 }
                                 if(i == 1){
-
+                                    delete_message_sender(position, holder);
                                 }
                                 if(i == 2){
-
+                                    delete_message_everyone(position, holder);
                                 }
                             }
                         });
 
                         AlertDialog alertDialog = Mbuilder.create();
                         alertDialog.show();
+
+
+                        return true;
                     }
                 });
 
@@ -179,21 +186,44 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.recivermessagelayout.setVisibility(View.VISIBLE);
 
 
-
                 holder.recivermessagelayout.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
 
 
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+                                "Unsent"
+                        };
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardTexType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_reciver(position, holder);
+                                }
+
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
 
                         return true;
                     }
-
-
                 });
+
 
 
 
@@ -229,15 +259,44 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                     public boolean onLongClick(View view) {
 
 
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+                                "Unsent"
+                        };
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_sender(position, holder);
+                                }
+                                if(i == 2){
+                                    delete_message_everyone(position, holder);
+                                }
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
 
                         return true;
+
+
+
                     }
-
-
                 });
+
 
 
 
@@ -310,20 +369,47 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.reciverimagetime.setText(MessageModalList.getTime());
 
 
+
                 holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
 
 
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+                        };
+
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardImageType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_reciver(position, holder);
+                                }
+
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
+
 
                         return true;
                     }
-
-
                 });
+
+
 
 
 
@@ -404,12 +490,42 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                     @Override
                     public boolean onLongClick(View view) {
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+                                "Unsent"
+                        };
+
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_sender(position, holder);
+                                }
+                                if(i == 2){
+                                    delete_message_everyone(position, holder);
+                                }
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
 
                         return true;
                     }
                 });
+
+
 
 
 
@@ -434,12 +550,43 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                     @Override
                     public boolean onLongClick(View view) {
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+
+                        };
+
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardPdfType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_reciver(position, holder);
+                                }
+
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
+
 
                         return true;
                     }
                 });
+
+
+
 
 
                 holder.reciver_pdf_box.setOnClickListener(new View.OnClickListener() {
@@ -894,9 +1041,94 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
-    /// todo delete for everyone
-  //  private void delete_from_everyone(final int position, )
-    /// todo delete for everyone
+    /// todo delete for sender
+    private void delete_message_sender(final int position, final MessageHolder messageHolder){
+
+        DatabaseReference MessageRoot = FirebaseDatabase.getInstance().getReference();
+        MessageRoot.child("Message").child(userMessageListModals.get(position).getFrom())
+                .child(userMessageListModals.get(position).getTo())
+                .child(userMessageListModals.get(position).getMessage_Id())
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            userMessageListModals.remove(position);
+                            notifyDataSetChanged();
+                        }
+                        else {
+                            Toast.makeText(messageHolder.context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
+    }
+    /// todo delete for sender
+
+    /// todo delete for reciver
+    private void delete_message_reciver(final int position, final MessageHolder messageHolder){
+
+        DatabaseReference MessageRoot = FirebaseDatabase.getInstance().getReference();
+        MessageRoot.child("Message").child(userMessageListModals.get(position).getTo())
+                .child(userMessageListModals.get(position).getFrom())
+                .child(userMessageListModals.get(position).getMessage_Id())
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            userMessageListModals.remove(position);
+                            notifyDataSetChanged();
+                        }
+                        else {
+                            Toast.makeText(messageHolder.context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+    /// todo delete for reciver
+
+    /// todo remove for everyone
+    private void delete_message_everyone(final int position, final MessageHolder messageHolder){
+        DatabaseReference MessageRoot = FirebaseDatabase.getInstance().getReference();
+        MessageRoot.child("Message").child(userMessageListModals.get(position).getTo())
+                .child(userMessageListModals.get(position).getFrom())
+                .child(userMessageListModals.get(position).getMessage_Id())
+                .removeValue()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                                MessageRoot.child("Message").child(userMessageListModals.get(position).getFrom())
+                                        .child(userMessageListModals.get(position).getTo())
+                                        .child(userMessageListModals.get(position).getMessage_Id())
+                                        .removeValue()
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+
+                                                if(task.isSuccessful()){
+                                                    /// todo finial task
+                                                    userMessageListModals.remove(position);
+                                                    notifyDataSetChanged();
+                                                }
+                                                else {
+                                                    Toast.makeText(messageHolder.context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+
+                                            }
+                                        });
+                        }
+                        else {
+                            Toast.makeText(messageHolder.context,task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+    /// todo remove for everyone
+
 
     @Override
     public int getItemCount() {
