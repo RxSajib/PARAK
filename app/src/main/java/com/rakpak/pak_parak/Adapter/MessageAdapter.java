@@ -894,6 +894,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
 
 
+    /// todo delete for everyone
+  //  private void delete_from_everyone(final int position, )
+    /// todo delete for everyone
 
     @Override
     public int getItemCount() {

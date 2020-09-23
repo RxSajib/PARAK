@@ -765,6 +765,8 @@ public class ChatPages extends Fragment {
         message_map.put("From", SenderID);
         message_map.put("Time", CurrentTime);
         message_map.put("Date", CurrentDate);
+        message_map.put("To", ReciverUID);
+        message_map.put("Message_Id", usermaessageid);
 
         Map<String, Object> message_body = new HashMap<String, Object>();
         message_body.put(SenderMessageRef + "/" + usermaessageid, message_map);
@@ -886,6 +888,8 @@ public class ChatPages extends Fragment {
                                     message_map.put("From", SenderID);
                                     message_map.put("Time", CurrentTime);
                                     message_map.put("Date", CurrentDate);
+                                    message_map.put("To", ReciverUID);
+                                    message_map.put("Message_Id", usermaessageid);
 
                                     Map<String, Object> message_body = new HashMap<String, Object>();
                                     message_body.put(SenderMessageRef + "/" + usermaessageid, message_map);
@@ -1041,6 +1045,8 @@ public class ChatPages extends Fragment {
                                 message_map.put("From", SenderID);
                                 message_map.put("Time", CurrentTime);
                                 message_map.put("Date", CurrentDate);
+                                message_map.put("To", ReciverUID);
+                                message_map.put("Message_Id", usermaessageid);
 
                                 Map<String, Object> message_body = new HashMap<String, Object>();
                                 message_body.put(SenderMessageRef + "/" + usermaessageid, message_map);
@@ -1515,6 +1521,8 @@ public class ChatPages extends Fragment {
                                 message_map.put("From", SenderID);
                                 message_map.put("Time", CurrentTime);
                                 message_map.put("Date", CurrentDate);
+                                message_map.put("To", ReciverUID);
+                                message_map.put("Message_Id", usermaessageid);
 
                                 Map<String, Object> message_body = new HashMap<String, Object>();
                                 message_body.put(SenderMessageRef + "/" + usermaessageid, message_map);
