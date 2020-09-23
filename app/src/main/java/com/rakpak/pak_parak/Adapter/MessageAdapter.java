@@ -1,6 +1,7 @@
 package com.rakpak.pak_parak.Adapter;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -57,6 +58,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
     private DatabaseReference MessageDatabase;
     private String SenderUID;
     private FirebaseAuth Mauth;
+    private ProgressDialog Mprogress;
 
     public MessageAdapter(List<UserMessageListModal> userMessageListModals) {
         this.userMessageListModals = userMessageListModals;
@@ -79,6 +81,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         MessageDatabase.keepSynced(true);
         Mauth = FirebaseAuth.getInstance();
         SenderUID = Mauth.getCurrentUser().getUid();
+        Mprogress = new ProgressDialog(holder.context);
 
         final UserMessageListModal MessageModalList = userMessageListModals.get(position);
         String from = MessageModalList.getFrom();
@@ -194,7 +197,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         CharSequence[] options = new CharSequence[]{
                                 "Forward",
                                 "Remove for you",
-                                "Unsent"
+
                         };
 
 
@@ -1044,6 +1047,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
     /// todo delete for sender
     private void delete_message_sender(final int position, final MessageHolder messageHolder){
 
+        Mprogress.setTitle("Wait for a moment ...");
+        Mprogress.setMessage("Please wait for delete message");
+        Mprogress.setCanceledOnTouchOutside(false);
+        Mprogress.show();
+
         DatabaseReference MessageRoot = FirebaseDatabase.getInstance().getReference();
         MessageRoot.child("Message").child(userMessageListModals.get(position).getFrom())
                 .child(userMessageListModals.get(position).getTo())
@@ -1055,9 +1063,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         if(task.isSuccessful()){
                             userMessageListModals.remove(position);
                             notifyDataSetChanged();
+                            Mprogress.dismiss();
                         }
                         else {
                             Toast.makeText(messageHolder.context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Mprogress.dismiss();
                         }
                     }
                 });
@@ -1068,6 +1078,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
     /// todo delete for reciver
     private void delete_message_reciver(final int position, final MessageHolder messageHolder){
+
+        Mprogress.setTitle("Wait for a moment ...");
+        Mprogress.setMessage("Please wait for delete message");
+        Mprogress.setCanceledOnTouchOutside(false);
+        Mprogress.show();
 
         DatabaseReference MessageRoot = FirebaseDatabase.getInstance().getReference();
         MessageRoot.child("Message").child(userMessageListModals.get(position).getTo())
@@ -1080,9 +1095,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         if(task.isSuccessful()){
                             userMessageListModals.remove(position);
                             notifyDataSetChanged();
+                            Mprogress.dismiss();
                         }
                         else {
                             Toast.makeText(messageHolder.context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Mprogress.dismiss();
                         }
                     }
                 });
@@ -1092,6 +1109,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
     /// todo remove for everyone
     private void delete_message_everyone(final int position, final MessageHolder messageHolder){
+
+        Mprogress.setTitle("Wait for a moment ...");
+        Mprogress.setMessage("Please wait for delete message");
+        Mprogress.setCanceledOnTouchOutside(false);
+        Mprogress.show();
+
         DatabaseReference MessageRoot = FirebaseDatabase.getInstance().getReference();
         MessageRoot.child("Message").child(userMessageListModals.get(position).getTo())
                 .child(userMessageListModals.get(position).getFrom())
@@ -1113,9 +1136,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                                                     /// todo finial task
                                                     userMessageListModals.remove(position);
                                                     notifyDataSetChanged();
+                                                    Mprogress.dismiss();
                                                 }
                                                 else {
                                                     Toast.makeText(messageHolder.context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                                                    Mprogress.dismiss();
                                                 }
 
                                             }
@@ -1123,6 +1149,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         }
                         else {
                             Toast.makeText(messageHolder.context,task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Mprogress.dismiss();
                         }
                     }
                 });

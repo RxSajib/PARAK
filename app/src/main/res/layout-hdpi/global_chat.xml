@@ -5,6 +5,15 @@
     android:background="@color/background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:src="@drawable/global_message_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ImageView>
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/GlobalToolbarID"
         android:layout_width="match_parent"

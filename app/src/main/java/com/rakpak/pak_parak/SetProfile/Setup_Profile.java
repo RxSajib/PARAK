@@ -290,7 +290,7 @@ public class Setup_Profile extends Fragment {
 
 
                                         alertDialog.dismiss();
-                                            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                                        homepage(new goto_homepage());
 
 
 

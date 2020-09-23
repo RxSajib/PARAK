@@ -8,6 +8,14 @@
     tools:context=".ChatPage.ChatPages">
 
 
+    <ImageView
+        android:src="@drawable/global_message_background"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ImageView>
+
 
     <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
