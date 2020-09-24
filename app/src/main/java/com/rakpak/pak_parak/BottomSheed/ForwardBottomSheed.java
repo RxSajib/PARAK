@@ -7,9 +7,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -32,6 +35,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.Forword.MessageForward;
@@ -63,8 +67,9 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
     private RelativeLayout forwardsend_button;
     private ProgressBar progressBar;
 
-    String imageuri;
-    String ForwardType;
+    private String imageuri;
+    private String ForwardType;
+    private EditText searchinput;
 
     public ForwardBottomSheed(String imageuri, String forwardType) {
         this.imageuri = imageuri;
@@ -81,6 +86,7 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
         forwardusername = view.findViewById(R.id.ForwardUserName);
         forwardsend_button = view.findViewById(R.id.ForwarButtonID);
 
+        searchinput = view.findViewById(R.id.SearchUserID);
 
         CrossIcon = view.findViewById(R.id.CrossIconID);
         CrossIcon.setOnClickListener(new View.OnClickListener() {
@@ -148,18 +154,400 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
         recyclerViewlist.setHasFixedSize(true);
         recyclerViewlist.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        read_data();
 
-        readuser_data();
+
+        searchinput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = editable.toString();
+                if(input.isEmpty()){
+                    readuser_data();
+                }
+                else {
+                    searching_name(input);
+                }
+            }
+        });
+
+
+
 
 
         return view;
     }
 
 
-    private void read_data() {
+    @Override
+    public void onStart() {
+
+
+
+
+        FirebaseRecyclerAdapter<UserIteamsList, ChatHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserIteamsList, ChatHolder>(
+                UserIteamsList.class,
+                R.layout.user_design,
+                ChatHolder.class,
+                MuserDatabase
+        ) {
+            @Override
+            protected void populateViewHolder(final ChatHolder chatHolder, UserIteamsList userIteamsList, int i) {
+                final String UID = getRef(i).getKey();
+
+
+                MuserDatabase.child(UID)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(final DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+
+
+
+
+
+
+                                    OnlineData.child(UID)
+                                            .addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                    if(dataSnapshot.hasChild(DataManager.OnlineUseRoot)){
+
+                                                        String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                        if(online_status.equals("online")){
+                                                            chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                            chatHolder.onlinetime_date_status.setText("online now");
+                                                        }
+                                                        else if(online_status.equals("offline")){
+                                                            chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+
+
+                                                            Calendar calendar_date = Calendar.getInstance();
+                                                            SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                            String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                            String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                            String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                            if(getoninedate.equals(CurrentDate)){
+                                                                chatHolder.onlinetime_date_status.setText("Last online today: "+getonlinetime);
+                                                            }
+                                                            else {
+                                                                chatHolder.onlinetime_date_status.setText("Last online : "+getoninedate);
+                                                            }
+
+                                                        }
+
+
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    haveuser.setVisibility(View.GONE);
+                                    if (dataSnapshot.hasChild("profileimage")) {
+                                        String uri = dataSnapshot.child("profileimage").getValue().toString();
+                                        chatHolder.setProfileimageset(uri);
+                                    }
+
+                                    if (dataSnapshot.hasChild("Username")) {
+                                        String name = dataSnapshot.child("Username").getValue().toString();
+                                        chatHolder.setUsernameset(name);
+                                    }
+
+                                    if (dataSnapshot.hasChild("MYID")) {
+                                        String myuid = dataSnapshot.child("MYID").getValue().toString();
+
+                                        if (myuid.equals(CurrentUserID)) {
+                                            chatHolder.mylayout.setVisibility(View.GONE);
+                                        }
+                                    }
+
+
+                                    chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            boolean selected = true;
+
+
+                                            String position = getRef(i).getKey();
+
+                                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
+                                                String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                                                forwardusername.setText(name);
+                                            }
+
+
+                                            if (!imageuri.isEmpty()) {
+                                                sendbutton.setVisibility(View.VISIBLE);
+
+
+                                                forwardsend_button.setVisibility(View.VISIBLE);
+                                                forwardsend_button.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        send_message_touser(UID, imageuri, ForwardType);
+                                                    }
+                                                });
+
+
+                                            }
+
+
+                                            if (position.equals(chatHolder.Mview)) {
+                                                chatHolder.chatview.setBackgroundResource(R.drawable.forward_deslelect);
+                                                selected = false;
+
+
+                                            } else if (!position.equals(chatHolder.Mview)) {
+                                                chatHolder.chatview.setBackgroundResource(R.drawable.forward_selection);
+                                                selected = true;
+                                            }
+
+
+
+                                          /*  String _id = dataSnapshot.child("MYID").getValue().toString();
+                                            gotochatPage(new ChatPages(), _id);*/
+                                        }
+                                    });
+
+                                } else {
+                                    haveuser.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        };
+
+        recyclerViewlist.setAdapter(firebaseRecyclerAdapter);
+
+
+
+
+        super.onStart();
+    }
+
+    private void searching_name(String name){
+        String tolowercase = name.toLowerCase();
+        Query searchquery = MuserDatabase.orderByChild(DataManager.search).startAt(tolowercase).endAt(tolowercase + "\uf8ff");
+
+
+
+        FirebaseRecyclerAdapter<UserIteamsList, ChatHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<UserIteamsList, ChatHolder>(
+                UserIteamsList.class,
+                R.layout.user_design,
+                ChatHolder.class,
+                searchquery
+        ) {
+            @Override
+            protected void populateViewHolder(final ChatHolder chatHolder, UserIteamsList userIteamsList, int i) {
+                final String UID = getRef(i).getKey();
+
+
+                MuserDatabase.child(UID)
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(final DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+
+
+
+
+
+
+                                    OnlineData.child(UID)
+                                            .addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                                    if(dataSnapshot.hasChild(DataManager.OnlineUseRoot)){
+
+                                                        String online_status = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserCardActive).getValue().toString();
+                                                        if(online_status.equals("online")){
+                                                            chatHolder.online_status_dot.setBackgroundResource(R.drawable.active_dot);
+                                                            chatHolder.onlinetime_date_status.setText("online now");
+                                                        }
+                                                        else if(online_status.equals("offline")){
+                                                            chatHolder.online_status_dot.setBackgroundResource(R.drawable.inactive_dot);
+
+
+                                                            Calendar calendar_date = Calendar.getInstance();
+                                                            SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+                                                            String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
+
+                                                            String getonlinetime = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveTime).getValue().toString();
+                                                            String getoninedate = dataSnapshot.child(DataManager.UserOnlineRoot).child(DataManager.UserActiveDate).getValue().toString();
+
+
+                                                            if(getoninedate.equals(CurrentDate)){
+                                                                chatHolder.onlinetime_date_status.setText("Last online today: "+getonlinetime);
+                                                            }
+                                                            else {
+                                                                chatHolder.onlinetime_date_status.setText("Last online : "+getoninedate);
+                                                            }
+
+                                                        }
+
+
+                                                    }
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+
+                                                }
+                                            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    haveuser.setVisibility(View.GONE);
+                                    if (dataSnapshot.hasChild("profileimage")) {
+                                        String uri = dataSnapshot.child("profileimage").getValue().toString();
+                                        chatHolder.setProfileimageset(uri);
+                                    }
+
+                                    if (dataSnapshot.hasChild("Username")) {
+                                        String name = dataSnapshot.child("Username").getValue().toString();
+                                        chatHolder.setUsernameset(name);
+                                    }
+
+                                    if (dataSnapshot.hasChild("MYID")) {
+                                        String myuid = dataSnapshot.child("MYID").getValue().toString();
+
+                                        if (myuid.equals(CurrentUserID)) {
+                                            chatHolder.mylayout.setVisibility(View.GONE);
+                                        }
+                                    }
+
+
+                                    chatHolder.Mview.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+
+                                            boolean selected = true;
+
+
+                                            String position = getRef(i).getKey();
+
+                                            if (dataSnapshot.hasChild(DataManager.UserFullname)) {
+                                                String name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
+                                                forwardusername.setText(name);
+                                            }
+
+
+                                            if (!imageuri.isEmpty()) {
+                                                sendbutton.setVisibility(View.VISIBLE);
+
+
+                                                forwardsend_button.setVisibility(View.VISIBLE);
+                                                forwardsend_button.setOnClickListener(new View.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(View view) {
+                                                        send_message_touser(UID, imageuri, ForwardType);
+                                                    }
+                                                });
+
+
+                                            }
+
+
+                                            if (position.equals(chatHolder.Mview)) {
+                                                chatHolder.chatview.setBackgroundResource(R.drawable.forward_deslelect);
+                                                selected = false;
+
+
+                                            } else if (!position.equals(chatHolder.Mview)) {
+                                                chatHolder.chatview.setBackgroundResource(R.drawable.forward_selection);
+                                                selected = true;
+                                            }
+
+
+
+                                          /*  String _id = dataSnapshot.child("MYID").getValue().toString();
+                                            gotochatPage(new ChatPages(), _id);*/
+                                        }
+                                    });
+
+                                } else {
+                                    haveuser.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+            }
+        };
+
+        recyclerViewlist.setAdapter(firebaseRecyclerAdapter);
+
 
     }
+
 
     public void readuser_data() {
 

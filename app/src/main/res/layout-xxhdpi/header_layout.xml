@@ -13,24 +13,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:src="@drawable/youtube"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_marginRight="@dimen/_7sdp"
-            android:layout_height="@dimen/_25sdp">
 
-        </ImageView>
+        <RelativeLayout
+            android:id="@+id/YouTubeButton"
+            android:padding="@dimen/_5sdp"
+            android:background="@drawable/back_button_ripple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/youtube"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp">
+
+            </ImageView>
+        </RelativeLayout>
 
 
 
-        <ImageView
-            android:src="@drawable/facebook"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp">
+        <RelativeLayout
+            android:id="@+id/FaceBookButtonID"
+            android:padding="@dimen/_5sdp"
+            android:background="@drawable/back_button_ripple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/facebook"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp">
 
-        </ImageView>
+            </ImageView>
+
+        </RelativeLayout>
+
 
     </LinearLayout>
+
 
 
     <RelativeLayout

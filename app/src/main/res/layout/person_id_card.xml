@@ -275,6 +275,7 @@
                                         android:layout_marginLeft="10dp"
                                         android:fontFamily="@font/ubuntureguiar"
                                         android:text="@string/id_no"
+                                        android:textStyle="bold"
                                         android:textSize="13sp">
 
                                     </com.google.android.material.textview.MaterialTextView>
@@ -314,6 +315,7 @@
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="@string/full_name"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>
@@ -359,6 +361,7 @@
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="@string/work"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>
@@ -398,6 +401,7 @@
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="@string/number"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>
@@ -435,6 +439,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_marginLeft="10dp"
+                                            android:textStyle="bold"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="@string/location"
                                             android:textSize="13sp">

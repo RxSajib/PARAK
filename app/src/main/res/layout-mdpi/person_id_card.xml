@@ -277,7 +277,8 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginLeft="10dp"
                                         android:fontFamily="@font/ubuntureguiar"
-                                        android:text="ID NO:"
+                                        android:text="ID No:"
+                                        android:textStyle="bold"
                                         android:textSize="13sp">
 
                                     </com.google.android.material.textview.MaterialTextView>
@@ -321,6 +322,7 @@
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="Full Name:"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>
@@ -365,6 +367,7 @@
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="Job:"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>
@@ -406,7 +409,8 @@
                                             android:layout_centerVertical="true"
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
-                                            android:text="Number:"
+                                            android:text="Contact. :"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>
@@ -450,6 +454,7 @@
                                             android:layout_marginLeft="10dp"
                                             android:fontFamily="@font/ubuntureguiar"
                                             android:text="@string/location"
+                                            android:textStyle="bold"
                                             android:textSize="13sp">
 
                                         </com.google.android.material.textview.MaterialTextView>

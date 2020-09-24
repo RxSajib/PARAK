@@ -338,7 +338,7 @@
                 android:layout_alignParentRight="true"
                 android:id="@+id/SendButtonID"
                 android:layout_centerVertical="true"
-                android:backgroundTint="@color/colorPrimary"
+                android:backgroundTint="@android:color/white"
                 android:visibility="gone"
                 app:cardCornerRadius="@dimen/_38sdp"
                 android:layout_height="@dimen/_38sdp">

@@ -57,12 +57,14 @@
         android:layout_alignParentBottom="true"
         android:id="@+id/RemoveButton"
         android:layout_marginBottom="@dimen/_17sdp"
+        android:visibility="gone"
         android:layout_marginRight="@dimen/_17sdp"
         android:src="@drawable/delate_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
 
 
 </RelativeLayout>

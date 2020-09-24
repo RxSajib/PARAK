@@ -235,7 +235,7 @@
             android:id="@+id/GlobalMessageSendButton"
             android:layout_centerVertical="true"
             android:visibility="gone"
-            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="@dimen/_38sdp"
             android:layout_height="@dimen/_38sdp">
 

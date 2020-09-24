@@ -176,7 +176,28 @@
         android:layout_height="match_parent">
 
 
+        <EditText
+            android:id="@+id/SearchUserID"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:hint="@string/search_by_name"
+            android:drawablePadding="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:textSize="@dimen/_13sdp"
+            android:padding="@dimen/_9sdp"
+            android:drawableLeft="@drawable/search_prefession_icon"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/forward_search_design"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/SearchUserID"
             android:layout_width="match_parent"
             android:id="@+id/ForwardViewID"
             android:layout_height="match_parent">

@@ -161,6 +161,7 @@ public class NotifactionPages extends Fragment {
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
                                 if(dataSnapshot.exists()) {
+                                    history.setVisibility(View.GONE);
 
                                     if (dataSnapshot.hasChild(DataManager.Type)) {
                                         String type = dataSnapshot.child(DataManager.Type).getValue().toString();
@@ -380,6 +381,10 @@ public class NotifactionPages extends Fragment {
                                     } else {
 
                                     }
+
+                                }
+                                else {
+                                    history.setVisibility(View.VISIBLE);
 
                                 }
                             }

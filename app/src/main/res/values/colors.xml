@@ -16,4 +16,8 @@
     <color name="tranprent">#5F7D95</color>
 
 
+
+    <color name="light_blue">@color/carbon_blue_400</color>
+
+
 </resources>

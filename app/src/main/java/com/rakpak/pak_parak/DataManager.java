@@ -115,4 +115,7 @@ public class DataManager {
     public static final String GlobalImageRoot = "GlobalImage";
     public static final String My_HistoryRoot = "My History";
     /// todo root of image
+
+    public static final String YouTube = "https://www.youtube.com/channel/UCt3HxbENhgnBMZ3PUNG-ydw?view_as=subscriber";
+    public static final String Facebook = "https://www.facebook.com/MustaqeemWelfareGroup";
 }

@@ -196,6 +196,33 @@ public class goto_homepage extends Fragment {
         final CircleImageView profileimage = navagation_view.findViewById(R.id.ProfileIagesNav);
         final ImageView addimage = navagation_view.findViewById(R.id.AddImageID);
 
+
+        final RelativeLayout youtubebutton = navagation_view.findViewById(R.id.YouTubeButton);
+        final RelativeLayout facebookbutton = navagation_view.findViewById(R.id.FaceBookButtonID);
+
+        youtubebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.closeDrawer(Gravity.LEFT);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(DataManager.YouTube));
+                startActivity(intent);
+
+
+            }
+        });
+
+        facebookbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.closeDrawer(Gravity.LEFT);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(DataManager.Facebook));
+                startActivity(intent);
+            }
+        });
+
+
         addimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
