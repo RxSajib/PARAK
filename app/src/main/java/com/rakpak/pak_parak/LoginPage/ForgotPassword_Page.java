@@ -40,7 +40,8 @@ public class ForgotPassword_Page extends Fragment {
 
         View view = inflater.inflate(R.layout.forgot_password__page, container, false);
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
 
         email = view.findViewById(R.id.ForgetPasswordEmail);
         button = view.findViewById(R.id.ContinueResetPassword);

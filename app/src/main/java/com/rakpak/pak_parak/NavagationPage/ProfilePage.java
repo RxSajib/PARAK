@@ -288,14 +288,7 @@ public class ProfilePage extends Fragment {
     }
 
 
-    private void goto_page(Fragment fragment){
-        if(fragment != null){
-            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.fedein    , R.anim.fedeout);
-            transaction.replace(R.id.MainID, fragment);
-            transaction.commit();
-        }
-    }
+
 
 
 }
