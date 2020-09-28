@@ -136,7 +136,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         CharSequence[] options = new CharSequence[]{
                                 "Forward",
                                 "Remove for you",
-                                "Unsent"
+                                "Unsend"
                         };
 
 
@@ -265,7 +265,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         CharSequence[] options = new CharSequence[]{
                                 "Forward",
                                 "Remove for you",
-                                "Unsent"
+                                "Unsend"
                         };
 
 
@@ -496,7 +496,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                         CharSequence[] options = new CharSequence[]{
                                 "Forward",
                                 "Remove for you",
-                                "Unsent"
+                                "Unsend"
                         };
 
 

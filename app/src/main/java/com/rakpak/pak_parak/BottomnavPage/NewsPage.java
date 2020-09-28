@@ -1,19 +1,27 @@
 package com.rakpak.pak_parak.BottomnavPage;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -31,6 +39,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.Model.NewsIteams;
+import com.rakpak.pak_parak.NewsFullImage.NewsFullimage;
 import com.rakpak.pak_parak.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
@@ -51,7 +60,6 @@ public class NewsPage extends Fragment {
     private RelativeLayout news_have;
 
     public NewsPage() {
-        // Required empty public constructor
     }
 
 
@@ -72,7 +80,7 @@ public class NewsPage extends Fragment {
         SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
         CurrentDate = simpleDateFormat_time.format(calendar_time.getTime());
 
-        MnewsDatabase = FirebaseDatabase.getInstance().getReference().child("News");
+        MnewsDatabase = FirebaseDatabase.getInstance().getReference().child(DataManager.NewsRoot);
         MnewsDatabase.keepSynced(true);
         recyclerView = view.findViewById(R.id.NewsRecylerViewID);
         recyclerView.setHasFixedSize(true);
@@ -139,7 +147,18 @@ public class NewsPage extends Fragment {
                                                 }
 
                                             }
+
+                                            if(dataSnapshot.hasChild(DataManager.NewsWebsite)){
+                                                String link = dataSnapshot.child(DataManager.NewsWebsite).getValue().toString();
+                                                newsHolder.url.setText(DataManager.HTTPS+link);
+
+                                               newsHolder.url.setPaintFlags(newsHolder.url.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                                            }
+                                            else {
+                                                newsHolder.url.setVisibility(View.GONE);//look link as person click should work ok no long press
+                                            }
                                         }
+                                        //look please first complete all the point ok for one point you tell and thats also not 1005 why long click just click goesto link
 
                                         else if(job_isvisiable.equals(DataManager.InVisiable)){
                                             newsHolder.job_layout.setVisibility(View.GONE);
@@ -147,6 +166,25 @@ public class NewsPage extends Fragment {
                                     }
 
 
+                                    newsHolder.url.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            if(dataSnapshot.hasChild(DataManager.NewsWebsite)){
+                                                String link = dataSnapshot.child(DataManager.NewsWebsite).getValue().toString();
+
+                                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(DataManager.HTTPS+link));
+                                                startActivity(intent);
+
+                                            }
+                                        }
+                                    });
+
+                                    newsHolder.newsimage.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            gotofullscreen_image(new NewsFullimage(), UID);
+                                        }
+                                    });
 
                                 }
                                 else {
@@ -175,6 +213,7 @@ public class NewsPage extends Fragment {
         // NewLottiFile
         private LottieAnimationView NewLottiFile;
         private RelativeLayout job_layout;
+        private MaterialTextView url;
 
         public NewsHolder(@NonNull View itemView) {
             super(itemView);
@@ -186,6 +225,7 @@ public class NewsPage extends Fragment {
             newsimage = Mview.findViewById(R.id.NewsImage);
             NewLottiFile = Mview.findViewById(R.id.NewLottiFile);
             job_layout = Mview.findViewById(R.id.Newslayout);
+            url = Mview.findViewById(R.id.NewsUri);
         }
 
         private void setTime_dateset(String time){
@@ -263,5 +303,17 @@ public class NewsPage extends Fragment {
     public void onResume() {
       //  onlinecheack("online");
         super.onResume();
+    }
+
+    private void gotofullscreen_image(Fragment fragment, String UID){
+        if(fragment != null){
+
+            Bundle bundle = new Bundle();
+            bundle.putString(DataManager.IntentNewsData, UID);
+            fragment.setArguments(bundle);
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.MainID, fragment).addToBackStack(null);
+            transaction.commit();
+        }
     }
 }

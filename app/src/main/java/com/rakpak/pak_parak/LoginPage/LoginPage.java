@@ -29,7 +29,7 @@ import com.rakpak.pak_parak.R;
 
 public class LoginPage extends Fragment {
 
-    private MaterialTextView signnupbutton;
+    private MaterialTextView signnupbutton, nothavacoount;
     private FirebaseAuth Mauth;
     private RelativeLayout loginbutton;
     private EditText email, password;
@@ -49,6 +49,14 @@ public class LoginPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.login_page, container, false);
+
+        nothavacoount = view.findViewById(R.id.donthaveaccounttext);
+        nothavacoount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goto_reg_page(new RegisterPage());
+            }
+        });
 
         forgotpassword = view.findViewById(R.id.ForgotPasswordID);
         forgotpassword.setOnClickListener(new View.OnClickListener() {

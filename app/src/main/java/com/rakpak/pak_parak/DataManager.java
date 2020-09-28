@@ -118,4 +118,13 @@ public class DataManager {
 
     public static final String YouTube = "https://www.youtube.com/channel/UCt3HxbENhgnBMZ3PUNG-ydw?view_as=subscriber";
     public static final String Facebook = "https://www.facebook.com/MustaqeemWelfareGroup";
+
+    /// todo news parse data
+    public static final String IntentNewsData = "NewsData";
+    public static final String NewsRoot = "News";
+    public static final String NewsImage = "jobimage";
+    public static final String NewsMessage = "message";
+    public static final String NewsWebsite = "Website";
+    public static final String HTTPS = "http://";
+    /// todo news parse data
 }

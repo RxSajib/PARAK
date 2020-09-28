@@ -96,6 +96,20 @@
 
             </com.google.android.material.textview.MaterialTextView>
 
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_below="@+id/NewsMessage"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_10sdp"
+                android:id="@+id/NewsUri"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@color/carbon_red_500"
+                style="text-decoration: underline"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
         </RelativeLayout>
         <RelativeLayout
             android:layout_marginTop="8dp"

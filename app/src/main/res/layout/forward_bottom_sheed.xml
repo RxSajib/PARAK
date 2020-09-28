@@ -208,19 +208,6 @@
     </RelativeLayout>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/forward_icon"
-        android:visibility="gone"
-        android:id="@+id/ForwordButtonID"
-        android:backgroundTint="@color/colorPrimary"
-        android:layout_marginRight="@dimen/_17sdp"
-        android:layout_marginBottom="@dimen/_17sdp"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 
 

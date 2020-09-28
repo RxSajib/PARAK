@@ -42,7 +42,7 @@ public class RegisterPage extends Fragment {
     private DatabaseReference MuserDatabase;
 
     private MaterialTextView loginpage;
-    private MaterialTextView forgetpassword;
+    private MaterialTextView forgetpassword, nothaveaccount;
 
     public RegisterPage() {
         // Required empty public constructor
@@ -54,6 +54,14 @@ public class RegisterPage extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.register_page, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
+        nothaveaccount = view.findViewById(R.id.donthaveaccounttext);
+        nothaveaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goto_loginpage(new LoginPage());// good s
+            }
+        });
 
         forgetpassword = view.findViewById(R.id.ForgotPassword);
         forgetpassword.setOnClickListener(new View.OnClickListener() {
@@ -94,8 +102,8 @@ public class RegisterPage extends Fragment {
                 } else if (retypepassword.length() < 7) {
                     Toast.makeText(getActivity(), "Password need minimum 7 char", Toast.LENGTH_LONG).show();
                 } else if (!retypepassword.equals(passwordtext)) {
-                    Toast.makeText(getActivity(), "Password not match", Toast.LENGTH_LONG).show();
-
+      ////////HOW MANY TI ME I TOLD YOU PLEASE COME TO FIXALL THE POINT JUST FIX ONE AND COME CHECK SO WORK I  THIS IS BIG PROBLEM ALSWAYS WHEN I GIVE U 5 POINT FIRST YOU WILL FOILLOW I I SAID AFTER WHEN U FOLLER YOU ONE FIX              Toast.makeText(getActivity(), "Password not match", Toast.LENGTH_LONG).show();
+            /// I FIXED SEND ME VOICE MESSAGE SIMPLE NEWS IMAGE IS NOT OPENING WHAT OPENING 
                 } else {
 
                     final MaterialAlertDialogBuilder Mbulder = new MaterialAlertDialogBuilder(getActivity());
