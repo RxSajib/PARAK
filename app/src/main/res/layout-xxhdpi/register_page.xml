@@ -7,6 +7,17 @@
     tools:context=".LoginPage.RegisterPage">
 
 
+    <Button
+        android:id="@+id/RecordPage"
+        android:visibility="gone"
+        android:text="click"
+        android:backgroundTint="@color/carbon_amber_100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </Button>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -106,6 +106,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         holder.reciver_pdf_box.setVisibility(View.GONE);
         holder.imagebox.setVisibility(View.GONE);
 
+        holder.SenderLOngMessageDate.setVisibility(View.GONE);
+        holder.sendershotMessageDate.setVisibility(View.GONE);
+
         /// todo sender and reciver image
         holder.sendderimage.setVisibility(View.GONE);
         holder.reciverimage.setVisibility(View.GONE);
@@ -116,6 +119,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         holder.sendershort_message.setVisibility(View.GONE);
         holder.sendmessage_time.setVisibility(View.GONE);
         holder.recivemessage_time.setVisibility(View.GONE);
+
+        holder.reciverimage_date.setVisibility(View.GONE);
+
+
+        holder.recivershortmessage_date.setVisibility(View.GONE);
+        holder.reciverlong_message_date.setVisibility(View.GONE);
+
         /// todo sender and reciver image
 
         /// todo send and reciver audio
@@ -174,15 +184,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 String sendermessage = MessageModalList.getMessage();
                 if(sendermessage.length() >= 15){
                     holder.sendmessage_time.setVisibility(View.VISIBLE);
+                    holder.SenderLOngMessageDate.setVisibility(View.VISIBLE);
                     holder.sendmessage_time.setText(MessageModalList.getTime());
                     holder.sendmessage.setText(MessageModalList.getMessage());
                     holder.sendershort_message.setText(MessageModalList.getTime());
+
+                    holder.sendershotMessageDate.setText(MessageModalList.getDate());
+                    holder.SenderLOngMessageDate.setText(MessageModalList.getDate());
+
+
+
                 }
                 else {
                     holder.sendershort_message.setVisibility(View.VISIBLE);
+                    holder.sendershotMessageDate.setVisibility(View.VISIBLE);
                     holder.sendershort_message.setText(MessageModalList.getTime());
                     holder.sendmessage_time.setText(MessageModalList.getTime());
                     holder.sendmessage.setText(MessageModalList.getMessage());
+
+                    holder.SenderLOngMessageDate.setText(MessageModalList.getDate());
+                    holder.sendershotMessageDate.setText(MessageModalList.getDate());
+
+
                 }
 
             } else {
@@ -234,15 +257,25 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 String sendermessage = MessageModalList.getMessage();
                 if(sendermessage.length() >= 15){
                    holder.recivemessage_time.setVisibility(View.VISIBLE);
+                   holder.reciverlong_message_date.setVisibility(View.VISIBLE);
                     holder.recivemessage_time.setText(MessageModalList.getTime());
                     holder.recivemessage.setText(MessageModalList.getMessage());
                     holder.recivershort_message.setText(MessageModalList.getTime());
+
+                    holder.reciverlong_message_date.setText(MessageModalList.getDate());
+                    holder.recivershortmessage_date.setText(MessageModalList.getDate());
                 }
                 else {
+                    holder.recivershortmessage_date.setVisibility(View.VISIBLE);
                     holder.recivershort_message.setVisibility(View.VISIBLE);
                     holder.recivershort_message.setText(MessageModalList.getTime());
                     holder.recivemessage_time.setText(MessageModalList.getTime());
                     holder.recivemessage.setText(MessageModalList.getMessage());
+
+                    holder.reciverlong_message_date.setText(MessageModalList.getDate());
+                    holder.recivershortmessage_date.setText(MessageModalList.getDate());
+
+
                 }
 
             }
@@ -254,6 +287,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.sendderimage.setVisibility(View.VISIBLE);
                 holder.senderimagetime.setVisibility(View.VISIBLE);
                 holder.senderimagetime.setText(MessageModalList.getTime());
+
+                holder.sneder_image_date.setText(MessageModalList.getDate());
 
 
 
@@ -369,8 +404,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciverimage.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setVisibility(View.VISIBLE);
+                holder.reciverimage_date.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setText(MessageModalList.getTime());
-
+                holder.reciverimage_date.setText(MessageModalList.getDate());
 
 
                 holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
@@ -487,6 +523,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             if(from.equals(SenderUID)){
                 holder.sender_pdf_box.setVisibility(View.VISIBLE);
                 holder.sender_pdf_time.setText(MessageModalList.getTime());
+                holder.senderPdfDate.setText(MessageModalList.getDate());
 
 
                 holder.sender_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
@@ -547,6 +584,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciver_pdf_box.setVisibility(View.VISIBLE);
                 holder.reciver_pdf_time.setText(MessageModalList.getTime());
+                holder.reciverpdf_date.setText(MessageModalList.getDate());
+
 
 
                 holder.reciver_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
@@ -607,14 +646,45 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             if(from.equals(SenderUID)){
                 holder.senderaudiobox.setVisibility(View.VISIBLE);
                 holder.senderaudiotime.setText(MessageModalList.getTime());
+                holder.senderaudiodate.setText(MessageModalList.getDate());
+
 
 
                 holder.senderaudiobox.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+                                "Unsend"
+                        };
+
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_sender(position, holder);
+                                }
+                                if(i == 2){
+                                    delete_message_everyone(position, holder);
+                                }
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
 
                         return true;
                     }
@@ -634,20 +704,51 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.reciveraudiobox.setVisibility(View.VISIBLE);
                 holder.reciveraudiotime.setText(MessageModalList.getTime());
 
+                holder.reciveraudiodate.setText(MessageModalList.getDate());
 
 
                 holder.reciveraudiobox.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
 
-                        Toast.makeText(holder.context, MessageModalList.getMessage(), Toast.LENGTH_SHORT).show();
 
-                        ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
-                        forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+                        CharSequence[] options = new CharSequence[]{
+                                "Forward",
+                                "Remove for you",
+
+                        };
+
+
+                        MaterialAlertDialogBuilder Mbuilder = new MaterialAlertDialogBuilder(holder.context);
+                        Mbuilder.setTitle("Select Action");
+                        Mbuilder.setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                if(i == 0){
+
+                                    ForwardBottomSheed forwardBottomSheed = new ForwardBottomSheed(MessageModalList.getMessage(), DataManager.ForwardAudioType);
+                                    forwardBottomSheed.show(((AppCompatActivity) holder.context).getSupportFragmentManager(), "show");
+
+                                }
+                                if(i == 1){
+                                    delete_message_reciver(position, holder);
+                                }
+
+                            }
+                        });
+
+                        AlertDialog alertDialog = Mbuilder.create();
+                        alertDialog.show();
+
+
 
                         return true;
                     }
                 });
+
+
+
+
 
 
                 holder.reciveraudiobox.setOnClickListener(new View.OnClickListener() {
@@ -675,6 +776,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.sendderimage.setVisibility(View.VISIBLE);
                 holder.senderimagetime.setVisibility(View.VISIBLE);
                 holder.senderimagetime.setText(MessageModalList.getTime());
+                holder.sneder_image_date.setText(MessageModalList.getDate());
 
 
 
@@ -735,6 +837,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
                 holder.reciverimage.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setVisibility(View.VISIBLE);
                 holder.reciverimagetime.setText(MessageModalList.getTime());
+                holder.reciverimage_date.setText(MessageModalList.getDate());
 
 
                 holder.reciverimage.setOnLongClickListener(new View.OnLongClickListener() {
@@ -858,16 +961,34 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
                 String sendermessage = MessageModalList.getMessage();
                 if(sendermessage.length() >= 15){
+                  /*  holder.sendmessage_time.setVisibility(View.VISIBLE);
+                    holder.sendmessage_time.setText(MessageModalList.getTime());
+                    holder.sendmessage.setText(MessageModalList.getMessage());
+                    holder.sendershort_message.setText(MessageModalList.getTime());*/
+
                     holder.sendmessage_time.setVisibility(View.VISIBLE);
+                    holder.SenderLOngMessageDate.setVisibility(View.VISIBLE);
                     holder.sendmessage_time.setText(MessageModalList.getTime());
                     holder.sendmessage.setText(MessageModalList.getMessage());
                     holder.sendershort_message.setText(MessageModalList.getTime());
+
+                    holder.sendershotMessageDate.setText(MessageModalList.getDate());
+                    holder.SenderLOngMessageDate.setText(MessageModalList.getDate());
                 }
                 else {
+                    /*holder.sendershort_message.setVisibility(View.VISIBLE);
+                    holder.sendershort_message.setText(MessageModalList.getTime());
+                    holder.sendmessage_time.setText(MessageModalList.getTime());
+                    holder.sendmessage.setText(MessageModalList.getMessage());*/
+
                     holder.sendershort_message.setVisibility(View.VISIBLE);
+                    holder.sendershotMessageDate.setVisibility(View.VISIBLE);
                     holder.sendershort_message.setText(MessageModalList.getTime());
                     holder.sendmessage_time.setText(MessageModalList.getTime());
                     holder.sendmessage.setText(MessageModalList.getMessage());
+
+                    holder.SenderLOngMessageDate.setText(MessageModalList.getDate());
+                    holder.sendershotMessageDate.setText(MessageModalList.getDate());
                 }
 
             }
@@ -898,16 +1019,36 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
                 String sendermessage = MessageModalList.getMessage();
                 if(sendermessage.length() >= 15){
+                  /*  holder.recivemessage_time.setVisibility(View.VISIBLE);
+                    holder.recivemessage_time.setText(MessageModalList.getTime());
+                    holder.recivemessage.setText(MessageModalList.getMessage());
+                    holder.recivershort_message.setText(MessageModalList.getTime());*/
+
                     holder.recivemessage_time.setVisibility(View.VISIBLE);
+                    holder.reciverlong_message_date.setVisibility(View.VISIBLE);
                     holder.recivemessage_time.setText(MessageModalList.getTime());
                     holder.recivemessage.setText(MessageModalList.getMessage());
                     holder.recivershort_message.setText(MessageModalList.getTime());
+
+                    holder.reciverlong_message_date.setText(MessageModalList.getDate());
+                    holder.recivershortmessage_date.setText(MessageModalList.getDate());
+
                 }
                 else {
+                    /*holder.recivershort_message.setVisibility(View.VISIBLE);
+                    holder.recivershort_message.setText(MessageModalList.getTime());
+                    holder.recivemessage_time.setText(MessageModalList.getTime());
+                    holder.recivemessage.setText(MessageModalList.getMessage());*/
+
+                    holder.recivershortmessage_date.setVisibility(View.VISIBLE);
                     holder.recivershort_message.setVisibility(View.VISIBLE);
                     holder.recivershort_message.setText(MessageModalList.getTime());
                     holder.recivemessage_time.setText(MessageModalList.getTime());
                     holder.recivemessage.setText(MessageModalList.getMessage());
+
+                    holder.reciverlong_message_date.setText(MessageModalList.getDate());
+                    holder.recivershortmessage_date.setText(MessageModalList.getDate());
+
                 }
 
 
@@ -921,7 +1062,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             if(from.equals(SenderUID)){
                 holder.sender_pdf_box.setVisibility(View.VISIBLE);
                 holder.sender_pdf_time.setText(MessageModalList.getTime());
-
+                holder.senderPdfDate.setText(MessageModalList.getDate());
 
 
                 holder.sender_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
@@ -953,6 +1094,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciver_pdf_box.setVisibility(View.VISIBLE);
                 holder.reciver_pdf_time.setText(MessageModalList.getTime());
+                holder.reciverpdf_date.setText(MessageModalList.getDate());
 
 
                 holder.reciver_pdf_box.setOnLongClickListener(new View.OnLongClickListener() {
@@ -983,6 +1125,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             if(from.equals(SenderUID)){
                 holder.senderaudiobox.setVisibility(View.VISIBLE);
                 holder.senderaudiotime.setText(MessageModalList.getTime());
+                holder.senderaudiodate.setText(MessageModalList.getDate());
 
 
                 holder.senderaudiobox.setOnLongClickListener(new View.OnLongClickListener() {
@@ -1010,7 +1153,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             else {
                 holder.reciveraudiobox.setVisibility(View.VISIBLE);
                 holder.reciveraudiotime.setText(MessageModalList.getTime());
-
+                holder.reciveraudiodate.setText(MessageModalList.getDate());
 
 
                 holder.reciveraudiobox.setOnLongClickListener(new View.OnLongClickListener() {
@@ -1035,13 +1178,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             }
         }
 
-
-
-
-
-
     }
-
 
 
     /// todo delete for sender
@@ -1170,22 +1307,28 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
         private MaterialTextView sendmessage, recivemessage;
         private MaterialTextView sendmessage_time, recivemessage_time;
         private MaterialTextView recivershort_message, sendershort_message;
+        private MaterialTextView sendershotMessageDate, SenderLOngMessageDate;
+
+        private MaterialTextView recivershortmessage_date, reciverlong_message_date;
+
         /// todo send and reciv message
 
         ///todo send and recive image
         private RoundedImageView sendderimage, reciverimage;
         private MaterialTextView senderimagetime, reciverimagetime;
         private RelativeLayout imagebox;
+        private MaterialTextView sneder_image_date, reciverimage_date;
         ///todo send and recive image
 
         /// todo sender and reciver pdf
         private RelativeLayout sender_pdf_box, reciver_pdf_box;
-        private MaterialTextView sender_pdf_time, reciver_pdf_time;
+        private MaterialTextView sender_pdf_time, reciver_pdf_time, senderPdfDate;
+        private MaterialTextView reciverpdf_date;
         /// todo sender and reciver pdf
 
         /// todo send and recive audio file
         private RelativeLayout senderaudiobox, reciveraudiobox;
-        private MaterialTextView senderaudiotime, reciveraudiotime;
+        private MaterialTextView senderaudiotime, reciveraudiotime, senderaudiodate, reciveraudiodate;
         /// todo send and recive audio file
 
 
@@ -1201,6 +1344,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
             senderaudiotime = itemView.findViewById(R.id.SenderAudioTime);
             reciveraudiotime = itemView.findViewById(R.id.ReciverAudioTime);
+            senderaudiodate = itemView.findViewById(R.id.SenderAudioDate);
             /// todo send recive audio file
 
             // todo sender reciver message
@@ -1215,6 +1359,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             recivershort_message = itemView.findViewById(R.id.ReciverShoetMessageTime);
             sendershort_message = itemView.findViewById(R.id.SenderShoetMessageTime);
 
+            sendershotMessageDate = itemView.findViewById(R.id.SenderMessageShortDateID);
+            SenderLOngMessageDate = itemView.findViewById(R.id.SenderMessageDateID);
+
+            recivershortmessage_date = itemView.findViewById(R.id.ReciverShoetMessageDate);
+            reciverlong_message_date = itemView.findViewById(R.id.ReciverLongMessagedate);
+
             // todo sender reciver message
 
             // todo sender and reciver image
@@ -1224,6 +1374,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             reciverimage = itemView.findViewById(R.id.ImageReciver);
             reciverimagetime = itemView.findViewById(R.id.ReciverTime);
             imagebox = itemView.findViewById(R.id.ImageLayoutID);
+            sneder_image_date = itemView.findViewById(R.id.SenderImageDate);
+            reciverimage_date = itemView.findViewById(R.id.ReciverImageDate);
             // todo sender and reciver image
 
             // todo sender and reciver pdf
@@ -1231,7 +1383,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
             reciver_pdf_box = itemView.findViewById(R.id.ReciverPdfBox);
 
             sender_pdf_time = itemView.findViewById(R.id.SenderPdfTime);
+            senderPdfDate = itemView.findViewById(R.id.SenderPdfDate);
             reciver_pdf_time = itemView.findViewById(R.id.ReciverPdfTime);
+            reciverpdf_date = itemView.findViewById(R.id.ReciverPdfDate);
+
+            reciveraudiodate = itemView.findViewById(R.id.ReciverAudioDate);
             // todo sender and reciver pdf
 
         }

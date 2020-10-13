@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/Root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_270sdp">
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:background="#E57373"
+                android:layout_height="0dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:src="@drawable/no_internet"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="@dimen/_50sdp">
+
+                        </ImageView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_marginTop="5dp"
+                            android:textColor="@android:color/white"
+                            android:layout_gravity="center_horizontal"
+                            android:textSize="@dimen/_18sdp"
+                            android:text="No Connection"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+
+                <RelativeLayout
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:textSize="@dimen/_12sdp"
+                            android:gravity="center"
+                            android:id="@+id/TextID"
+                            android:textColor="@android:color/black"
+                            android:layout_width="wrap_content"
+                            android:text="It look like your internet connection is off\nPlease turn it and try again!"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_below="@+id/TextID"
+                            android:textColor="@android:color/white"
+                            android:text=" Exit "
+                            android:id="@+id/ExitButton"
+                            android:textSize="@dimen/_13sdp"
+                            app:cornerRadius="@dimen/_15sdp"
+                            android:backgroundTint="#E57373"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.button.MaterialButton>
+
+                    </RelativeLayout>
+
+
+
+
+
+                </RelativeLayout>
+
+
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

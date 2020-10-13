@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:background="@color/background"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -59,6 +60,24 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_160sdp">
 
+
+
+            <com.google.android.material.button.MaterialButton
+                android:backgroundTint="@color/carbon_red_300"
+                android:layout_width="wrap_content"
+                android:id="@+id/NeedhelpButton"
+                app:cornerRadius="@dimen/_15sdp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:textAllCaps="false"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@android:color/white"
+                android:text="Need Help?"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.button.MaterialButton>
 
 
             <ImageView

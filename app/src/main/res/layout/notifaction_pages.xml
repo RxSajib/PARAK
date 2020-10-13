@@ -8,6 +8,21 @@
 
 
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:backgroundTint="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_17sdp"
+        android:layout_marginRight="@dimen/_17sdp"
+        android:id="@+id/CommunityButtonID"
+        android:src="@drawable/group_of_people"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+
     <RelativeLayout
         android:id="@+id/History"
         android:layout_centerHorizontal="true"

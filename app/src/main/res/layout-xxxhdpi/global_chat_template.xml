@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
         android:id="@+id/ReciverMessageLayout"
-        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="7dp"
         android:layout_marginRight="100dp"
-        android:visibility="gone"
         android:layout_marginBottom="7dp"
         android:background="@drawable/reciver_message_design"
-        android:layout_height="wrap_content">
-
+        android:visibility="visible">
 
 
         <RelativeLayout
             android:id="@+id/TimeBox"
-            android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp">
 
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:orientation="horizontal">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/SenderName"
-                    android:textSize="12sp"
-                    android:layout_gravity="center_vertical"
-                    android:text="username"
-                    android:textColor="@color/carbon_red_200"
-                    android:fontFamily="sans-serif"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/carbon_red_200"
+                    android:textSize="12sp">
 
                 </com.google.android.material.textview.MaterialTextView>
 
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/ReciverMessageTime"
-                    android:textSize="12sp"
-                    android:text="01:00 PM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:fontFamily="sans-serif"
+                    android:textSize="@dimen/_10sdp">
+
+                </com.google.android.material.textview.MaterialTextView>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/ReciverMessageDate"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:fontFamily="sans-serif"
+                    android:textSize="@dimen/_10sdp">
 
                 </com.google.android.material.textview.MaterialTextView>
 
@@ -60,44 +69,51 @@
             </LinearLayout>
 
 
-
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:layout_below="@+id/TimeBox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TimeBox">
 
             <com.google.android.material.textview.MaterialTextView
-                android:textColor="@android:color/black"
-                android:textSize="13sp"
-                android:layout_marginRight="@dimen/_3sdp"
                 android:id="@+id/ReciverMessage"
-                android:paddingBottom="7dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="7dp"
-                android:paddingTop="3dp"
-                android:text="hello developer"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_3sdp"
+                android:paddingLeft="13dp"
+                android:paddingTop="3dp"
+                android:paddingRight="7dp"
+                android:paddingBottom="7dp"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"></com.google.android.material.textview.MaterialTextView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/ReciverShoetMessageTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ReciverMessage"
+                android:textSize="@dimen/_10sdp">
+
             </com.google.android.material.textview.MaterialTextView>
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:textSize="@dimen/_10sdp"
-                android:id="@+id/ReciverShoetMessageTime"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:text="2:00 AM"
-                android:layout_toRightOf="@+id/ReciverMessage"
+                android:id="@+id/ReciverShoetMessageDate"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/ReciverShoetMessageTime"
+                android:textSize="@dimen/_10sdp">
 
             </com.google.android.material.textview.MaterialTextView>
 
         </RelativeLayout>
-
 
 
     </RelativeLayout>
@@ -108,53 +124,65 @@
     <RelativeLayout
         android:id="@+id/ImageLayoutID"
         android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="@dimen/_180sdp">
+        android:layout_height="@dimen/_180sdp"
+        android:visibility="gone">
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/SenderImageName"
-            android:textSize="12sp"
-            android:layout_gravity="center_vertical"
-            android:elevation="0.1dp"
-            android:textColor="@color/carbon_red_200"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:fontFamily="sans-serif"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:elevation="0.1dp"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/carbon_red_200"
+            android:textSize="@dimen/_10sdp">
 
         </com.google.android.material.textview.MaterialTextView>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/ImageDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/SenderImageName"
+            android:elevation="0.1dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="visible">
+
+        </com.google.android.material.textview.MaterialTextView>
 
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ImageReciver"
             android:layout_width="@dimen/_220sdp"
-            android:background="@drawable/image_placeholder"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginLeft="@dimen/_7sdp"
-            android:visibility="visible"
-            android:scaleType="centerCrop"
+            android:layout_height="@dimen/_170sdp"
             android:layout_alignParentLeft="true"
             android:layout_margin="@dimen/_5sdp"
-            app:riv_border_width="2dip"
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:background="@drawable/image_placeholder"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
             app:riv_border_color="#FFF"
-            app:riv_corner_radius="@dimen/_10sdp"
-            android:layout_height="@dimen/_170sdp">
-        </com.makeramen.roundedimageview.RoundedImageView>
+            app:riv_border_width="2dip"
+            app:riv_corner_radius="@dimen/_10sdp"></com.makeramen.roundedimageview.RoundedImageView>
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_alignParentBottom="true"
-            android:layout_width="wrap_content"
             android:id="@+id/ReciverTime"
-            android:textSize="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_3sdp"
-            android:visibility="visible"
-            android:text = "current time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
             android:layout_toRightOf="@+id/ImageReciver"
-            android:layout_height="wrap_content">
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_10sdp"
+            android:visibility="visible">
 
         </com.google.android.material.textview.MaterialTextView>
 
@@ -165,27 +193,26 @@
 
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/ReciverPdfBox"
+        android:layout_width="@dimen/_185sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:background="@drawable/reciver_message_design"
-        android:layout_width="@dimen/_175sdp"
-        android:layout_height="@dimen/_45sdp">
+        android:visibility="gone">
 
         <com.google.android.material.textview.MaterialTextView
-            android:textColor="@color/carbon_black_38"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/_10sdp"
-            android:text="10:00 AM"
             android:id="@+id/ReciverPdfTime"
-            android:fontFamily="@font/ubuntureguiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_height="wrap_content">
+            android:fontFamily="@font/ubuntureguiar"
+            android:textColor="@color/carbon_black_38"
+            android:textSize="@dimen/_10sdp">
 
         </com.google.android.material.textview.MaterialTextView>
 
@@ -193,56 +220,68 @@
         <RelativeLayout
             android:id="@+id/Usernamebox"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="@dimen/_2sdp">
 
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/PdfSenderUserID"
-                android:textSize="12sp"
-                android:layout_gravity="center_vertical"
-                android:text="username"
-                android:textColor="@color/carbon_red_200"
-                android:fontFamily="sans-serif"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/carbon_red_200"
+                android:textSize="@dimen/_10sdp">
 
             </com.google.android.material.textview.MaterialTextView>
 
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/PdfDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/PdfSenderUserID"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/carbon_black_87"
+                android:textSize="@dimen/_10sdp">
+
+            </com.google.android.material.textview.MaterialTextView>
 
 
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:layout_below="@+id/Usernamebox"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Usernamebox"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp">
 
             <ImageView
                 android:id="@+id/AAttachIcon"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:src="@drawable/attach_icon_black"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp">
-            </ImageView>
+                android:src="@drawable/attach_icon_black"></ImageView>
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/AAttachIcon"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="@dimen/_15sdp"
-                android:textSize="@dimen/_13sdp"
-                android:textColor="@color/carbon_black"
-                android:text="Download"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:layout_toRightOf="@+id/AAttachIcon"
                 android:fontFamily="@font/ubuntureguiar"
-                android:layout_height="wrap_content">
+                android:text="Download"
+                android:textColor="@color/carbon_black"
+                android:textSize="@dimen/_13sdp">
 
             </com.google.android.material.textview.MaterialTextView>
 
@@ -253,54 +292,51 @@
     </RelativeLayout>
 
 
-
-
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/ReciverPdfBox"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="@dimen/_7sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:background="@drawable/reciver_message_design"
         android:layout_width="@dimen/_175sdp"
-        android:layout_height="@dimen/_40sdp">
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:background="@drawable/reciver_message_design"
+        android:visibility="gone">
 
         <com.google.android.material.textview.MaterialTextView
-            android:textColor="@color/carbon_black_38"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/_10sdp"
-            android:text="10:00 AM"
             android:id="@+id/ReciverPdfTime"
-            android:fontFamily="@font/ubuntureguiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_height="wrap_content">
+            android:fontFamily="@font/ubuntureguiar"
+            android:text="10:00 AM"
+            android:textColor="@color/carbon_black_38"
+            android:textSize="@dimen/_10sdp">
 
         </com.google.android.material.textview.MaterialTextView>
 
 
         <ImageView
             android:id="@+id/AAttachIcon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_10sdp"
-            android:src="@drawable/attach_icon_black"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp">
-        </ImageView>
+            android:src="@drawable/attach_icon_black"></ImageView>
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/AAttachIcon"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/_15sdp"
-            android:textSize="@dimen/_14sdp"
-            android:textColor="@color/carbon_black"
-            android:text="Download"
+            android:layout_toRightOf="@+id/AAttachIcon"
             android:fontFamily="@font/ubuntureguiar"
-            android:layout_height="wrap_content">
+            android:text="Download"
+            android:textColor="@color/carbon_black"
+            android:textSize="@dimen/_14sdp">
 
         </com.google.android.material.textview.MaterialTextView>
 
@@ -308,82 +344,90 @@
 
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/ReciverAudioBox"
+        android:layout_width="@dimen/_190sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_alignParentLeft="true"
-        android:layout_marginBottom="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:background="@drawable/reciver_message_design"
-        android:layout_width="@dimen/_175sdp"
-        android:layout_height="@dimen/_45sdp">
+        android:visibility="visible">
 
         <com.google.android.material.textview.MaterialTextView
-            android:textColor="@color/carbon_black_38"
-            android:layout_width="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/_10sdp"
-            android:text="10:00 AM"
             android:id="@+id/ReciverAudioTime"
-            android:fontFamily="@font/ubuntureguiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginRight="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_height="wrap_content">
+            android:fontFamily="@font/ubuntureguiar"
+            android:text="10:00 AM"
+            android:textColor="@color/carbon_black_38"
+            android:textSize="@dimen/_10sdp">
 
         </com.google.android.material.textview.MaterialTextView>
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/SenderAudioname"
-            android:textSize="12sp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:text="username"
-            android:layout_marginLeft="@dimen/_12sdp"
-            android:textColor="@color/carbon_red_200"
-            android:fontFamily="sans-serif"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="sans-serif"
+            android:text="username"
+            android:textColor="@color/carbon_red_200"
+            android:textSize="@dimen/_10sdp">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/AudioDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_toRightOf="@+id/SenderAudioname"
+            android:fontFamily="sans-serif"
+            android:text="Date"
+            android:textColor="@color/carbon_black_87"
+            android:textSize="@dimen/_10sdp">
 
         </com.google.android.material.textview.MaterialTextView>
 
 
-
-
         <RelativeLayout
-            android:layout_below="@+id/SenderAudioname"
             android:layout_width="match_parent"
-            android:padding="@dimen/_3sdp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SenderAudioname"
+            android:padding="@dimen/_3sdp">
 
             <ImageView
                 android:id="@+id/MicICon"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
-                android:src="@drawable/mic_black_icon"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp">
-            </ImageView>
+                android:src="@drawable/mic_black_icon"></ImageView>
 
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/MicICon"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textSize="@dimen/_13sdp"
-                android:textColor="@color/carbon_black"
-                android:text="Play Record"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_toRightOf="@+id/MicICon"
                 android:fontFamily="@font/ubuntureguiar"
-                android:layout_height="wrap_content">
+                android:text="Play Record"
+                android:textColor="@color/carbon_black"
+                android:textSize="@dimen/_13sdp">
 
             </com.google.android.material.textview.MaterialTextView>
 
         </RelativeLayout>
-
-
-
-
 
 
     </RelativeLayout>

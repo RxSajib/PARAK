@@ -19,6 +19,9 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -48,6 +51,8 @@ public class ProjectPage extends Fragment {
     private FirebaseAuth Mauth;
     private DatabaseReference OnLineData;
 
+    private AdView adView;
+
     public ProjectPage() {
         // Required empty public constructor
     }
@@ -59,6 +64,13 @@ public class ProjectPage extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.project_page, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+
+        adView = view.findViewById(R.id.MyprojectAds);
+        MobileAds.initialize(getContext(), DataManager.BannerAdsID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
+
 
         OnLineData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
         OnLineData.keepSynced(true);
@@ -92,6 +104,7 @@ public class ProjectPage extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }

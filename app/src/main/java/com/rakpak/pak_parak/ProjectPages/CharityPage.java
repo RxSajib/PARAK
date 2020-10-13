@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class CharityPage extends Fragment {
     private String CurrentUserID;
     private FirebaseAuth Mauth;
     private DatabaseReference OnlineData;
+
+    private MaterialButton needhelp;
 
     public CharityPage() {
     }
@@ -83,6 +86,7 @@ public class CharityPage extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }
@@ -107,6 +111,15 @@ public class CharityPage extends Fragment {
         });
 
         onlinecheack("online");
+
+        needhelp = view.findViewById(R.id.NeedhelpButton);
+        needhelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goto_help_page(new Help());
+            }
+        });
+
         return view;
     }
 
@@ -158,5 +171,14 @@ public class CharityPage extends Fragment {
     public void onResume() {
         onlinecheack("online");
         super.onResume();
+    }
+
+    private void goto_help_page(Fragment fragment){
+        if(fragment != null){
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.setCustomAnimations(R.anim.slider_from_right, R.anim.slide_outfrom_left);
+            transaction.replace(R.id.MainID, fragment).addToBackStack(null);
+            transaction.commit();
+        }
     }
 }

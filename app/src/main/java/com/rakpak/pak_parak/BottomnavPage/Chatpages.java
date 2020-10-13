@@ -92,14 +92,10 @@ public class Chatpages extends Fragment {
 
 
         haveuser = view.findViewById(R.id.haveUser);
-        search_button = view.findViewById(R.id.SearchButtonID);
 
-        search_button.setColorFilter(Color.WHITE);
         animation = AnimationUtils.loadAnimation(getActivity(), R.anim.reciver_message_animaction_fatout);
-        search_button.setAnimation(animation);
 
-
-        search_button.setOnClickListener(view1 -> goto_search_screen(new GlobalChat()));
+        /// wait i have a call ok
 
         Mauth = FirebaseAuth.getInstance();
         CurrentUserID = Mauth.getCurrentUser().getUid();
@@ -113,9 +109,6 @@ public class Chatpages extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        //  onlinecheack("online");
-
-     //   readuser_data();
 
         user_search.addTextChangedListener(new TextWatcher() {
             @Override

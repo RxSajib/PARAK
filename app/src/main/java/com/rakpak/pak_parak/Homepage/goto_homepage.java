@@ -258,7 +258,7 @@ public class goto_homepage extends Fragment {
 
                                         @Override
                                         public void onError() {
-                                            Picasso.with(getContext()).load(uri).placeholder(R.drawable.profile_image_back).into(profileimage);
+                                            Picasso.with(getContext()).load(uri).into(profileimage);
 
                                         }
                                     });
@@ -377,7 +377,7 @@ public class goto_homepage extends Fragment {
                         chat_isactive = true;
                         jobis_active = true;
                         news_isactive = true;
-                    }
+                    }  wait
 
                 }*/
               if(item.getItemId() == R.id.NotifactionID){
@@ -528,6 +528,9 @@ public class goto_homepage extends Fragment {
           Mbuilder.setView(viewinternet);
           AlertDialog alertDialog = Mbuilder.create();
           alertDialog.setCanceledOnTouchOutside(false);
+
+          alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+
           alertDialog.show();
 
 

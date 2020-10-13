@@ -29,6 +29,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -88,6 +91,10 @@ public class IDcard_Page extends Fragment {
     private MaterialTextView locationtext;
     private DatabaseReference OnlineData;
 
+
+    private AdView bannerads;
+
+
     public IDcard_Page() {
     }
 
@@ -98,6 +105,10 @@ public class IDcard_Page extends Fragment {
         View view = inflater.inflate(R.layout._idcard__page, container, false);
   //      getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        bannerads = view.findViewById(R.id.adView);
+        MobileAds.initialize(getContext(), DataManager.BannerAdsID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        bannerads.loadAd(adRequest);
 
         OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
 
@@ -129,6 +140,7 @@ public class IDcard_Page extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }

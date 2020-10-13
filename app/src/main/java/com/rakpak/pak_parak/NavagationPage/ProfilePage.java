@@ -25,6 +25,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -57,6 +60,8 @@ public class ProfilePage extends Fragment {
     private String CurrentTime, CurrentDate;
     private DatabaseReference OnlineData;
 
+    private AdView adView;
+
     public ProfilePage() {
 
     }
@@ -67,6 +72,12 @@ public class ProfilePage extends Fragment {
 
         View view = inflater.inflate(R.layout.profile_page, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        MobileAds.initialize(getContext(), DataManager.BannerAdsID);
+        adView = view.findViewById(R.id.ProfileAds);
+        MobileAds.initialize(getContext(), DataManager.BannerAdsID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
 
 
@@ -90,7 +101,6 @@ public class ProfilePage extends Fragment {
 
 
 
-
             MaterialButton exitbutton = viewinternet.findViewById(R.id.ExitButton);
             exitbutton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -102,6 +112,7 @@ public class ProfilePage extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }

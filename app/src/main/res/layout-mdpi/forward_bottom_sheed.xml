@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/haveUser"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/whatsappchat"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="@dimen/_65sdp">
+
+            </ImageView>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:text="No User Found"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@color/tranprent"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/ForwardToolbarID"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/CrossIconID"
+                android:padding="@dimen/_5sdp"
+                android:background = "@drawable/back_button_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/cross_white"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp">
+
+                </ImageView>
+
+
+            </RelativeLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="Forward To ..."
+                android:layout_centerVertical="true"
+                android:id="@+id/ForwardText"
+                android:layout_toRightOf="@+id/CrossIconID"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textSize="@dimen/_13sdp"
+                android:textColor="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+
+            <RelativeLayout
+                android:layout_toRightOf="@+id/ForwardText"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_toLeftOf="@+id/ForwarButtonID"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_3sdp"
+                    android:layout_marginRight="@dimen/_3sdp"
+                    android:layout_height="wrap_content">
+
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:scrollbars="none"
+                        android:layout_height="wrap_content">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/ForwardUserName"
+                            android:layout_toRightOf="@+id/CrossIconID"
+                            android:fontFamily="@font/ubuntureguiar"
+                            android:textSize="@dimen/_13sdp"
+                            android:textColor="@android:color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+
+                <ProgressBar
+                    android:id="@+id/ProgressbarID"
+                    android:layout_width="@dimen/_22sdp"
+                    android:progressTint="@android:color/white"
+                    android:visibility="gone"
+                    android:indeterminateTint="@color/carbon_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_height="@dimen/_22sdp">
+
+                </ProgressBar>
+
+
+                <RelativeLayout
+                    android:id="@+id/ForwarButtonID"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/back_button_ripple"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_height="wrap_content">
+
+
+
+                    <ImageView
+                        android:src="@drawable/forward_icon"
+                        android:layout_width="@dimen/_22sdp"
+                        android:visibility="visible"
+                        android:layout_height="@dimen/_22sdp">
+
+                    </ImageView>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <RelativeLayout
+        android:layout_below="@+id/ForwardToolbarID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <EditText
+            android:id="@+id/SearchUserID"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:hint="@string/search_by_name"
+            android:drawablePadding="@dimen/_3sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:textSize="@dimen/_12sdp"
+            android:padding="@dimen/_7sdp"
+            android:drawableLeft="@drawable/search_prefession_icon"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/forward_search_design"
+            android:fontFamily="@font/ubuntureguiar"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/SearchUserID"
+            android:layout_width="match_parent"
+            android:id="@+id/ForwardViewID"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

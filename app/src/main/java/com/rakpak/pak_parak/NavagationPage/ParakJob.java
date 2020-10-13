@@ -109,6 +109,7 @@ public class ParakJob extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }

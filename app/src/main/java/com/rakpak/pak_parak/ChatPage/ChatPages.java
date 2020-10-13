@@ -236,6 +236,7 @@ public class ChatPages extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }
@@ -648,7 +649,7 @@ public class ChatPages extends Fragment {
             @Override
             public void onClick(View view) {
 
-                 message = inputmessage.getText().toString().toString();
+                 message = inputmessage.getText().toString().trim();
                 if (message.isEmpty()) {
                     Toast.makeText(getActivity(), "input any message", Toast.LENGTH_SHORT).show();
                 } else {

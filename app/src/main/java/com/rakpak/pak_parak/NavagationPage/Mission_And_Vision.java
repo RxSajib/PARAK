@@ -18,6 +18,9 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -42,8 +45,11 @@ public class Mission_And_Vision extends Fragment {
     private FirebaseAuth Mauth;
     private DatabaseReference OnlineData;
 
+    private AdView adView;
+
     public Mission_And_Vision() {
         // Required empty public constructor
+
     }
 
 
@@ -54,6 +60,11 @@ public class Mission_And_Vision extends Fragment {
         View view = inflater.inflate(R.layout.mission__and__vision, container, false);
       //  getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
+        MobileAds.initialize(getContext(), DataManager.BannerAdsID);
+        adView = view.findViewById(R.id.MissionVissionAdsID);
+        MobileAds.initialize(getContext(), DataManager.BannerAdsID);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         OnlineData = FirebaseDatabase.getInstance().getReference().child(DataManager.UserOnlineRoot);
         OnlineData.keepSynced(true);
@@ -63,8 +74,10 @@ public class Mission_And_Vision extends Fragment {
         NetworkInfo activnetwkinfo = cm.getActiveNetworkInfo();
 
         boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
-        if(isconnected){
 
+
+
+        if(isconnected){
             ///open anythings
         }
         else {
@@ -86,6 +99,7 @@ public class Mission_And_Vision extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
         }

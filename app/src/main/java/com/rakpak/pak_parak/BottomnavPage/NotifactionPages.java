@@ -38,6 +38,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.rakpak.pak_parak.BottomSheed.AuidoButtomSheed;
 import com.rakpak.pak_parak.ChatPage.ChatPages;
 import com.rakpak.pak_parak.DataManager;
+import com.rakpak.pak_parak.GlobalChat.GlobalChat;
 import com.rakpak.pak_parak.Model.HistoryModel;
 import com.rakpak.pak_parak.R;
 import com.squareup.picasso.Callback;
@@ -62,6 +63,8 @@ public class NotifactionPages extends Fragment {
     private ProgressDialog Mprogress;
     private RelativeLayout history;
 
+    private FloatingActionButton communitybutton;
+
     public NotifactionPages() {}
 
     @Override
@@ -71,6 +74,15 @@ public class NotifactionPages extends Fragment {
         View view = inflater.inflate(R.layout.notifaction_pages, container, false);
         Mprogress = new ProgressDialog(getActivity());
 
+
+        communitybutton = view.findViewById(R.id.CommunityButtonID);
+        communitybutton.setColorFilter(Color.WHITE);
+        communitybutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goto_community(new GlobalChat());
+            }
+        });
 
         history = view.findViewById(R.id.History);
 
@@ -656,5 +668,15 @@ public class NotifactionPages extends Fragment {
             super(itemView);
         }
     }*/
+
+
+   private void goto_community(Fragment fragment){
+       if(fragment != null){
+           FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+           transaction.setCustomAnimations(R.anim.slider_from_right, R.anim.slide_outfrom_left);
+           transaction.replace(R.id.MainID, fragment).addToBackStack(null);
+           transaction.commit();
+       }
+   }
 
 }

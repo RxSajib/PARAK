@@ -2,29 +2,32 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rakpak.pak_parak">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
+        android:name=".Offline.Pak_Parak"
         android:allowBackup="true"
-        android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+        android:defaultToDeviceProtectedStorage="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:preserveLegacyExternalStorage="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:hardwareAccelerated="true"
         android:supportsRtl="true"
-        android:name=".Offline.Pak_Parak"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
-        >
-        <activity android:name=".MainActivity" android:screenOrientation="portrait">
+        android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
+        <activity android:name=".SamplePage"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,20 +35,23 @@
             </intent-filter>
         </activity>
 
-
         <service android:name=".Services.MyFirebaseServices">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".Services.MyFirebaseMessaging">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
 
+
+
+
+    <meta-data
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-8213826839161591~5487024614"/>
 
 </manifest>

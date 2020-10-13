@@ -135,6 +135,9 @@ Organize social events, exhibitions, seminars, conferences and public lectures f
     <string name="chat">Chat</string>
     <string name="contacts">Contacts</string>
     <string name="search_by_name">Search by name</string>
+    <string name="application_submit">Submit your Application</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
 
 
 </resources>

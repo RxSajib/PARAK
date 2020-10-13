@@ -58,6 +58,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/MyprojectAds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-8213826839161591/7921616269">
+        </com.google.android.gms.ads.AdView>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -202,5 +212,18 @@
 
 
     </RelativeLayout>
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ProjectAds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-8213826839161591/7921616269">
+    </com.google.android.gms.ads.AdView>
+
 
 </LinearLayout>

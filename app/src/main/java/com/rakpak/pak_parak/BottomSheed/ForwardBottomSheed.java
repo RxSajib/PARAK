@@ -59,7 +59,6 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
     private RelativeLayout haveuser;
     private FirebaseAuth Mauth;
     private String CurrentUserID;
-    private FloatingActionButton sendbutton;
     private DatabaseReference OnlineData;
 
     private RelativeLayout CrossIcon;
@@ -100,9 +99,7 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
         OnlineData.keepSynced(true);
 
         Message_database = FirebaseDatabase.getInstance().getReference();
-        sendbutton = view.findViewById(R.id.ForwordButtonID);
-        sendbutton.setVisibility(View.GONE);
-        sendbutton.setColorFilter(Color.WHITE);
+
         Mauth = FirebaseAuth.getInstance();
         CurrentUserID = Mauth.getCurrentUser().getUid();
         haveuser = view.findViewById(R.id.haveUser);
@@ -119,30 +116,7 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
 
             ///open anythings
         } else {
-            final Dialog dialog = new Dialog(getActivity(), android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
-            dialog.setContentView(R.layout.no_connection_dioloag);
-            dialog.show();
-
-
-            RelativeLayout button = dialog.findViewById(R.id.RetryButton);
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(getActivity().WIFI_SERVICE);
-                    wifiManager.setWifiEnabled(true);
-                    dialog.dismiss();
-                }
-            });
-
-            RelativeLayout cancelbutton = dialog.findViewById(R.id.CaneclButtonID);
-
-            cancelbutton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getActivity().finish();
-                }
-            });
 
         }
 
@@ -316,7 +290,6 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
 
 
                                             if (!imageuri.isEmpty()) {
-                                                sendbutton.setVisibility(View.VISIBLE);
 
 
                                                 forwardsend_button.setVisibility(View.VISIBLE);
@@ -498,7 +471,6 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
 
 
                                             if (!imageuri.isEmpty()) {
-                                                sendbutton.setVisibility(View.VISIBLE);
 
 
                                                 forwardsend_button.setVisibility(View.VISIBLE);
@@ -674,7 +646,7 @@ public class ForwardBottomSheed extends BottomSheetDialogFragment {
 
 
                                             if (!imageuri.isEmpty()) {
-                                                sendbutton.setVisibility(View.VISIBLE);
+                                              //  sendbutton.setVisibility(View.VISIBLE);
 
 
                                                 forwardsend_button.setVisibility(View.VISIBLE);

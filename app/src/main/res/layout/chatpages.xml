@@ -86,19 +86,6 @@
 
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:id="@+id/SearchButtonID"
-            android:backgroundTint="@color/carbon_teal_600"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/group_of_people"
-            android:tint="@color/carbon_white"
-            android:layout_marginRight="@dimen/_17sdp"
-            android:layout_marginBottom="@dimen/_17sdp"
-            android:layout_height="wrap_content">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     </RelativeLayout>
 

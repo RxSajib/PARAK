@@ -149,6 +149,8 @@ public class GlobalChat extends Fragment {
     private DatabaseReference OnlineRoot;
     private static final int IMAGEREQUESTCODE = 100;
     private AnstronCoreHelper anstronCoreHelper;
+    private String current_image_uri;
+    private LinearLayoutManager linearLayoutManager;
     /// todo all function is there
 
 
@@ -175,7 +177,6 @@ public class GlobalChat extends Fragment {
         boolean isconnected = activnetwkinfo != null && activnetwkinfo.isConnected();
         if (isconnected) {
 
-            ///open anythings
         } else {
 
 
@@ -197,6 +198,7 @@ public class GlobalChat extends Fragment {
             Mbuilder.setView(viewinternet);
             AlertDialog alertDialog = Mbuilder.create();
             alertDialog.setCanceledOnTouchOutside(false);
+            alertDialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
             alertDialog.show();
 
 
@@ -297,6 +299,9 @@ public class GlobalChat extends Fragment {
                             if (dataSnapshot.hasChild(DataManager.UserFullname)) {
                                 Currentuser_name = dataSnapshot.child(DataManager.UserFullname).getValue().toString();
                             }
+                            if(dataSnapshot.hasChild(DataManager.profileimage)){
+                                current_image_uri = dataSnapshot.child(DataManager.profileimage).getValue().toString();
+                            }
                         } else {
 
                         }
@@ -310,7 +315,10 @@ public class GlobalChat extends Fragment {
 
         recyclerView = view.findViewById(R.id.ChatListID);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+         linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
         messageAdapter = new GlobalMessageAdapter(globalChatModalList);
         recyclerView.setAdapter(messageAdapter);
         inputmessage = view.findViewById(R.id.GlobalMessageInput);
@@ -352,7 +360,7 @@ public class GlobalChat extends Fragment {
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                messagetext = inputmessage.getText().toString();
+                messagetext = inputmessage.getText().toString().trim();
                 if (messagetext.isEmpty()) {
                     Toast.makeText(getActivity(), "Type any message", Toast.LENGTH_LONG).show();
                 } else {
@@ -377,6 +385,8 @@ public class GlobalChat extends Fragment {
                     globalmap.put("type", "text");
                     globalmap.put("MessageKey", push_id);
                     globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    globalmap.put("Uri", current_image_uri);
+                    globalmap.put(DataManager.UserNameSerach, Currentuser_name.toLowerCase());
 
 
                     NewNode.updateChildren(globalmap)
@@ -444,6 +454,7 @@ public class GlobalChat extends Fragment {
 
         readall_message();
 
+      //  onscrall();
 
         Muser_database = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
 
@@ -536,6 +547,31 @@ public class GlobalChat extends Fragment {
     }
 
 
+
+    private void onscrall(){
+        messageAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                super.onItemRangeInserted(positionStart, itemCount);
+                int friendlyMessageCount = messageAdapter.getItemCount();
+                int lastVisiblePosition = linearLayoutManager.findLastCompletelyVisibleItemPosition();
+                // If the recycler view is initially being loaded or the
+                // user is at the bottom of the list, scroll to the bottom
+                // of the list to show the newly added message.
+                if (lastVisiblePosition == -1 ||
+                        (positionStart >= (friendlyMessageCount - 1) &&
+                                lastVisiblePosition == (positionStart - 1))) {
+                    recyclerView.scrollToPosition(positionStart);
+                }
+            }
+        });
+    }
+
+
+
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, final Intent data) {
 
@@ -586,6 +622,8 @@ public class GlobalChat extends Fragment {
                                     globalmap.put("type", "image");
                                     globalmap.put("MessageKey", push_id);
                                     globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                    globalmap.put("Uri", current_image_uri);
+                                    globalmap.put(DataManager.UserNameSerach, Currentuser_name.toLowerCase());
 
                                     NewNode.updateChildren(globalmap)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -719,6 +757,8 @@ public class GlobalChat extends Fragment {
                                 globalmap.put("type", "PDf");
                                 globalmap.put("MessageKey", push_id);
                                 globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                                globalmap.put("Uri", current_image_uri);
+                                globalmap.put(DataManager.UserNameSerach, Currentuser_name.toLowerCase());
 
                                 NewNode.updateChildren(globalmap)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -1082,12 +1122,12 @@ public class GlobalChat extends Fragment {
     private void onlinecheack(String online) {
 
         Calendar calendar_time = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
         String CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
 
         Calendar calendar_date = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
         String CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
 
@@ -1129,7 +1169,7 @@ public class GlobalChat extends Fragment {
     private void startrecoding() {
 
         Calendar calendar_time = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
         String CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -1194,11 +1234,11 @@ public class GlobalChat extends Fragment {
                             String audiouri = task.getResult().getDownloadUrl().toString();
 
                             Calendar calendar_time = Calendar.getInstance();
-                            SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat("hh:mm a");
+                            SimpleDateFormat simpleDateFormat_time = new SimpleDateFormat(DataManager.TimePattern);
                             CurrentTime = simpleDateFormat_time.format(calendar_time.getTime());
 
                             Calendar calendar_date = Calendar.getInstance();
-                            SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat("dd MMM yyyy");
+                            SimpleDateFormat simpleDateFormat_date = new SimpleDateFormat(DataManager.DatePattern);
                             CurrentDate = simpleDateFormat_date.format(calendar_date.getTime());
 
                             DatabaseReference   NewNode = FirebaseDatabase.getInstance().getReference().child("GlobalChat").push();
@@ -1214,6 +1254,8 @@ public class GlobalChat extends Fragment {
                             globalmap.put("type", "Audio");
                             globalmap.put("MessageKey", push_id);
                             globalmap.put("MyID", FirebaseAuth.getInstance().getCurrentUser().getUid());
+                            globalmap.put("Uri", current_image_uri);
+                            globalmap.put(DataManager.UserNameSerach, Currentuser_name.toLowerCase());
 
                             NewNode.updateChildren(globalmap)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {

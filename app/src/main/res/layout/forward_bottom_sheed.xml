@@ -19,9 +19,9 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:src="@drawable/whatsappchat"
-                android:layout_width="@dimen/_70sdp"
+                android:layout_width="@dimen/_60sdp"
                 android:layout_gravity="center_horizontal"
-                android:layout_height="@dimen/_70sdp">
+                android:layout_height="@dimen/_60sdp">
 
             </ImageView>
             <com.google.android.material.textview.MaterialTextView
@@ -183,8 +183,8 @@
             android:hint="@string/search_by_name"
             android:drawablePadding="@dimen/_3sdp"
             android:layout_marginRight="@dimen/_25sdp"
-            android:textSize="@dimen/_13sdp"
-            android:padding="@dimen/_9sdp"
+            android:textSize="@dimen/_10sdp"
+            android:padding="@dimen/_5sdp"
             android:drawableLeft="@drawable/search_prefession_icon"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"

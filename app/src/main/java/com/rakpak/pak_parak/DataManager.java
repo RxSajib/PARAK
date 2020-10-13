@@ -1,5 +1,7 @@
 package com.rakpak.pak_parak;
 
+import java.lang.ref.SoftReference;
+
 public class DataManager {
 
     // todo user data
@@ -23,6 +25,7 @@ public class DataManager {
     public static final String UserTypeRoot = "Type";
     public static final String GlobalTypeRoot = "GlobalType";
     public static final String profileimage = "profileimage";
+    public static final String UserNameSerach = "NameSearch";
 
     // todo user data
 
@@ -127,4 +130,26 @@ public class DataManager {
     public static final String NewsWebsite = "Website";
     public static final String HTTPS = "http://";
     /// todo news parse data
+
+    /// todo help data
+    public static final String Yes = "Yes";
+    public static final String No = "No";
+    public static final String HelpRootPdf = "HelpPdf";
+
+    public static final String Help_Name = "Name";
+    public static final String Help_Mobile = "Mobile";
+    public static final String Help_ID = "ID";
+    public static final String Help_FamilyMembers = "FamilyMembers";
+    public static final String Help_SourceOfIncome = "Work";
+    public static final String Help_Location = "Location";
+    public static final String Help_MontlyIncome = "MontlyIncome";
+    public static final String HelpDetails = "HelpDetails";
+    public static final String WhyNeedHelp = "WhyNeedHelp";
+    public static final String HelpPdf = "DownloadPdf";
+    public static final String HelpRoot = "HelpRoot";
+    public static final String Short = "Short";
+    /// todo help data
+
+    public static final String BannerAdsID = "ca-app-pub-8213826839161591/7921616269";
+    public static final String TeastAdsID = "ca-app-pub-3940256099942544/6300978111";
 }

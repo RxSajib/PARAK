@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +16,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textview.MaterialTextView;
@@ -35,8 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.rakpak.pak_parak.BottomSheed.AuidoButtomSheed;
 import com.rakpak.pak_parak.DataManager;
-import com.rakpak.pak_parak.GlobalChat.GlobalChat;
-import com.rakpak.pak_parak.ImageFullScreen.ImageFullScreen;
 import com.rakpak.pak_parak.Model.GlobalChatModal;
 import com.rakpak.pak_parak.R;
 import com.squareup.picasso.Callback;
@@ -80,7 +75,10 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
         MuserDatabase.keepSynced(true);
         /// todo gone all component
         holder.timeright.setVisibility(View.GONE);
+        holder.dateright.setVisibility(View.GONE);
         holder.timetop.setVisibility(View.GONE);
+        holder.datetop.setVisibility(View.GONE);
+
         holder.textmessagebox.setVisibility(View.GONE);
         holder.imagebox.setVisibility(View.GONE);
         holder.pdflayout.setVisibility(View.GONE);
@@ -96,9 +94,12 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
         if (type.equals(DataManager.GlobalchatTextType)) {
             holder.textmessagebox.setVisibility(View.VISIBLE);
+            holder.dateright.setVisibility(View.VISIBLE);
 
             if (globalChatModal.getMessage().length() >= 15) {
                 holder.timetop.setVisibility(View.VISIBLE);
+                holder.dateright.setVisibility(View.VISIBLE);
+
                 MuserDatabase.child(CurrentUserID)
                         .addValueEventListener(new ValueEventListener() {
                             @Override
@@ -112,11 +113,13 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                                             holder.username.setText("Me");
                                             holder.timetop.setText(globalChatModal.getTime());
                                             holder.timeright.setText(globalChatModal.getTime());
+                                            holder.dateright.setText(globalChatModal.getDate());
                                         } else {
                                             holder.message.setText(globalChatModal.getMessage());
                                             holder.username.setText(globalChatModal.getName());
                                             holder.timetop.setText(globalChatModal.getTime());
                                             holder.timeright.setText(globalChatModal.getTime());
+                                            holder.dateright.setText(globalChatModal.getDate());
                                         }
                                     }
                                 }
@@ -144,10 +147,12 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                                             holder.username.setText("Me");
                                             holder.timetop.setText(globalChatModal.getTime());
                                             holder.timeright.setText(globalChatModal.getTime());
+                                            holder.dateright.setText(globalChatModal.getDate());
                                         } else {
                                             holder.message.setText(globalChatModal.getMessage());
                                             holder.username.setText(globalChatModal.getName());
                                             holder.timetop.setText(globalChatModal.getTime());
+                                            holder.datetop.setText(globalChatModal.getDate());
                                             holder.timeright.setText(globalChatModal.getTime());
                                         }
 
@@ -199,6 +204,7 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                     });
 
             holder.sender_imageusername.setText(globalChatModal.getName());
+            holder.imagedate.setText(globalChatModal.getDate());
 
 
             Picasso.with(holder.itemView.getContext()).load(globalChatModal.getMessage()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.imageView, new Callback() {
@@ -399,9 +405,11 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                                     if (name.equals(globalChatModal.getName())) {
                                         holder.pdftime.setText(globalChatModal.getTime());
                                         holder.pdfsender.setText("Me");
+                                        holder.pdfdate.setText(globalChatModal.getDate());
                                     } else {
                                         holder.pdftime.setText(globalChatModal.getTime());
                                         holder.pdfsender.setText(globalChatModal.getName());
+                                        holder.pdfdate.setText(globalChatModal.getDate());
                                     }
                                 }
                             }
@@ -496,9 +504,11 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
                                     if (name.equals(globalChatModal.getName())) {
                                         holder.aduiotime.setText(globalChatModal.getTime());
                                         holder.senderaudio_username.setText("Me");
+                                        holder.audiodate.setText(globalChatModal.getDate());
                                     } else {
                                         holder.aduiotime.setText(globalChatModal.getTime());
                                         holder.senderaudio_username.setText(globalChatModal.getName());
+                                        holder.audiodate.setText(globalChatModal.getDate());
                                     }
                                 }
                             }
@@ -609,23 +619,26 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
 
     public class GlobalHolder extends RecyclerView.ViewHolder {
 
-        private MaterialTextView message, timeright, timetop, username;
+        private MaterialTextView message, timeright,dateright, timetop,datetop, username;
         private RelativeLayout textmessagebox, imagebox;
 
-
+        /// todo image
         private MaterialTextView image_time;
         private RoundedImageView imageView;
         private MaterialTextView sender_imageusername;
+        private MaterialTextView imagedate;
+        /// todo image
 
         /// todo PDF
         private RelativeLayout pdflayout;
         private MaterialTextView pdftime, pdfsender;
         private Context context;
+        private MaterialTextView pdfdate;
         /// todo PDF
 
         /// todo audio message
         private RelativeLayout audiobox;
-        private MaterialTextView aduiotime, senderaudio_username;
+        private MaterialTextView aduiotime, audiodate, senderaudio_username;
         /// todo audio message
 
 
@@ -638,24 +651,30 @@ public class GlobalMessageAdapter extends RecyclerView.Adapter<GlobalMessageAdap
             timeright = itemView.findViewById(R.id.ReciverShoetMessageTime);
             timetop = itemView.findViewById(R.id.ReciverMessageTime);
             username = itemView.findViewById(R.id.SenderName);
+            datetop = itemView.findViewById(R.id.ReciverMessageDate);
+            dateright = itemView.findViewById(R.id.ReciverShoetMessageDate);
             // todo usermessage templete
 
             /// todo image
             imagebox = itemView.findViewById(R.id.ImageLayoutID);
             image_time = itemView.findViewById(R.id.ReciverTime);
             imageView = itemView.findViewById(R.id.ImageReciver);
+            imagedate = itemView.findViewById(R.id.ImageDate);
+
             /// todo image
 
             /// todo PDF
             pdflayout = itemView.findViewById(R.id.ReciverPdfBox);
             pdftime = itemView.findViewById(R.id.ReciverPdfTime);
             pdfsender = itemView.findViewById(R.id.PdfSenderUserID);
+            pdfdate = itemView.findViewById(R.id.PdfDate);
             /// todo PDF
 
             // todo audio message
             audiobox = itemView.findViewById(R.id.ReciverAudioBox);
             aduiotime = itemView.findViewById(R.id.ReciverAudioTime);
             senderaudio_username = itemView.findViewById(R.id.SenderAudioname);
+            audiodate = itemView.findViewById(R.id.AudioDate);
             // todo audio message
 
             textmessagebox = itemView.findViewById(R.id.ReciverMessageLayout);

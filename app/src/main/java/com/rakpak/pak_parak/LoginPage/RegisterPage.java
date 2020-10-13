@@ -1,5 +1,6 @@
 package com.rakpak.pak_parak.LoginPage;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rakpak.pak_parak.DataManager;
 import com.rakpak.pak_parak.Homepage.goto_homepage;
 import com.rakpak.pak_parak.R;
+import com.rakpak.pak_parak.SamplePage;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -44,6 +47,11 @@ public class RegisterPage extends Fragment {
     private MaterialTextView loginpage;
     private MaterialTextView forgetpassword, nothaveaccount;
 
+
+    /// todo sample button click
+    private Button buttonrecprdsample;
+    /// todo sample button click
+
     public RegisterPage() {
         // Required empty public constructor
     }
@@ -53,6 +61,20 @@ public class RegisterPage extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.register_page, container, false);
+
+
+
+        buttonrecprdsample = view.findViewById(R.id.RecordPage);
+        buttonrecprdsample.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SamplePage.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         nothaveaccount = view.findViewById(R.id.donthaveaccounttext);

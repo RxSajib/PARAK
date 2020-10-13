@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/backbuttons"
+                android:padding="@dimen/_5sdp"
+                android:background="@drawable/back_button_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/back_white"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:textSize="@dimen/_15sdp"
+                android:textColor="@android:color/white"
+                android:text="Jobs"
+                android:fontFamily="@font/ubuntureguiar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/NoDataContiner"
+            android:orientation="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/job_icon"
+                android:layout_width="@dimen/_65sdp"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="@dimen/_65sdp">
+
+            </ImageView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/_14sdp"
+                android:fontFamily="@font/ubuntureguiar"
+                android:textColor="@color/tranprent"
+                android:text="No work found"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginLeft="@dimen/_25sdp"
+                android:layout_marginRight="@dimen/_25sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <EditText
+                        android:id="@+id/SearchBywork"
+                        android:padding="@dimen/_8sdp"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:textSize="@dimen/_12sdp"
+                        android:imeOptions="actionSearch"
+                        android:background="@null"
+                        android:drawablePadding="@dimen/_3sdp"
+                        android:drawableLeft="@drawable/search_prefession_icon"
+                        android:textColor="@color/carbon_black_87"
+                        android:hint="@string/search_by_profession"
+                        android:layout_height="wrap_content">
+
+                    </EditText>
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/JobsReclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
