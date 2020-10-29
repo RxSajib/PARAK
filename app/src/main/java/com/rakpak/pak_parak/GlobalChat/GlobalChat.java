@@ -342,7 +342,7 @@ public class GlobalChat extends Fragment {
                     sendbutton.setVisibility(View.GONE);
                     recordButton.setVisibility(View.VISIBLE);
 
-                    attachbox.setVisibility(View.VISIBLE);
+                    attachbox.setVisibility(View.GONE);
                 } else {
                     recordButton.setVisibility(View.GONE);
                     sendbutton.setVisibility(View.VISIBLE);
@@ -509,6 +509,9 @@ public class GlobalChat extends Fragment {
 
         return view;
     }
+
+
+
 
 
     private void readall_message() {

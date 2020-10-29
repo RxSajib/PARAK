@@ -124,6 +124,7 @@ public class goto_homepage extends Fragment {
     private final int PERMISSION_CODE = 100;
     private AnstronCoreHelper coreHelper;
 
+
     public goto_homepage() {
         // Required empty public constructor
     }
