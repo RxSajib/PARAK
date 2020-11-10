@@ -24,6 +24,13 @@
         android:title="Mission &amp; Vission"
         android:icon="@drawable/mission_update">
         </item>
+
+    <item
+        android:id="@+id/WhatWedoID"
+        android:icon="@drawable/whatwedo_icon"
+        android:title="What We Do"
+        ></item>
+
     <item
         android:id="@+id/ProjectID"
         android:icon="@drawable/project_icon_update"

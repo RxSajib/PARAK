@@ -323,7 +323,7 @@ public class AddjobsPage extends Fragment {
         });
 
 
-        onlinecheack("online");
+      //  onlinecheack("online");
 
         return view;
     }

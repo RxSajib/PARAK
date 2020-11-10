@@ -157,7 +157,7 @@ public class Search_Page extends Fragment {
         setHasOptionsMenu(true);
 
 
-        onlinecheack("online");
+      //  onlinecheack("online");
         return view;
     }
 

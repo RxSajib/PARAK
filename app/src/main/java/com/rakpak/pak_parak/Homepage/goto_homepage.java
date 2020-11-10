@@ -1,4 +1,4 @@
-package com.rakpak.pak_parak.Homepage;
+    package com.rakpak.pak_parak.Homepage;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -76,6 +76,7 @@ import com.rakpak.pak_parak.NavagationPage.ParakJob;
 import com.rakpak.pak_parak.NavagationPage.ProfilePage;
 import com.rakpak.pak_parak.NavagationPage.ProjectPage;
 import com.rakpak.pak_parak.NavagationPage.TeamPage;
+import com.rakpak.pak_parak.NavagationPage.WhatWedo_Page;
 import com.rakpak.pak_parak.R;
 import com.rakpak.pak_parak.Search.Search_Page;
 import com.rakpak.pak_parak.SetProfile.Setup_Profile;
@@ -124,6 +125,8 @@ public class goto_homepage extends Fragment {
     private final int PERMISSION_CODE = 100;
     private AnstronCoreHelper coreHelper;
 
+    private MaterialTextView usercounter;
+    private int UserCounter;
 
     public goto_homepage() {
         // Required empty public constructor
@@ -139,6 +142,8 @@ public class goto_homepage extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.goto_homepage, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        usercounter = view.findViewById(R.id.CounterTextID);
 
         Mprogress = new ProgressDialog(getActivity());
         ImageStores = FirebaseStorage.getInstance().getReference().child(DataManager.ProfileImageRoot);
@@ -183,6 +188,21 @@ public class goto_homepage extends Fragment {
         Muserdata = FirebaseDatabase.getInstance().getReference().child(DataManager.UserRoot);
         Muserdata.keepSynced(true);
         read_user();
+
+        Muserdata.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    UserCounter = (int) dataSnapshot.getChildrenCount();
+                    usercounter.setText("("+UserCounter+")");
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         drawerLayout = view.findViewById(R.id.MainDrawerID);
@@ -336,6 +356,14 @@ public class goto_homepage extends Fragment {
                 drawerLayout.closeDrawer(Gravity.LEFT);
 
                 goto_parakjobpage(new ParakJob());
+            }
+            if(item.getItemId() == R.id.WhatWedoID){
+                item.setCheckable(true);
+                item.setChecked(true);
+                drawerLayout.closeDrawer(Gravity.LEFT);
+
+                goto_parakjobpage(new WhatWedo_Page());
+
             }
 
             if(item.getItemId() == R.id.ShareID){

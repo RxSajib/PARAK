@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -267,6 +268,7 @@ public class Chatpages extends Fragment {
 
                                                         String _id = dataSnapshot.child("MYID").getValue().toString();
                                                         gotochatPage(new ChatPages(), _id);
+
                                                     }
                                                 });
 
@@ -681,18 +683,7 @@ public class Chatpages extends Fragment {
 
             if (context != null) {
 
-                Picasso.with(context).load(img).resize(200, 200).centerCrop().networkPolicy(NetworkPolicy.OFFLINE).into(profileimage, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError() {
-                        Picasso.with(context).load(img).resize(200, 200).centerCrop().into(profileimage);
-                    }
-                });
-
+                Picasso.with(context).load(img).resize(200, 200).centerCrop().into(profileimage);
 
             }
 
